@@ -1,0 +1,46 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    {{ include('CYAYogaBundle:Alumnocc:messages/success.html.twig') }}
+     <div class="container-fluid cuenta">
+        <div class="container cuenta-icon">
+            <div class="row">
+            	<div class="col-sm-12">
+					<h2>Pago diario</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+            
+            	
+	<div class="container grey-input">
+		<div class="row">
+			<div class="col-sm-5">
+				
+				{{ form_start(form, {'attr': { 'rol' : 'form'}}) }}
+				<h4 class="text-danger">{{ form_errors(form) }}</h4>
+                     
+                         
+                         <div class="form-group">
+					        Alumno
+					        {{ form_widget(form.usuario, {'attr': {'class': 'form-control', 'placeholder' : 'Alumno'}}) }}
+					        <span class="text-danger">{{ form_errors(form.usuario) }}</span>
+					    </div>  
+					    
+					    <div class="form-group">
+					        Pago
+					        {{ form_widget(form.pagado, {'attr': {'class': 'form-control', 'placeholder' : 'Pago'}}) }}
+					        <span class="text-danger">{{ form_errors(form.pagado) }}</span>
+					    </div> 
+					    
+				    <p>
+				        {{ form_widget(form.save, {'label' : 'Realizar pago', 'attr': {'class': 'btn btn-success'}}) }}
+				    </p>
+                 
+                   
+				{{ form_end(form) }}
+			</div>
+		</div>
+	</div>
+{% endblock %}

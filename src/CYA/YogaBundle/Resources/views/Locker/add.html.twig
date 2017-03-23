@@ -1,0 +1,45 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="container-fluid producto">
+        <div class="container producto-icon">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2>Nuevo Locker</h2>
+                    <a href="{{ path('cya_locker_index') }}" class="head-link">
+        			        <h3>
+        			           <span><i class="icon ion-android-arrow-dropleft back"></i></span>
+        			            regresar a listado lockers
+        			         </h3>
+        			    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    {{ form_start(form, {'attr' : {'role' : 'form'}, 'action':'', 'method':'POST' }) }}
+           
+     <div class="container grey-input">
+        <div class="row">
+            <div class="col-sm-4"> 
+                    <div class="form-group">
+                         Descripción del locker
+                         {{ form_widget(form.descripcion, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Descripcion'} }) }}
+                         <span class="text-danger"> {{ form_errors(form.descripcion) }} </span>
+                    </div>
+            </div>
+
+            
+            <div class="col-sm-12">
+                
+                {{ form_widget(form.save, {'label' : 'Agregar Locker', 'attr': {'class': 'btn alumnos-btn'} }) }}
+                 
+                
+            </div>
+            {{ form_end(form) }}
+         </div>
+     </div>
+{% endblock %}
+

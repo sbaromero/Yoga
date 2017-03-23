@@ -1,0 +1,45 @@
+cya_usuario_index:
+    path:    /index
+    defaults: { _controller: CYAYogaBundle:Usuario:index }
+    
+cya_usuario_add:
+    path:    /add
+    defaults: { _controller: CYAYogaBundle:Usuario:add }
+
+cya_usuario_rapido:
+    path:    /rapido
+    defaults: { _controller: CYAYogaBundle:Usuario:usuariorapido }
+    
+cya_usuario_create:
+    path:    /create
+    defaults: { _controller: CYAYogaBundle:Usuario:create }
+    methods: POST
+
+cya_usuario_edit:
+    path:    /edit/{id}
+    defaults: { _controller: CYAYogaBundle:Usuario:edit }
+    
+cya_usuario_editpublic:
+    path:    /editpublic/
+    defaults: { _controller: CYAYogaBundle:Usuario:editpublic }
+
+cya_usuario_editpass:
+    path:    /editpass/{id}
+    defaults: { _controller: CYAYogaBundle:Usuario:editpass }    
+    
+cya_usuario_update:
+    path:    /update/{id}
+    defaults: { _controller: CYAYogaBundle:Usuario:update }
+    methods: [POST,PUT]
+    
+cya_usuario_view:
+    path:    /view/{id}
+    defaults: { _controller: CYAYogaBundle:Usuario:view }
+    
+cya_usuario_inicio:
+    path:    /inicio
+    defaults: { _controller: CYAYogaBundle:Usuario:inicio }
+    
+cya_usuario_constru:
+    path:    /constru
+    defaults: { _controller: CYAYogaBundle:Usuario:constru }

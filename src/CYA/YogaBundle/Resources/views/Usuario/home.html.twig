@@ -1,0 +1,146 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+	{{ parent() }} 
+	{{ include('CYAYogaBundle:Usuario:messages/success.html.twig')}}
+    {{ include('CYAYogaBundle:Usuario:messages/danger.html.twig')}}
+	<div class="container">
+		<div class="row">
+		    <div class="home-avatar">
+			    <span>
+		            <img src="{{ asset('public/img/avatar.jpg') }}" class="img-circle"/> 
+		        </span>
+		        <h2 class="bienvenido">
+		            Bienvenido  al Sistema de Alumnos del Centro de Yoga Aplicada: {{ app.user.nombrecompleto}}
+		            <!-- <small>
+		            {% if app.user.rol == 'ROLE_ADMIN' %}
+		                Administrador
+		            {% elseif app.user.rol == 'ROLE_USER' %}
+		                Usuario
+		            {% elseif app.user.rol == 'ROLE_SUPER' %}
+		                Superadmin
+		            {% endif %}
+		            </small>
+		            -->
+		        </h2>
+		        <div class="clearfix"></div>
+	        </div>
+        </div>
+	</div>
+	{% if is_granted('ROLE_SUPER') or is_granted('ROLE_ADMIN') %}
+	<div class="container home">
+	    <div class="row">
+    	        <div class="col-sm-4">
+    	        	<div class="top alumnos"><i class="icon ion-android-people"></i> <h2>Usuarios</h2></div>
+    	        	<div class="box">
+    	        		<ul class="list-group">
+							<li class="list-group-item">
+							    <span class="badge">{{ usuariosa }}</span>
+							    Usuarios activos 
+							</li>
+							<li class="list-group-item">
+							    <span class="badge">{{ usuariosi }}</span>
+							    Usuarios Inactivos 
+							</li>
+							<li class="list-group-item">
+							    <span class="badge">{{ usuariost }}</span>
+							    Total
+							</li>
+						</ul>
+						<a href="{{ path('cya_usuario_rapido') }}" class="btn home-usuario"><i class="icon ion-android-people"></i><span>Carga rápida</span></a>
+						<a href="{{ path('cya_usuario_index') }}" class="btn home-usuario"><i class="icon ion-ios-compose"></i><span>Listado</span></a>
+    	        	</div>
+    	        </div>
+	       
+	        	<div class="col-sm-4">
+	            <div class="top cuenta"><i class="icon ion-card"></i> <h2>Cuenta corriente</h2></div>
+    	            <div class="box">
+    	            		 <ul class="list-group">
+							
+								<li class="list-group-item">
+							      <span class="badge">{{ deudas }}</span>
+							       Deuda $
+						     	</li>
+						        <li class="list-group-item">
+							      <span class="badge">{{ pagados }}</span>
+							       Pagado + Bonificaciones $
+						     	</li>
+						        <li class="list-group-item">
+							      <span class="badge">{{ saldocc }}</span>
+							       Saldo $
+						     	</li>
+						</ul>
+						<a href="{{ path('cya_alumnocc_pagodiario') }}" class="btn home-usuario cuenta-home"><i class="icon ion-social-usd"></i><span>Pago Clase</span></a>
+						<a href="{{ path('cya_alumnocc_index') }}" class="btn home-usuario cuenta-home"><i class="icon ion-ios-compose"></i><span>Listado CC</span></a>
+    	        		
+    	        	</div>
+	       	 	</div>
+	       	 	
+    	        <div class="col-sm-4">
+    	        	<div class="top producto"><i class="icon ion-bag"></i> <h2>Productos y lockers</h2></div>
+    	            <div class="box">
+    	        		<ul class="list-group">
+							<li class="list-group-item">
+							    <span class="badge">{{ saldo }}</span>
+							    Stock 
+							</li>
+							<li class="list-group-item">
+							    <span class="badge">{{lockers }}</span>
+							    Lockers 
+							</li>
+						</ul>
+						<a href="{{ path('cya_detalleventa_add') }}" class="btn home-usuario productos"><i class="icon ion-bag"></i><span>Nueva venta</span></a>
+						<a href="{{ path('cya_locker_add') }}" class="btn home-usuario productos"><i class="icon ion-ios-unlocked"></i><span>Nuevo locker</span></a>
+					    <a href="{{ path('cya_producto_index') }}" class="btn home-usuario productos"><i class="icon ion-ios-unlocked"></i><span>Listado de Productos</span></a>
+    	        	</div>
+    	        </div>
+	      
+    	        <div class="col-sm-4">
+    	            <div class="top caja"><i class="icon ion-ios-box"></i> <h2>Caja</h2></div>
+    	            <div class="box">
+						<ul class="list-group">
+							
+								<li class="list-group-item">
+							    <span class="badge">{{ saldoc }}</span>
+							   Saldo
+							</li>
+						</ul>
+						<a href="{{ path('cya_movimiento_add') }}" class="btn home-usuario caja-home"><i class="icon ion-ios-filing"></i><span>Nuevo movimiento de caja</span></a>
+						<a href="{{ path('cya_movimiento_index') }}" class="btn home-usuario caja-home"><i class="icon ion-ios-compose"></i><span>Listado de movimientos</span></a>
+    	        	</div>
+    	        </div>
+	        	
+	        	<div class="col-sm-4">
+    	            <div class="top profesorado"><i class="icon ion-ios-box"></i> <h2>Profesorado</h2></div>
+    	            <div class="box">
+						<a href="{{ path('cya_usuario_constru') }}" class="btn home-usuario profesorado-home"><i class="icon ion-ios-bookmarks"></i><span>Materias</span></a>
+						<a href="{{ path('cya_usuario_constru') }}" class="btn home-usuario profesorado-home"><i class="icon ion-university"></i><span>Consulta de planes de estudios</span></a>
+    	        	</div>
+    	        </div>
+	         
+	        	
+	        
+	    </div>
+	</div>
+	{% endif %}
+	
+	
+	{% if is_granted('ROLE_USER') %}
+	<div class="container home">
+	    <div class="row">
+	        <a href="{{ path('cya_usuario_editpublic') }}">
+    	        <div class="col-sm-6 alumnos">
+    	            <i class="icon ion-android-people"></i>
+    	            <h2>EDITAR USUARIO</h2>
+    	        </div>
+	        </a>
+	          <a href="{{ path('cya_alumnocc_indexpublic') }}">
+	        <div class="col-sm-6 cuenta">
+	            <i class="icon ion-card"></i>
+	            <h2>CUENTA CORRIENTE</h2>
+	        </div>
+	        </a>
+	    </div>
+	</div>
+	{% endif %}
+{% endblock %}

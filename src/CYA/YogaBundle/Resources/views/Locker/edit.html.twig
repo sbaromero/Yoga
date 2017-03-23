@@ -1,0 +1,48 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    {{ include('CYAYogaBundle:Locker:messages/success.html.twig') }}
+	<div class="container-fluid producto">
+        <div class="container producto-icon">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2>Editar Lockers</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<div class="container grey-input">
+		<div class="modulo-form">
+		<div class="row">
+			<div class="col-sm-6">
+			
+				{{ form_start(form, {'attr': { 'role' : 'form'}}) }}
+				<h4 class="text-danger">{{ form_errors(form) }}</h4>
+                     
+					<fieldset>
+						
+
+					    <div class="form-group">
+	                         {{ form_label(form.descripcion) }}
+	                         {{ form_widget(form.descripcion, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Nombre'} }) }}
+	                         <span class="text-danger"> {{ form_errors(form.descripcion) }} </span>
+                    	</div>
+                          
+
+		               
+				 	</fieldset>
+                     
+				    
+			</div>
+		</div>
+		</div>
+		
+		<p>
+			{{ form_widget(form.save, {'label' : 'Modificar Locker', 'attr': {'class': 'btn btn-success'}}) }}
+		</p>
+                 
+            {{ form_end(form) }}
+	</div>
+{% endblock %}

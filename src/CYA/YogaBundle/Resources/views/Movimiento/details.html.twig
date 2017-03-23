@@ -1,0 +1,66 @@
+{% extends 'layout.html.twig' %}
+
+  
+{% block body %}
+{{ parent() }}
+{{ include('CYAYogaBundle:Movimiento:messages/success.html.twig')}}
+{{ include('CYAYogaBundle:Movimiento:messages/danger.html.twig')}}
+    <div class="container-fluid caja">
+        <div class="container alumnos-icon">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2>Detalle de venta</h2>
+                    <h2> Fecha: {{ fecha }}</h2>
+					<h2> Monto: ${{ total }}</h2>
+                </div>
+					
+                
+                
+                <div class="col-sm-7">
+                    <form action="" class="form-inline pull-right" role="search">
+                        <a href="{{ path('cya_movimiento_index') }}" class="btn btn-success">
+                            Regresar
+                        </a>
+        			</form>
+                </div>
+            </div>
+        </div>
+    </div>
+           
+            
+	<div class="container">
+	    <div class="row">
+	    	
+	    <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+
+							<th>{{ knp_pagination_sortable(pagination, 'Producto', 'm.nombreproducto') }}</th>
+							<th>{{ knp_pagination_sortable(pagination, 'Cantidad', 'm.cantidad') }}</th>
+							<th>{{ knp_pagination_sortable(pagination, 'Precio unitario', 'm.producto.precio') }}</th>
+							<th>{{ knp_pagination_sortable(pagination, 'Precio Total', 'm.precioproducto') }}</th>
+						
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for detalleventa in pagination %}
+                                
+                                <td>{{ detalleventa.nombreproducto }}</td>
+                                <td>{{ detalleventa.cantidad }}</td>
+                                <td>${{ detalleventa.precioproducto/detalleventa.cantidad }}</td>
+                                <td>$ {{ detalleventa.precioproducto }}</td>
+                                
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+           <H4> Total Productos: {{ pagination.getTotalItemCount }}</H4>
+                <div class="navigation">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

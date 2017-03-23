@@ -1,0 +1,81 @@
+{% extends 'layout.html.twig' %}
+
+  
+{% block body %}
+{{ parent() }}
+{{ include('CYAYogaBundle:Lockersocio:messages/success.html.twig')}}
+<div class="container-fluid producto">
+        <div class="container producto-icon">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2> Listado Asignación de Lockers</h2>
+                    <a href="{{ path('cya_lockersocio_add') }}" class="head-link">
+        			        <h3>
+        			           <span><i class="icon ion-plus"></i></span>
+    			                Asignar otro locker
+        			         </h3>
+        			         
+        			    </a>
+        			    
+        			    
+        			      <a href="{{ path('cya_locker_index') }}" class="head-link">
+        			        <h3>
+        			           <span><i class="icon ion-android-arrow-dropleft back"></i></span>
+        			            ir a listado lockers
+        			         </h3>
+        			    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="container">
+	    <div class="row">
+	    	
+	    <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+
+							<th>Locker</th>
+							<th>Usuario/Alumno</th>
+						   	<th>Fecha Inicio</th>
+						   	<th>Monto</th>
+						   	<th>Comentario</th>
+                            <th>Acciones</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for lockersocio in pagination %}
+                            <tr data-id="{{ lockersocio.id }}">
+                                
+                                <td>{{ lockersocio.locker.descripcion}}</td>
+                                <td>{{ lockersocio.usuario.nombrecompleto}}</td>
+                                <td>{{ lockersocio.fechainicio | date('d/m/Y') }}</td>
+                                <td>{{ lockersocio.monto}}</td>
+                                <td>{{ lockersocio.comentario}}</td>
+
+                                <td class="actions">
+
+                                      <a href="{{ path('cya_lockersocio_delete', {id: lockersocio.id }) }}" onclick="return confirm('Está seguro de eliinar la asignación??')"
+			                           class="btn btn btn-danger btn-delete" >
+              
+			                            Eliminar Asignación
+			                        </a>
+                                    
+                                    
+                                    
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+           <H4> {% trans %}Total Lockers Asignados:{% endtrans %} {{ pagination.getTotalItemCount }}</H4>
+                {# display navigation #}
+                <div class="navigation">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

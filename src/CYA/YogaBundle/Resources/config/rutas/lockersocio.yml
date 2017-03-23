@@ -1,0 +1,33 @@
+cya_lockersocio_index:
+    path:    /index
+    defaults: { _controller: CYAYogaBundle:Lockersocio:index }
+    
+cya_lockersocio_add:
+    path:    /add
+    defaults: { _controller: CYAYogaBundle:Lockersocio:add }
+
+cya_lockersocio_create:
+    path:    /create
+    defaults: { _controller: CYAYogaBundle:Lockersocio:create }
+    methods: POST
+
+cya_lockersocio_edit:
+    path:    /edit/{id}
+    defaults: { _controller: CYAYogaBundle:Lockersocio:edit }
+    
+cya_lockersocio_update:
+    path:    /update/{id}
+    defaults: { _controller: CYAYogaBundle:Lockersocio:update }
+    methods: [POST,PUT]
+    
+cya_lockersocio_view:
+    path:    /view/{id}
+    defaults: { _controller: CYAYogaBundle:Lockersocio:view }
+    
+cya_lockersocio_delete:
+    path:    /delete/{id}
+    defaults: { _controller: CYAYogaBundle:Lockersocio:delete }
+    
+
+    
+    

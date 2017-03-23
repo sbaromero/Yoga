@@ -1,0 +1,76 @@
+{% extends 'layout.html.twig' %}
+
+  
+{% block body %}
+{{ parent() }}
+{{ include('CYAYogaBundle:Alumnocc:messages/success.html.twig')}}
+{{ include('CYAYogaBundle:Alumnocc:messages/danger.html.twig')}}
+    <div class="container-fluid cuenta">
+        <div class="container cuenta-icon">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2>Deuda de Alumnos </h2>
+                   <h4>{{ nombrecuota }} </h4>
+                </div>
+                <div class="col-sm-9">
+                    <form method="get" action="" class="form-inline pull-right" role="search">
+                        
+
+        				<div class="form-group">
+                            <select class="selectpicker" data-live-search="true" id="cuota" name="cuota" value="{{ app.request.get('cuota') }}">
+                                <option value="" selected disabled>Tipo de cuota</option>
+                                {% for us in cuotas %}
+                                    <option value="{{ us.id }}">{{ us.nombre }}</option>
+                                {% endfor %}
+                             </select>
+                        </div>
+
+        				<input type="submit" value="Buscar" class="btn btn-success">
+        			</form>
+                </div>
+            </div>
+        </div>
+    </div>
+           
+            
+	<div class="container">
+	    <div class="row">
+	    	
+	    <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+
+						    <th>ALUMNO</th>
+							<th>REINGRESO</th>
+							<th>MES</th>
+
+							<th>DEUDA</th>
+							<th>PAGADO</th>
+							<th>BONIFICACION</th>
+							<th> COMENTARIO </th>
+                       
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for alumnocc in pagination %}
+                            <tr data-id="{{ alumnocc.id }}">
+                                
+                                <td>{{ alumnocc.usuario.apellido }}, {{ alumnocc.usuario.nombre }} </td>
+                               <td>{{ alumnocc.usuario.fechareingreso |date('d/m/Y') }}</td>
+                                <td>{{ alumnocc.mes }}</td>
+
+                                <td>{{ alumnocc.deuda }}</td>
+                                <td>{{ alumnocc.pagado }}</td>
+                                <td>{{ alumnocc.bonificacion }}</td>
+                               <h6> <td>{{ alumnocc.comentario }}</td> </h6>
+                               
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

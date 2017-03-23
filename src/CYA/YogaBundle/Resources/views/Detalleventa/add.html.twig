@@ -1,0 +1,129 @@
+{% extends 'layout.html.twig' %}
+
+  
+{% block body %}
+{{ parent() }}
+{{ include('CYAYogaBundle:Detalleventa:messages/success.html.twig')}}
+
+
+<div class="container-fluid producto">
+        <div class="container productos-icon">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2>Venta de Productos</h2>
+                    <a href="{{ path('cya_maestroventa_add') }}" class="head-link">
+        			      <h3>
+        			           <span><i class="icon ion-skip-forward"></i></span>
+    			                Pagar
+        			         </h3>
+        			 </a>
+                </div>
+            </div>
+        </div>
+</div>
+
+
+
+	<div class="container">
+	    {{ form_start(form, {'attr' : {'role' : 'form'}, 'action':'', 'method':'POST' }) }}
+	    <div class="container grey-input">
+       
+
+
+
+ 
+  <div class = row>     
+            <div class="col-sm-2"> 
+                <div class="form-group">
+                     Cantidad
+                     {{ form_widget(form.cantidad, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Cantidad'} }) }}
+                     <span class="text-danger"> {{ form_errors(form.cantidad) }} </span>
+                </div>
+            </div>
+       <br>
+            <div class="col-sm-8">
+            <div class="form-group">
+        
+            <select class="selectpicker" data-live-search="true" id="producto" name="producto" value="{{ app.request.get('producto') }}">
+                <option value="" selected disabled>Producto</option>
+                {% for us in productos %}
+                    <option value="{{ us.id }}">{{ us.descripcion }}</option>
+                {% endfor %}
+             </select>
+            </div>
+            </div> 
+ </div>
+ 
+   <div class = row> 
+
+            <div class="col-sm-12">
+                {{ form_widget(form.save, {'label' : 'Agregar Producto', 'attr': {'class': 'btn alumnos-btn'} }) }}
+            </div>
+            
+        
+          </div>
+            {{ form_end(form) }}
+    </div>
+   </div>     
+   <br>
+   <br>
+         <div class="container">
+	    <div class="row">
+	    	
+	    <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+
+							<th>{{ knp_pagination_sortable(pagination, 'Producto', 'm.nombreproducto') }}</th>
+							<th>{{ knp_pagination_sortable(pagination, 'Cantidad', 'm.cantidad') }}</th>
+							<th>{{ knp_pagination_sortable(pagination, 'Precio unitario', 'm.producto.precio') }}</th>
+							<th>{{ knp_pagination_sortable(pagination, 'Precio Total', 'm.precioproducto') }}</th>
+						
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for detalleventa in pagination %}
+                                
+                                <td>{{ detalleventa.nombreproducto }}</td>
+                                <td>{{ detalleventa.cantidad }}</td>
+                                <td>${{ detalleventa.precioproducto/detalleventa.cantidad }}</td>
+                                <td>$ {{ detalleventa.precioproducto }}</td>
+                                 <td class="actions">
+                                      
+    			                           <a href="{{ path('cya_detalleventa_delete', {id: detalleventa.id }) }}" class="btn btn-sm btn-danger btn-delete" >
+    			                              Eliminar
+    			                        </a>
+                                    </td>
+                                
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+
+           <br>
+
+            <b>
+           <H4> {% trans %}Total productos cargados:{% endtrans %} {{ pagination.getTotalItemCount }} </H4> <h4>Monto Total: $ {{ saldo }}</h4>
+                {# display navigation #}
+                <div class="navigation">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+             
+            </b>
+             <br>
+              <br>
+            </div>
+             <a href="{{ path('cya_maestroventa_add') }}" class="btn alumnos-btn">
+    		 Pagar Venta
+    		</a>
+                
+            </div>
+        </div> 
+         
+         
+         
+         
+ 
+ {% endblock %}

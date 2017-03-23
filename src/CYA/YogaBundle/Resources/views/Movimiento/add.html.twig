@@ -1,0 +1,121 @@
+{% extends 'layout.html.twig' %}
+
+  
+{% block body %}
+{{ parent() }}
+{{ include('CYAYogaBundle:Movimiento:messages/success.html.twig')}}
+<div class="container-fluid caja">
+        <div class="container caja-icon">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2>Cargar Nuevo Movimiento</h2>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+	<div class="container">
+	    {{ form_start(form, {'attr' : {'role' : 'form'}, 'action':'', 'method':'POST' }) }}
+	    <div class="container grey-input">
+        <div class="row">
+
+            <div class="col-sm-4">
+                <div class="form-group"> 
+        	        Rubro
+        	        {{ form_widget(form.rubro, {'attr': {'class': 'form-control', 'id' : 'select_rubro'} }) }} 
+        	         <span class="text-danger">{{ form_errors(form.rubro) }}</span> 
+        	    </div>
+            </div>
+            
+            <div class="col-sm-4"> 
+                <div class="form-group">
+                     Monto
+                     {{ form_widget(form.monto, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Monto'} }) }}
+                     <span class="text-danger"> {{ form_errors(form.monto) }} </span>
+                </div>
+            </div>
+
+            <div class="col-sm-4"> 
+                <div class="form-group">
+                     Descripcion
+                     {{ form_widget(form.descripcion, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Descripcion'} }) }}
+                     <span class="text-danger"> {{ form_errors(form.descripcion) }} </span>
+                    
+                </div>
+                
+            </div>
+            
+
+
+            <div class="col-sm-12">
+                {{ form_widget(form.save, {'label' : 'Cargar Movimiento', 'attr': {'class': 'btn alumnos-btn'} }) }}
+            </div>
+            
+            {{ form_end(form) }}
+         </div>
+         
+         
+         
+         
+         
+         
+        <div class="container">
+	    <div class="row">
+	    	
+	    <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+
+							<th>{{ knp_pagination_sortable(pagination, 'Fecha', 'm.fecha') }}</th>
+							<th>{{ knp_pagination_sortable(pagination, 'Monto', 'm.monto') }} </th>
+							<th>{{ knp_pagination_sortable(pagination, 'Descripcion', 'm.descripcion') }} </th>
+							<th>{{ knp_pagination_sortable(pagination, 'Rubro', 'm.rubro.nombre') }}</th>
+							<th>{{ knp_pagination_sortable(pagination, 'D/C', 'm.rubro.tipo') }}</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for movimiento in pagination %}
+                            <tr data-id="{{ movimiento.id }}">
+                                
+                                <td>{{ movimiento.fecha | date('d M Y - h:i:s') }}</td>
+                                <td>$ {{ movimiento.monto }}</td>
+                                <td>{{ movimiento.descripcion }}</td>
+                                <td>{{ movimiento.rubro.nombre }}</td>
+                                
+                                <td>
+                                    {% if movimiento.rubro.tipo == 'C' %}
+                                        <strong>Crédito</strong>
+                                    {% endif %}    
+                                    {% if movimiento.rubro.tipo == 'D' %}
+                                        <strong>Débito</strong>
+                                    {% endif %}    
+                                </td>
+                                
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+
+<br>
+
+            <b>
+           <H4> {% trans %}Total Movimientos:{% endtrans %} {{ pagination.getTotalItemCount }} </H4> <h4>Saldo: $ {{ saldo }}</h4>
+                {# display navigation #}
+                <div class="navigation">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+             
+            </b>
+            </div>   
+                
+            </div>
+        </div>
+    </div>
+
+ </div>
+ 
+ {% endblock %}

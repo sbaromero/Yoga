@@ -1,0 +1,197 @@
+{% extends 'layout.html.twig' %}
+
+  
+{% block body %}
+{{ parent() }}
+{{ include('CYAYogaBundle:Movimiento:messages/success.html.twig')}}
+<div class="container-fluid caja">
+        <div class="container caja-icon">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2>Movimientos de Caja</h2>
+                    <a href="{{ path('cya_movimiento_add') }}" class="head-link">
+        			        <h3>
+        			           <span><i class="icon ion-plus"></i></span>
+        			            Nuevo movimiento
+        			         </h3>
+        			    </a>
+                </div>
+                <div class="col-sm-7">
+                    <form method="get" action="" class="form-inline pull-right" role="search">
+        				
+        				<div class="form-group select-class">
+                          <select class="form-control" id="dc"name="dc" value="{{ app.request.get('dc') }}">
+                            <option value="" selected disabled>Débito/Crédito</option>
+                            <option value="">Todos</option>
+                            <option value="D">Débito</option>
+                            <option value="C">Crédito</option>
+                          </select>
+                        </div>
+                        
+                        <div class="form-group select-class">
+                          <select class="form-control" id="tipo"name="tipo" value="{{ app.request.get('tipo') }}">
+                            <option value="" selected disabled>Tipo</option>
+                            <option value="">Todos</option>
+                            <option value="MB">Movimientos básicos</option>
+                            <option value="CC">Movimientos CC</option>
+                            <option value="VP">Venta de productos</option>
+                          </select>
+                        </div>
+                        
+                        <div class="form-group select-class">
+                            <select class="form-control" id="rubro" name="rubro" value="{{ app.request.get('rubro') }}">
+                                <option value="" selected disabled>Rubro</option>
+                                {% for ru in rubros %}
+                                    <option value="{{ ru.id }}">{{ ru.nombre }}</option>
+                                {% endfor %}
+                             </select>
+                        </div>
+                        <br>
+                         <br>
+                        <div class="form-group select-class">
+                            <select class="form-control" id="usuario" name="usuario" value="{{ app.request.get('usuario') }}">
+                                <option value="" selected disabled>Usuario (que hizo el movimiento)</option>
+                                {% for us in usuarios %}
+                                    <option value="{{ us.id }}">{{ us.nombrecompleto }}</option>
+                                {% endfor %}
+                             </select>
+                        </div>
+                        
+                        <div class="select-class2">
+                            <div class="form-group">
+                                    Desde
+                                    <input type='date' class="" id="fd"name="fd" value="{{ app.request.get('fd') }}" />
+                            </div>
+                            
+                            <div class="form-group">
+                                    Hasta
+                                    <input type='date' class="" id="fh"name="fh" value="{{ app.request.get('fh') }}" />
+                            </div>
+                        
+                        <input type="submit" value="buscar" class="btn btn-success" margin-top="5px">
+        				</div>
+        			</form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+    	
+    	    <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+    
+    							<th>{{ knp_pagination_sortable(pagination, 'Fecha', 'm.fecha') }}</th>
+    							 <th>{{ knp_pagination_sortable(pagination, 'D/C', 'm.rubro.tipo') }}</th>
+    							<th>{{ knp_pagination_sortable(pagination, 'Monto', 'm.monto') }} </th>
+    							<th>{{ knp_pagination_sortable(pagination, 'Descripcion', 'm.descripcion') }} </th>
+    							<th>{{ knp_pagination_sortable(pagination, 'Rubro', 'm.rubro.nombre') }}</th>
+    							<th>{{ knp_pagination_sortable(pagination, 'Tipo', 'm.tipo') }}</th>
+    							<th>{{ knp_pagination_sortable(pagination, 'Usuario', 'm.usuario.nombrecompleto') }}</th>
+    							<th>{{ 'Acciones' }}</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for movimiento in pagination %}
+                                <tr data-id="{{ movimiento.id }}">
+                                  <td>  
+                                    {% if movimiento.rubro.tipo == 'C' %}
+                                    <span class="text-success"> {{ movimiento.fecha | date('d/m/Y - h:i:s') }}  </span>
+                                    {% endif %}
+                                     {% if movimiento.rubro.tipo == 'D' %}
+                                     <span class="text-danger"> {{ movimiento.fecha | date('d/m/Y - h:i:s') }}  </span>
+                                    {% endif %}
+                                  </td>
+                                  
+                                  
+                                    <td>
+                                        {% if movimiento.rubro.tipo == 'C' %}
+                                     <span class="text-success">       <strong>Crédito</strong> </span>
+                                        {% endif %}    
+                                        {% if movimiento.rubro.tipo == 'D' %}
+                                       <span class="text-danger">     <strong>Débito</strong> </span>
+                                        {% endif %}    
+                                    </td>
+                                 
+                                    <td>
+                                    {% if movimiento.rubro.tipo == 'C' %}
+                               <strong>  <span class="text-success"> $ {{ movimiento.monto }} </span> </strong>
+                                     {% endif %}
+                               {% if movimiento.rubro.tipo == 'D' %}
+                               <strong>  <span class="text-danger"> $ {{ movimiento.monto }} </span> </strong>
+                                     {% endif %}
+                                    </td>
+                                    
+                                    
+                                <td>
+                                    {% if movimiento.rubro.tipo == 'C' %}
+                               <span class="text-success">  {{ movimiento.descripcion }} </span> 
+                                     {% endif %}
+                               {% if movimiento.rubro.tipo == 'D' %}
+                                <span class="text-danger">  {{ movimiento.descripcion }} </span> 
+                                     {% endif %}
+                                 </td>
+                                    
+                                   <td>
+                                    {% if movimiento.rubro.tipo == 'C' %}
+                               <span class="text-success">  {{ movimiento.rubro.nombre }} </span> 
+                                     {% endif %}
+                               {% if movimiento.rubro.tipo == 'D' %}
+                                <span class="text-danger">  {{ movimiento.rubro.nombre }} </span> 
+                                     {% endif %}
+                                 </td>   
+                             
+                                    
+                                    
+                                  
+                                    
+                                    
+                                    <td>
+                                        {% if movimiento.tipo == 'MB' %}
+                                            Movimiento de caja básico
+                                        {% endif %}    
+                                        {% if movimiento.tipo == 'CC' %}
+                                            Movimiento de CC - {{ movimiento.alumnocc.usuario.nombrecompleto }}
+                                        {% endif %}   
+                                        {% if movimiento.tipo == 'VP' %}
+                                           Venta de productos
+                                        {% endif %}   
+                                    </td>
+                                    
+                                    <td>{{ movimiento.usuario.nombrecompleto }}</td>
+                                    <td class="actions">
+                                        <a href="{{ path('cya_movimiento_details', {id: movimiento.id }) }}" 
+                                        {% if movimiento.tipo == 'MB' or movimiento.tipo == 'CC' %}
+                                            class="btn btn-sm btn-primary disabled"
+                                        {% elseif movimiento.tipo == 'VP' %} 
+                                            class="btn btn-sm btn-primary"
+                                        {% endif %}  
+                                        >
+                                            detalles
+                                        </a>
+                                         <a href="{{ path('cya_movimiento_delete', {id: movimiento.id }) }}" class="btn btn-sm btn-danger btn-delete" onclick="return confirm('Está seguro?')">
+    			                            eliminar
+    			                        </a>
+                                    </td>
+    
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                   
+               <H4> {% trans %}Total Movimientos:{% endtrans %} {{ pagination.getTotalItemCount }}</H4>
+               <H4> {% trans %}Saldo: ${% endtrans %} {{ saldo }}</H4>
+                    <div class="navigation">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+    
+                </div>   
+                    
+                </div>
+            </div>
+        </div>
+ </div>
+{% endblock %}

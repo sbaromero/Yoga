@@ -1,0 +1,7 @@
+<footer>
+    <a href="#inicio" class="head-link">
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            SUBIR <i class="icon ion-android-arrow-dropup"></i>
+        {% endif %}
+    </a>
+</footer>

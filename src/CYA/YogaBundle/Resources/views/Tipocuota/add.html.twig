@@ -1,0 +1,113 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="container-fluid alumnos">
+        <div class="container alumnos-icon">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2>Nuevo tipo de cuota</h2>
+                    <a href="{{ path('cya_tipocuota_index') }}" class="head-link">
+    			        <h3>
+    			           <span><i class="icon ion-android-arrow-dropleft back"></i></span>
+    			            regresar al listado
+    			         </h3>
+    			    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {{ form_start(form, {'attr' : {'role' : 'form'}, 'action':'', 'method':'POST' }) }}
+           
+     <div class="container grey-input">
+        <div class="row">
+            
+            <div class="col-sm-4">
+                <div class="form-group">
+                     Nombre
+                     {{ form_widget(form.nombre, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Nombre'} }) }}
+                     <span class="text-danger"> {{ form_errors(form.nombre) }} </span>
+               </div>
+            </div>
+            
+            <div class="col-sm-4"> 
+                <div class="form-group">
+                     Valor
+                     {{ form_widget(form.valor, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Valor'} }) }}
+                     <span class="text-danger"> {{ form_errors(form.valor) }} </span>
+                </div>
+            </div>
+            
+            <div class="col-sm-4"> 
+                   <div class="checkbox">
+                     <label>
+                         {{ form_widget(form.instructorado) }} Profesorado 1er. Nivel
+                         <span class="text-danger"> {{ form_errors(form.instructorado) }} </span>
+                     </label>
+                 </div>
+            </div>
+            
+            <div class="col-sm-4"> 
+                   <div class="checkbox">
+                     <label>
+                         {{ form_widget(form.clasesyoga) }} Clases de yoga
+                         <span class="text-danger"> {{ form_errors(form.clasesyoga) }} </span>
+                     </label>
+                 </div>
+            </div>
+            
+            <div class="col-sm-4"> 
+                   <div class="checkbox">
+                     <label>
+                         {{ form_widget(form.asociacion) }} Asociacion
+                         <span class="text-danger"> {{ form_errors(form.asociacion) }} </span>
+                     </label>
+                 </div>
+            </div>
+            
+            <div class="col-sm-4"> 
+                   <div class="checkbox">
+                     <label>
+                         {{ form_widget(form.profesorado) }} Profesorado 2do. Nivel
+                         <span class="text-danger"> {{ form_errors(form.profesorado) }} </span>
+                     </label>
+                 </div>
+            </div>
+            
+            <div class="col-sm-4"> 
+                   <div class="checkbox">
+                     <label>
+                         {{ form_widget(form.posgrado) }} Posgrado
+                         <span class="text-danger"> {{ form_errors(form.posgrado) }} </span>
+                     </label>
+                 </div>
+            </div>
+            
+            <div class="col-sm-4"> 
+                   <div class="checkbox">
+                     <label>
+                         {{ form_widget(form.casillero) }} Casillero
+                         <span class="text-danger"> {{ form_errors(form.casillero) }} </span>
+                     </label>
+                 </div>
+            </div>
+            
+            <div class="col-sm-4"> 
+                   <div class="checkbox">
+                     <label>
+                         {{ form_widget(form.otro) }} Otro
+                         <span class="text-danger"> {{ form_errors(form.otro) }} </span>
+                     </label>
+                 </div>
+            </div>
+            
+            <div class="col-sm-12">
+                {{ form_widget(form.save, {'label' : 'Agregar tipo de cuota', 'attr': {'class': 'btn alumnos-btn'} }) }}
+            </div>
+            
+            {{ form_end(form) }}
+         </div>
+     </div>
+{% endblock %}
+

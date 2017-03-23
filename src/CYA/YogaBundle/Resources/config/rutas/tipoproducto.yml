@@ -1,0 +1,26 @@
+cya_tipoproducto_index:
+    path:    /index
+    defaults: { _controller: CYAYogaBundle:Tipoproducto:index }
+    
+cya_tipoproducto_add:
+    path:    /add
+    defaults: { _controller: CYAYogaBundle:Tipoproducto:add }
+
+cya_tipoproducto_create:
+    path:    /create
+    defaults: { _controller: CYAYogaBundle:Tipoproducto:create }
+    methods: POST
+
+cya_tipoproducto_edit:
+    path:    /edit/{id}
+    defaults: { _controller: CYAYogaBundle:Tipoproducto:edit }
+    
+cya_tipoproducto_update:
+    path:    /update/{id}
+    defaults: { _controller: CYAYogaBundle:Tipoproducto:update }
+    methods: [POST,PUT]
+    
+cya_tipoproducto_view:
+    path:    /view/{id}
+    defaults: { _controller: CYAYogaBundle:Tipoproducto:view }
+    

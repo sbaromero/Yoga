@@ -1,0 +1,4 @@
+services:
+#    cya_yoga.example:
+#        class: CYA\YogaBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

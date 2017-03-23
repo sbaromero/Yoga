@@ -1,0 +1,48 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    {{ include('CYAYogaBundle:Rubro:messages/success.html.twig') }}
+	<div class="main container">
+		<div class="row well">
+			<div class="col-md-6">
+				<div class="page-header">
+					<h2>Editar Rubro de Caja</h2>
+				</div>
+				{{ form_start(form, {'attr': { 'role' : 'form'}}) }}
+				<h4 class="text-danger">{{ form_errors(form) }}</h4>
+                     
+					<fieldset>
+						
+						<div class="checkbox">
+		                 <label>
+		                     {{ form_widget(form.isActive) }} Activo
+		                     <span class="text-danger"> {{ form_errors(form.isActive) }} </span>
+		                 </label>
+		               </div>
+						
+					    <div class="form-group">
+	                         {{ form_label(form.nombre) }}
+	                         {{ form_widget(form.nombre, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Nombre'} }) }}
+	                         <span class="text-danger"> {{ form_errors(form.nombre) }} </span>
+                    	</div>
+                          
+					    <div class="form-group">
+		                     {{ form_label(form.tipo) }}
+		                     {{ form_widget(form.tipo, { 'attr' : { 'class' : 'form-control'} }) }}
+		                     <span class="text-danger"> {{ form_errors(form.tipo) }} </span>
+		                </div>
+
+		               
+				 	</fieldset>
+                     
+				    <p>
+				        {{ form_widget(form.save, {'label' : 'Modificar Rubro', 'attr': {'class': 'btn btn-success'}}) }}
+				    </p>
+                 
+                   
+				{{ form_end(form) }}
+			</div>
+		</div>
+	</div>
+{% endblock %}

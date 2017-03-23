@@ -1,0 +1,60 @@
+{% extends 'layout.html.twig' %}
+
+  
+{% block body %}
+{{ parent() }}
+{{ include('CYAYogaBundle:Alumnocc:messages/success.html.twig')}}
+{{ include('CYAYogaBundle:Alumnocc:messages/danger.html.twig')}}
+    <div class="container-fluid cuenta">
+        <div class="container alumnos-icon">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2>Detalle del Pago de Cuota</h2>
+                </div>
+                <div class="col-sm-7">
+                    <form action="" class="form-inline pull-right" role="search">
+                        <a href="{{ path('cya_alumnocc_indexpublic') }}" class="btn btn-success">
+                            Regresar al listado
+                        </a>
+
+        			</form>
+                </div>
+            </div>
+        </div>
+    </div>
+           
+            
+	<div class="container">
+	    <div class="row">
+	    	
+	    <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+
+                            <th>{{ knp_pagination_sortable(pagination, 'Fecha', 'm.fecha') }}</th>
+							<th>{{ knp_pagination_sortable(pagination, 'Monto', 'm.monto') }}</th>
+							<th>{{ knp_pagination_sortable(pagination, 'Descripcion', 'm.descripcion') }}</th>
+					
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for movimiento in pagination %}
+                                
+                                <td>{{ movimiento.fecha | date('d m Y - h:i:s') }}</td>
+                                <td> $ {{ movimiento.monto }}</td>
+                                <td>{{ movimiento.descripcion }}</td>
+                               
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+           <H4> Total Cuotas: {{ pagination.getTotalItemCount }}</H4>
+                <div class="navigation">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

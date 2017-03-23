@@ -1,0 +1,105 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="container-fluid alumnos">
+        <div class="container alumnos-icon">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2>Carga Rápida de Usuario </h2>
+                    <a href="{{ path('cya_usuario_index') }}" class="head-link">
+        			        <h3>
+        			           <span><i class="icon ion-android-arrow-dropleft back"></i></span>
+        			            regresar al listado de usuarios
+        			         </h3>
+        			    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+           
+     <div class="container grey-input">
+        
+        <div class="modulo-form">
+        
+        
+        <div class="row">
+            <div class="col-sm-4">
+                 
+             {{ form_start(form, {'attr' : {'role' : 'form'}, 'action':'', 'method':'POST' }) }}
+            
+
+
+                 <div class="form-group">
+                     Usuario (iniciales y apellido)
+                     {{ form_widget(form.nombreusuario, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Nombre de Usuario (iniciales y apellido)'} }) }}
+                     <span class="text-danger"> {{ form_errors(form.nombreusuario) }} </span>
+                 </div>
+                     
+
+            </div>
+            <div class="col-sm-4">
+  
+                <div class="form-group">
+                         DNI
+                         {{ form_widget(form.dni, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'DNI'} }) }}
+                         <span class="text-danger"> {{ form_errors(form.dni) }} </span>
+               </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4"> 
+                    <div class="form-group">
+                         {{ form_label(form.nombre) }}
+                         {{ form_widget(form.nombre, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Nombre'} }) }}
+                         <span class="text-danger"> {{ form_errors(form.nombre) }} </span>
+                    </div>
+            </div>
+            <div class="col-sm-4"> 
+                     <div class="form-group">
+                         {{ form_label(form.apellido) }}
+                         {{ form_widget(form.apellido, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Apellido'} }) }}
+                         <span class="text-danger"> {{ form_errors(form.apellido) }} </span>
+                     </div>
+            </div>
+
+        </div>
+
+        
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                     Tipo de Cuota
+                     {{ form_widget(form.tipocuota, { 'attr' : { 'class' : 'form-control'} }) }}
+                     <span class="text-danger"> {{ form_errors(form.tipocuota) }} </span>
+                 </div>
+            </div>
+        </div>
+           
+        <div class="row">
+            <div class="col-sm-4">
+
+                     {{ form_label(form.password) }}
+                     {{ form_widget(form.password, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Password'} }) }}
+                     <span class="text-danger"> {{ form_errors(form.password) }} </span>
+        
+                  </div> 
+                            
+        </div>      
+                
+              
+             </div>
+              <p>
+                     {{ form_widget(form.save, {'label' : 'Agregar Usuario', 'attr': {'class': 'btn alumnos-btn'} }) }}
+                 </p>
+
+                 {{ form_end(form) }}
+         </div>
+                 
+     </div>
+     
+    
+{% endblock %}
+

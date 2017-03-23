@@ -1,0 +1,44 @@
+cya_alumnocc_index:
+    path:    /index
+    defaults: { _controller: CYAYogaBundle:Alumnocc:index }
+    
+cya_alumnocc_indexpublic:
+    path:    /indexpublic
+    defaults: { _controller: CYAYogaBundle:Alumnocc:indexpublic }
+    
+cya_alumnocc_add:
+    path:    /add
+    defaults: { _controller: CYAYogaBundle:Alumnocc:add }
+    
+cya_alumnocc_pagodiario:
+    path:    /pagodiarioAction
+    defaults: { _controller: CYAYogaBundle:Alumnocc:pagodiario }
+
+cya_alumnocc_create:
+    path:    /create
+    defaults: { _controller: CYAYogaBundle:Alumnocc:create }
+    methods: POST
+
+cya_alumnocc_detallepago:
+    path:    /detallepago/{id}
+    defaults: { _controller: CYAYogaBundle:Alumnocc:detallepago }
+    
+cya_alumnocc_details:
+    path:    /details/{id}
+    defaults: { _controller: CYAYogaBundle:Alumnocc:details }
+    
+cya_alumnocc_delete:
+    path:    /delete/{id}
+    defaults: { _controller: CYAYogaBundle:Alumnocc:delete }
+    
+cya_alumnocc_detallepagopublic:
+    path:    /detallepagopublic/{id}
+    defaults: { _controller: CYAYogaBundle:Alumnocc:detallepagopublic}
+
+cya_alumnocc_pago:
+    path:    /pago/{id}
+    defaults: { _controller: CYAYogaBundle:Alumnocc:pago }
+        
+cya_alumnocc_indexdeuda:
+    path:    /indexdeuda
+    defaults: { _controller: CYAYogaBundle:Alumnocc:indexdeuda }        

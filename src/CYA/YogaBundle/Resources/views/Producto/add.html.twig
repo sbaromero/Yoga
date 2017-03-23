@@ -1,0 +1,105 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="container-fluid producto">
+        <div class="container producto-icon">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2>Nuevo Producto</h2>
+                    <a href="{{ path('cya_producto_index') }}" class="head-link">
+        			        <h3>
+        			           <span><i class="icon ion-android-arrow-dropleft back"></i></span>
+        			            regresar a listado de productos
+        			         </h3>
+        			    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {{ form_start(form, {'attr' : {'role' : 'form'}, 'action':'', 'method':'POST' }) }}
+           
+     <div class="container grey-input">
+       <div class="row">
+         <div class="col-sm-4"> 
+                   <div class="checkbox">
+                     <label>
+                         {{ form_widget(form.isActive) }} 
+                         <span class="text-danger"> {{ form_errors(form.isActive) }} </span>
+                     </label>
+                 </div>
+            </div>
+         </div>
+      
+        <div class="row">
+            <div class="col-sm-8"> 
+                    <div class="form-group">
+                         {{ form_label(form.descripcion) }}
+                         {{ form_widget(form.descripcion, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Descripción'} }) }}
+                         <span class="text-danger"> {{ form_errors(form.descripcion) }} </span>
+                    </div>
+            </div>
+            
+        </div>
+        <div class="row">
+             <div class="col-sm-2"> 
+                    <div class="form-group">
+                         Costo $
+                         {{ form_widget(form.costo, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Costo'} }) }}
+                         <span class="text-danger"> {{ form_errors(form.costo) }} </span>
+                    </div>
+            </div>
+             <div class="col-sm-2"> 
+                    <div class="form-group">
+                         Precio de Lista $
+                         {{ form_widget(form.preciolista, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Precio Lista'} }) }}
+                         <span class="text-danger"> {{ form_errors(form.preciolista) }} </span>
+                    </div>
+            </div>
+            
+             <div class="col-sm-2"> 
+                    <div class="form-group">
+                         {{ form_label(form.stock) }}
+                         {{ form_widget(form.stock, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Stock'} }) }}
+                         <span class="text-danger"> {{ form_errors(form.stock) }} </span>
+                    </div>
+            </div>
+         </div>  
+         
+         <div class="row">
+             <div class="col-sm-4"> 
+                    <div class="form-group">
+                         Tipo de Producto
+                         {{ form_widget(form.tipoproducto, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Tipo Producto'} }) }}
+                         <span class="text-danger"> {{ form_errors(form.tipoproducto) }} </span>
+                    </div>
+            </div>
+            <div class="col-sm-4"> 
+                    <div class="form-group">
+                          Proveedor
+                         {{ form_widget(form.proveedor, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Proveedor'} }) }}
+                         <span class="text-danger"> {{ form_errors(form.proveedor) }} </span>
+                    </div>
+            </div>
+
+         </div>  
+         
+         
+         
+         
+         
+      <div class="row">   
+     <div class="col-sm-12">
+                
+                {{ form_widget(form.save, {'label' : 'Agregar producto', 'attr': {'class': 'btn alumnos-btn'} }) }}
+                 
+                
+          </div>
+       </div>   
+           
+    {{ form_end(form) }}
+        
+     </div>
+{% endblock %}
+

@@ -1,0 +1,142 @@
+{% extends 'layout.html.twig' %}
+
+  
+{% block body %}
+{{ parent() }}
+{{ include('CYAYogaBundle:Alumnocc:messages/success.html.twig')}}
+{{ include('CYAYogaBundle:Alumnocc:messages/danger.html.twig')}}
+    <div class="container-fluid cuenta">
+        <div class="container cuenta-icon">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2>Cuentas Corrientes de Alumnos </h2>
+                   <h4>Leyenda: pc (pago de cuota)  - cc (cuota cancelada) - vp (venta de producto) - pd (pago diario)  </h4>
+                </div>
+                <div class="col-sm-7">
+                    <form method="get" action="" class="form-inline pull-right" role="search">
+                        
+                        <div class="form-group select-class">
+                          <select class="form-control" id="pago" name="pago" value="{{ app.request.get('pago') }}">
+                            <option value="" selected disabled>Tipo</option>
+                            <option value="">Todas</option>
+                            <option value="S">Pagas</option>
+                            <option value="N">No pagas</option>
+                          </select>
+                        </div>
+                        
+        				<div class="form-group">
+                            <select class="selectpicker" data-live-search="true" id="usuario" name="usuario" value="{{ app.request.get('usuario') }}">
+                                <option value="" selected disabled>Usuario</option>
+                                {% for us in usuarios %}
+                                    <option value="{{ us.id }}">{{ us.nombrecompleto }}</option>
+                                {% endfor %}
+                             </select>
+                        </div>
+
+        				<input type="submit" value="Buscar" class="btn btn-success">
+        			</form>
+                </div>
+            </div>
+        </div>
+    </div>
+           
+            
+	<div class="container">
+	    <div class="row">
+	    	
+	    <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+
+							<th>{{ knp_pagination_sortable(pagination, 'Alumno', 'a.nombrecompleto') }}</th>
+							<th>{{ knp_pagination_sortable(pagination, 'Fecha de Reingreso', 'a.fechavencimiento') }}</th>
+							<th>{{ knp_pagination_sortable(pagination, 'Cuota Mes', 'a.deuda') }}</th>
+
+							<th>{{ knp_pagination_sortable(pagination, 'Debe', 'a.deuda') }}</th>
+							<th>{{ knp_pagination_sortable(pagination, 'Pagado', 'a.pagado') }}</th>
+							<th>{{ knp_pagination_sortable(pagination, 'Bonificación', 'a.bonificacion') }}</th>
+							<th>{{ knp_pagination_sortable(pagination, 'Modificacion', 'a.fechamodificacion') }}</th>
+							<th>{{ knp_pagination_sortable(pagination, 'Tipo', 'a.tipo') }}</th>
+							<th align=center>{{ knp_pagination_sortable(pagination, 'Comentario', 'a.comentario') }}</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for alumnocc in pagination %}
+                            <tr data-id="{{ alumnocc.id }}">
+                                
+                                <td>{{ alumnocc.usuario.apellido }}, {{ alumnocc.usuario.nombre }} </td>
+                               <td>{{ alumnocc.usuario.fechareingreso |date('d/m/Y') }}</td>
+                                <td>{{ alumnocc.mes }}</td>
+
+                                <td>{{ alumnocc.deuda }}</td>
+                                <td>{{ alumnocc.pagado }}</td>
+                                <td>{{ alumnocc.bonificacion }}</td>
+                                <td>{{ alumnocc.fechamodificacion |date('d/m/Y') }}</td>
+                                <td>{{ alumnocc.tipo }}</td>
+                               <h6> <td>{{ alumnocc.comentario }}</td> </h6>
+                               
+                                <td class="actions">
+                                    <a href="{{ path('cya_alumnocc_detallepago', {id: alumnocc.id }) }}" 
+                                    {% if alumnocc.pagado == 0 or alumnocc.tipo != 'VP' %}
+                                        class="btn btn-warning disabled"
+                                    {% elseif alumnocc.pagado > 0 or alumnocc.tipo == 'VP' %} 
+                                        class="btn btn-warning"
+                                    {% endif %} >
+                                        detalle
+                                    </a>
+                                    
+                                    <a href="{{ path('cya_alumnocc_pago', {id: alumnocc.id }) }}"
+                                        {% if alumnocc.deuda <= (alumnocc.pagado + alumnocc.bonificacion)  %}
+                                            class="btn btn-success disabled"
+                                        {% elseif alumnocc.deuda > (alumnocc.pagado + alumnocc.bonificacion) %} 
+                                            class="btn btn-success"
+                                        {% endif %} >
+                                        A Pagar
+                                    </a>
+                                    
+                                    <a href="{{ path('cya_alumnocc_delete', {id: alumnocc.id }) }}" onclick="return confirm('Está seguro??')"
+			                            {% if alumnocc.tipo == 'CC' %}
+                                            class="btn btn btn-danger btn-delete"
+                                        {% elseif alumnocc.tipo == 'PD' %} 
+                                            class="btn btn btn-danger btn-delete"
+                                        {% elseif alumnocc.tipo == 'VP' %} 
+                                            class="btn btn btn-danger btn-delete"
+                                        {% elseif alumnocc.tipo == 'PC' %}
+                                         class="btn btn btn-danger btn-delete"   
+                                         
+                                        {% endif %} >
+                                        
+			                            elimina
+			                        </a>
+                                    
+                                </td>
+                                
+                                
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+           <H4> Total Movimientos: {{ contador }}</H4>
+          <H4> Total Deudas: {{ deudas }}</H4>
+           <H4> Total Pagado: {{ pagados }}</H4>
+            <H4> Total Bonificaciones: {{ bonificaciones }}</H4>
+        
+          </br>
+         {% if saldo < 0 %}  
+         <H4 >  <b> <span class="text-danger">SALDO NEGATIVO: $ {{ saldo }}</span> </b>  <H4 >
+         {% endif %}</td>  
+         
+          {% if saldo >= 0 %}  
+         <H4 >  <b> <span class="text-success">SALDO POSITIVO: $ {{ saldo }}</span> </b>  <H4 >
+         {% endif %}</td>  
+           
+           
+                <div class="navigation">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

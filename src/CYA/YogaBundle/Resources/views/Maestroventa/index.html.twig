@@ -1,0 +1,89 @@
+{% extends 'layout.html.twig' %}
+
+  
+{% block body %}
+{{ parent() }}
+{{ include('CYAYogaBundle:Usuario:messages/success.html.twig')}}
+{{ include('CYAYogaBundle:Usuario:messages/danger.html.twig')}}
+
+
+<div class="container-fluid producto">
+        <div class="container productos-icon">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2>Listado de Productos</h2>
+                    <a href="{{ path('cya_producto_add') }}" class="head-link">
+        			      <h3>
+        			           <span><i class="icon ion-plus"></i></span>
+    			                Agregar nuevo producto
+        			         </h3>
+        			 </a>
+                </div>
+               
+                <div class="col-sm-7">
+                    
+                    <form method="get" action="" class="form-inline pull-right" role="search">
+        				<div class="form-group">
+        					<input type="text" size="40" name="query" value="" class="form-control" placeholder="Buscar Producto" required />
+        				</div>
+        				<input type="submit" value="Buscar" class="btn btn-sm btn-primary">
+        			</form>
+                </div>
+            </div>
+        </div>
+</div>
+
+<div class="container">
+	    <div class="row">
+	    	
+	    <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+
+							<th>{{ knp_pagination_sortable(pagination, 'Código', 'r.id') }}</th>
+							<th>{{ knp_pagination_sortable(pagination, 'Descripción', 'r.descripcion') }} </th>
+							<th>Costo</th>
+							<th>Precio de Lista </th>
+						    <th>Stock</th>
+						    <th>Tipo Prod. </th>
+						     <th>Estado</th>
+						
+                            <th>Acciones</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for producto in pagination %}
+                                <tr data-id="{{ producto.id }}">
+                                
+                                <td>{{ producto.id }}</td>
+                                <td>{{ producto.descripcion }}</td>
+                                <td>{{ producto.costo }}</td>
+                                <td>{{ producto.preciolista }}</td>
+                                <td>{{ producto.stock }}</td>
+                                <td>{{ producto.tipoproducto.descripcion }}</td>
+                                <td>{% if producto.isActive == 1 %}
+					               <b>   <span class="text-success">Activo</span></b>
+				                      {% elseif producto.isActive == 0 %}
+						            <b> <span class="text-warning">Inactivo</span> </b>
+                                	{% endif %}</td>
+
+                                <td class="actions">
+                                    <a href="{{ path('cya_producto_edit', {id: producto.id }) }}" class="btn btn-sm btn-primary">
+                                        {% trans %} <i class="icon ion-edit"></i> {% endtrans %}
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+           <H4> {% trans %}Total Tipos Producto:{% endtrans %} {{ pagination.getTotalItemCount }}</H4>
+                {# display navigation #}
+                <div class="navigation">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

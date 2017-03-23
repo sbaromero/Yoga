@@ -1,0 +1,71 @@
+{% extends 'layout.html.twig' %}
+
+  
+{% block body %}
+{{ parent() }}
+{{ include('CYAYogaBundle:Tipoproducto:messages/success.html.twig')}}
+<div class="container-fluid producto">
+        <div class="container producto-icon">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2>Tipos de Productos</h2>
+                    <a href="{{ path('cya_tipoproducto_add') }}" class="head-link">
+        			        <h3>
+        			           <span><i class="icon ion-plus"></i></span>
+    			                Agregar nuevo tipo de producto
+        			         </h3>
+        			    </a>
+                </div>
+                <div class="col-sm-7">
+                    <form method="get" action="" class="form-inline pull-right" role="search">
+        				<div class="form-group">
+        					<input type="text" size="40" name="query" value="" class="form-control" placeholder="Buscar tipo producto" required />
+        				</div>
+        				<input type="submit" value="buscar" class="btn btn-default">
+        			</form>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="container">
+	    <div class="row">
+	    	
+	    <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+
+							<th>{{ knp_pagination_sortable(pagination, 'Código', 'r.id') }}</th>
+							<th>{{ knp_pagination_sortable(pagination, 'Tipo Producto', 'r.descripcion') }} </th>
+						
+                            <th>Acciones</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for tipoproducto in pagination %}
+                            <tr data-id="{{ tipoproducto.id }}">
+                                
+                                <td>{{ tipoproducto.id }}</td>
+                                <td>{{ tipoproducto.descripcion }}</td>
+                                
+                                
+
+                                <td class="actions">
+                                    <a href="{{ path('cya_tipoproducto_edit', {id: tipoproducto.id }) }}" class="btn btn-sm btn-primary">
+                                        {% trans %} <i class="icon ion-edit"></i> {% endtrans %}
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+           <H4> {% trans %}Total Tipos Producto:{% endtrans %} {{ pagination.getTotalItemCount }}</H4>
+                {# display navigation #}
+                <div class="navigation">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

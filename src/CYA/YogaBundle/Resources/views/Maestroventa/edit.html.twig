@@ -1,0 +1,71 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    {{ include('CYAYogaBundle:Tipoproducto:messages/success.html.twig') }}
+	<div class="main container">
+		<div class="row well">
+			<div class="col-md-6">
+				<div class="page-header">
+					<h2>Editar Producto</h2>
+				</div>
+				{{ form_start(form, {'attr': { 'role' : 'form'}}) }}
+				<h4 class="text-danger">{{ form_errors(form) }}</h4>
+                     
+					<fieldset>
+						<div class="form-group">
+ 
+	                         {{ form_widget(form.isActive, { 'attr' : { 'class' : 'form-control inputswitch', 'placeholder' : 'Activo'} }) }}
+	                         <span class="text-danger"> {{ form_errors(form.isActive) }} </span>
+                    	</div> 
+
+					    <div class="form-group">
+	                         {{ form_label(form.descripcion) }}
+	                         {{ form_widget(form.descripcion, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Descripcion'} }) }}
+	                         <span class="text-danger"> {{ form_errors(form.descripcion) }} </span>
+                    	</div>
+                       
+                       	<div class="form-group">
+	                         {{ form_label(form.costo) }}
+	                         {{ form_widget(form.costo, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Precio de Costo'} }) }}
+	                         <span class="text-danger"> {{ form_errors(form.costo) }} </span>
+                    	</div>   
+
+		                   <div class="form-group">
+	                         {{ form_label(form.preciolista) }}
+	                         {{ form_widget(form.preciolista, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Precio de Lista'} }) }}
+	                         <span class="text-danger"> {{ form_errors(form.preciolista) }} </span>
+                    	</div>   
+		               
+		               	<div class="form-group">
+	                         {{ form_label(form.stock) }}
+	                         {{ form_widget(form.stock, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Stock'} }) }}
+	                         <span class="text-danger"> {{ form_errors(form.stock) }} </span>
+                    	</div>   
+		               
+		               		<div class="form-group">
+	                         {{ form_label(form.proveedor) }}
+	                         {{ form_widget(form.proveedor, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Proveedor'} }) }}
+	                         <span class="text-danger"> {{ form_errors(form.proveedor) }} </span>
+                    	</div> 
+		               
+		               	 <div class="form-group">
+	                       <b> Tipo de Producto</b>
+	                         {{ form_widget(form.tipoproducto, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Tipo Producto'} }) }}
+	                         <span class="text-danger"> {{ form_errors(form.tipoproducto) }} </span>
+                    	</div> 
+		               
+		               	
+		               
+				 	</fieldset>
+                     
+				    <p>
+				        {{ form_widget(form.save, {'label' : 'Modificar Producto', 'attr': {'class': 'btn btn-success'}}) }}
+				    </p>
+                 
+                   
+				{{ form_end(form) }}
+			</div>
+		</div>
+	</div>
+{% endblock %}

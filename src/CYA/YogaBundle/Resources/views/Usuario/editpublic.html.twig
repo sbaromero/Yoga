@@ -1,0 +1,59 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    {{ include('CYAYogaBundle:Usuario:messages/success.html.twig') }}
+	<div class="main container">
+		<div class="row well">
+			<div class="col-md-6">
+				<div class="page-header">
+					<h2>Edite sus datos personales </h2>
+				</div>
+				{{ form_start(form, {'attr': { 'rol' : 'form'}}) }}
+				<h4 class="text-danger">{{ form_errors(form) }}</h4>
+                     
+					<fieldset>
+					    
+					       
+						<div class="form-group">
+					        Dirección
+					        {{ form_widget(form.direccion, {'attr': {'class': 'form-control', 'placeholder' : 'Dirección'}}) }}
+					        <span class="text-danger">{{ form_errors(form.direccion) }}</span>
+					    </div>
+						<div class="form-group">
+					        Ciudad
+					        {{ form_widget(form.ciudad, {'attr': {'class': 'form-control', 'placeholder' : 'Ciudad'}}) }}
+					        <span class="text-danger">{{ form_errors(form.ciudad) }}</span>
+					    </div>
+					    <div class="form-group">
+					        Teléfono
+					        {{ form_widget(form.telefono, {'attr': {'class': 'form-control', 'placeholder' : 'Teléfono'}}) }}
+					        <span class="text-danger">{{ form_errors(form.telefono) }}</span>
+					    </div>
+					    <div class="form-group">
+					        Mail
+					        {{ form_widget(form.mail, {'attr': {'class': 'form-control', 'placeholder' : 'Mail'}}) }}
+					        <span class="text-danger">{{ form_errors(form.mail) }}</span>
+					    </div>
+					    <div class="form-group">
+					        Fecha de nacimiento
+					        {{ form_widget(form.fechanacimiento, {'attr': {'class': 'form-control', 'placeholder' : 'Fecha de nacimiento'}}) }}
+					        <span class="text-danger">{{ form_errors(form.fechanacimiento) }}</span>
+					    </div>
+					    <div class="form-group">
+					        Password
+					        {{ form_widget(form.password, {'attr': {'class': 'form-control', 'placeholder' : 'Password'}}) }}
+					        <span class="text-danger">{{ form_errors(form.password) }}</span>
+					    </div>
+				 	</fieldset>
+                     
+				    <p>
+				        {{ form_widget(form.save, {'label' : 'Modificar Usuario', 'attr': {'class': 'btn btn-success'}}) }}
+				    </p>
+                 
+                   
+				{{ form_end(form) }}
+			</div>
+		</div>
+	</div>
+{% endblock %}

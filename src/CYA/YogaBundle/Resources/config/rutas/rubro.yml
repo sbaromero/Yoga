@@ -1,0 +1,26 @@
+cya_rubro_index:
+    path:    /index
+    defaults: { _controller: CYAYogaBundle:Rubro:index }
+    
+cya_rubro_add:
+    path:    /add
+    defaults: { _controller: CYAYogaBundle:Rubro:add }
+
+cya_rubro_create:
+    path:    /create
+    defaults: { _controller: CYAYogaBundle:Rubro:create }
+    methods: POST
+
+cya_rubro_edit:
+    path:    /edit/{id}
+    defaults: { _controller: CYAYogaBundle:Rubro:edit }
+    
+cya_rubro_update:
+    path:    /update/{id}
+    defaults: { _controller: CYAYogaBundle:Rubro:update }
+    methods: [POST,PUT]
+    
+cya_rubro_view:
+    path:    /view/{id}
+    defaults: { _controller: CYAYogaBundle:Rubro:view }
+    

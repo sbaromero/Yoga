@@ -1,0 +1,85 @@
+{% extends 'layout.html.twig' %}
+
+  
+{% block body %}
+{{ parent() }}
+{{ include('CYAYogaBundle:Rubro:messages/success.html.twig')}}
+<div class="container-fluid caja">
+        <div class="container caja-icon">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2>Listado de Rubros</h2>
+                    <a href="{{ path('cya_rubro_add') }}" class="head-link">
+        			        <h3>
+        			           <span><i class="icon ion-plus"></i></span>
+        			           Definir Nuevo rubro
+        			         </h3>
+        			    </a>
+                </div>
+                <div class="col-sm-7">
+                    <form method="get" action="" class="form-inline pull-right" role="search">
+        				<div class="form-group">
+        					<input type="text" size="40" name="query" value="" class="form-control" placeholder="Buscar rubro" required />
+        				</div>
+        				<input type="submit" value="buscar" class="btn btn-default">
+        			</form>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="container">
+	    <div class="row">
+	    	
+	    <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+
+							<th>{{ knp_pagination_sortable(pagination, 'Id', 'r.id') }}</th>
+							<th>{{ knp_pagination_sortable(pagination, 'Rubro', 'r.nombre') }} </th>
+							<th>{{ knp_pagination_sortable(pagination, 'Tipo', 'r.tipo') }}</th>
+                            <th>Acciones</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for rubro in pagination %}
+                            <tr data-id="{{ rubro.id }}">
+                                
+                                <td>{{ rubro.id }}</td>
+                                <td>{{ rubro.nombre }}</td>
+                                <td>
+                                    {% if rubro.tipo == 'C' %}
+                                        <strong>Crédito</strong>
+                                    {% endif %}    
+                                    {% if rubro.tipo == 'D' %}
+                                        <strong>Débito</strong>
+                                    {% endif %}    
+                                </td>
+                                
+
+                                <td class="actions">
+                                    <a href="{{ path('cya_rubro_edit', {id: rubro.id }) }}"
+                                    
+                                    {% if rubro.nombre == 'PAGO CC' %}
+                                        class="btn btn-sm btn-primary disabled"
+                                    {% elseif rubro.nombre != 'PAGO CC' %} 
+                                        class="btn btn-sm btn-primary"
+                                    {% endif %} 
+                                    >
+                                    <i class="icon ion-edit">Editar</i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+           <H4> {% trans %}Total Rubros:{% endtrans %} {{ pagination.getTotalItemCount }}</H4>
+                {# display navigation #}
+                <div class="navigation">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

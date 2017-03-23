@@ -1,0 +1,60 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/book/security.html
+security:
+
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    providers:
+        our_db_provider:
+            entity:
+                class: CYAYogaBundle:Usuario
+                property: nombreusuario
+
+    firewalls:
+        default:
+            anonymous: ~
+            http_basic: ~
+            form_login:
+                login_path: /login
+                check_path: /login_check
+                # field names for the username and password fields:
+                username_parameter: _nombreusuario
+                password_parameter: _password
+                # default_target_path: default_security_target
+                # always_use_default_target_path: true
+            logout:
+                path:   /logout
+                target: /login   
+
+        main:
+            anonymous: ~
+            # activate different ways to authenticate
+
+            # http_basic: ~
+            # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
+
+            # form_login: ~
+            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+
+    encoders:
+        CYA\YogaBundle\Entity\Usuario:
+            algorithm: bcrypt
+            cost: 12
+            
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/$, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/usuario/home, roles: [ROLE_ADMIN, ROLE_SUPER, ROLE_USER] }
+        - { path: ^/usuario/editpublic, roles: ROLE_USER }
+        - { path: ^/usuario/edit, roles: [ROLE_ADMIN, ROLE_SUPER] }
+        - { path: ^/usuario/editpass, roles: [ROLE_ADMIN, ROLE_SUPER] }
+        - { path: ^/usuario/add, roles: [ROLE_ADMIN, ROLE_SUPER] }
+        - { path: ^/usuario/index, roles: [ROLE_ADMIN, ROLE_SUPER] }
+        - { path: ^/usuario/view, roles: [ROLE_ADMIN, ROLE_SUPER] }
+        - { path: ^/rubro, roles: [ROLE_ADMIN, ROLE_SUPER] }
+        - { path: ^/producto, roles: [ROLE_ADMIN, ROLE_SUPER] }
+        - { path: ^/alumnocc/indexpublic, roles: ROLE_USER }
+        - { path: ^/alumnocc/detallepagopublic, roles: ROLE_USER }
+        - { path: ^/alumnocc/detallepago, roles: [ROLE_ADMIN, ROLE_SUPER] }
+        - { path: ^/alumnocc/index, roles: [ROLE_ADMIN, ROLE_SUPER] }
+        - { path: ^/alumnocc/pago, roles: [ROLE_ADMIN, ROLE_SUPER] }
+        - { path: ^/alumnocc/pagodiario, roles: [ROLE_ADMIN, ROLE_SUPER] }

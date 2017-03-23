@@ -1,0 +1,92 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    {{ include('CYAYogaBundle:Alumnocc:messages/success.html.twig') }}
+	<div class="main container">
+		<div class="row well">
+			<div class="col-md-6">
+				<div class="page-header">
+					<h2>Pago de Cta. Cte. </h2>
+					<h3>{{ nombrecompleto }}</h3>
+					<h3> Fecha de Reingreso: {{ vencimiento }}</h3>
+				
+				</div>
+				{{ form_start(form, {'attr': { 'rol' : 'form'}}) }}
+				<h4 class="text-danger">{{ form_errors(form) }}</h4>
+                     
+					<fieldset>
+				
+			
+						<div class="form-group">
+					        Mes cuota
+					        {{ form_widget(form.mes, {'attr': {'class': 'form-control', 'placeholder' : 'Cta. cte. común'}}) }}
+					        <span class="text-danger">{{ form_errors(form.mes) }}</span>
+					    </div>
+					    <div class="form-group">
+					        Monto cuota $
+					        {{ form_widget(form.deuda, {'attr': {'class': 'form-control', 'placeholder' : 'Monto cuota'}}) }}
+					        <span class="text-danger">{{ form_errors(form.deuda) }}</span>
+					    </div>
+                    <div class="form-group">
+	                	<span class="text-success">		  <strong>      Pagar  $    <br>
+					        {{ form_widget(form.pagado, {'value': saldo }, {'attr': {'class': 'form-control', 'placeholder' : 'Pagar' }}) }}
+					        <span class="text-danger">{{ form_errors(form.pagado) }}</span>
+					     </strong> 
+					    </span>
+					 </div> 
+					 
+						<div class="form-group">
+					        Comentario
+					        {{ form_widget(form.comentario, {'attr': {'class': 'form-control', 'placeholder' : ''}}) }}
+					        <span class="text-danger">{{ form_errors(form.comentario) }}</span>
+					    </div>  
+				 	</fieldset>
+                     
+	
+					    
+            </div>
+          </div>
+	      
+
+
+   		 <fieldset>
+
+		 <div class="row well">
+		  <div class="col-md-2">
+		  
+       
+		      <div class="form-group" >
+				   	<span class="text-danger">		  
+				   	<strong>      Bonificación $   <br>
+					        {{ form_widget(form.bonificacion,  {'value': '0' }, {'attr': {'class': 'form-control', 'placeholder' : 'Bonificacion'}}) }}
+					        <span class="text-danger">{{ form_errors(form.bonificacion) }}</span>
+					  </span>
+			 </strong> 
+			 </div>  
+	
+		</div>			
+       	</fieldset>            
+				
+	     <fieldset>
+
+		 <div class="row well">
+		  <div class="col-md-2">
+
+			        <p>
+				        {{ form_widget(form.save, {'label' : 'Realizar pago', 'attr': {'class': 'btn btn-success'}}) }} 
+				    </p>
+                     
+
+		 </div>  
+	
+		</div>			
+       	</fieldset>			
+				
+				{{ form_end(form) }}
+	
+
+	
+	
+
+{% endblock %}

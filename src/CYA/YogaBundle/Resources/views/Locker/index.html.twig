@@ -1,0 +1,80 @@
+{% extends 'layout.html.twig' %}
+
+  
+{% block body %}
+{{ parent() }}
+{{ include('CYAYogaBundle:Locker:messages/success.html.twig')}}
+<div class="container-fluid producto">
+        <div class="container producto-icon">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2>Lockers</h2>
+                    <a href="{{ path('cya_locker_add') }}" class="head-link">
+        			        <h3>
+        			           <span><i class="icon ion-plus"></i></span>
+    			                Agregar nuevo locker
+        			         </h3>
+        			    </a>
+                </div>
+                <div class="col-sm-7">
+                    <form method="get" action="" class="form-inline pull-right" role="search">
+        				<div class="form-group">
+        					<input type="text" size="40" name="query" value="" class="form-control" placeholder="Buscar locker" required />
+        				</div>
+        				<input type="submit" value="buscar" class="btn btn-default">
+        			</form>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="container">
+	    <div class="row">
+	    	
+	    <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+
+							<th>{{ knp_pagination_sortable(pagination, 'Código', 'r.id') }}</th>
+							<th>{{ knp_pagination_sortable(pagination, 'Nombre de Locker', 'r.descripcion') }} </th>
+						
+                            <th>Acciones</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for locker in pagination %}
+                            <tr data-id="{{ locker.id }}">
+                                
+                                <td>{{ locker.id }}</td>
+                                <td>{{ locker.descripcion }}</td>
+                                
+                                
+
+                                <td class="actions">
+                                    <a href="{{ path('cya_locker_edit', {id: locker.id }) }}" class="btn btn-sm btn-primary">
+                                        {% trans %} <i class="icon ion-edit">Editar</i> {% endtrans %}
+                                    </a>
+                                    
+                                      <a href="{{ path('cya_locker_delete', {id: locker.id }) }}" onclick="return confirm('Está seguro??')"
+			                           class="btn btn btn-danger btn-delete" >
+              
+			                            eliminar
+			                        </a>
+                                    
+                                    
+                                    
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+           <H4> {% trans %}Total Lockers:{% endtrans %} {{ pagination.getTotalItemCount }}</H4>
+                {# display navigation #}
+                <div class="navigation">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

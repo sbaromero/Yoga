@@ -1,0 +1,29 @@
+cya_movimiento_index:
+    path:    /index
+    defaults: { _controller: CYAYogaBundle:Movimiento:index }
+    
+cya_movimiento_add:
+    path:    /add
+    defaults: { _controller: CYAYogaBundle:Movimiento:add }
+
+cya_movimiento_create:
+    path:    /create
+    defaults: { _controller: CYAYogaBundle:Movimiento:create }
+    methods: POST
+
+cya_movimiento_details:
+    path:    /details/{id}
+    defaults: { _controller: CYAYogaBundle:Movimiento:details }
+    
+cya_movimiento_update:
+    path:    /update/{id}
+    defaults: { _controller: CYAYogaBundle:Movimiento:update }
+    methods: [POST,PUT]
+    
+cya_movimiento_view:
+    path:    /view/{id}
+    defaults: { _controller: CYAYogaBundle:Movimiento:view }
+    
+cya_movimiento_delete:
+    path:    /delete/{id}
+    defaults: { _controller: CYAYogaBundle:Movimiento:delete }

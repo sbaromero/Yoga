@@ -1,0 +1,60 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="container-fluid caja">
+        <div class="container caja-icon">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2>Nuevo Rubro de Caja</h2>
+                    <a href="{{ path('cya_rubro_index') }}" class="head-link">
+        			        <h3>
+        			           <span><i class="icon ion-android-arrow-dropleft back"></i></span>
+        			            regresar a rubros
+        			         </h3>
+        			    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {{ form_start(form, {'attr' : {'role' : 'form'}, 'action':'', 'method':'POST' }) }}
+           
+     <div class="container grey-input">
+        <div class="row">
+            <div class="col-sm-4"> 
+                    <div class="form-group">
+                         {{ form_label(form.nombre) }}
+                         {{ form_widget(form.nombre, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Nombre'} }) }}
+                         <span class="text-danger"> {{ form_errors(form.nombre) }} </span>
+                    </div>
+            </div>
+
+             <div class="col-sm-4">
+                <div class="form-group">
+                     {{ form_label(form.tipo) }}
+                     {{ form_widget(form.tipo, { 'attr' : { 'class' : 'form-control'} }) }}
+                     <span class="text-danger"> {{ form_errors(form.tipo) }} </span>
+                 </div>
+            </div>
+            
+            <div class="col-sm-4"> 
+               <div class="checkbox">
+                 <label>
+                     {{ form_widget(form.isActive) }} Activo
+                     <span class="text-danger"> {{ form_errors(form.isActive) }} </span>
+                 </label>
+             </div>
+            
+            
+            <div class="col-sm-12">
+                
+                {{ form_widget(form.save, {'label' : 'Agregar Rubro', 'attr': {'class': 'btn alumnos-btn'} }) }}
+                 
+                
+            </div>
+            {{ form_end(form) }}
+         </div>
+     </div>
+{% endblock %}
+

@@ -1,0 +1,58 @@
+{% extends 'layout.html.twig' %}
+
+  
+{% block body %}
+{{ parent() }}
+{{ include('CYAYogaBundle:Detalleventa:messages/success.html.twig')}}
+<div class="container-fluid productos">
+        <div class="container productos-icon">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2>Venta de Productos</h2>
+                </div>
+            </div>
+        </div>
+</div>
+    
+	<div class="container">
+	    {{ form_start(form, {'attr' : {'role' : 'form'}, 'action':'', 'method':'POST' }) }}
+	    <div class="container grey-input">
+        <div class="row">
+
+            <div class="col-sm-2">
+            <div class="form-group">
+            Elija los Productos
+            <select class="selectpicker" data-live-search="true" id="producto" name="producto" value="{{ app.request.get('producto') }}">
+                <option value="" selected disabled>Producto</option>
+                {% for us in productos %}
+                    <option value="{{ us.id }}">{{ us.descripcion }}</option>
+                {% endfor %}
+             </select>
+            </div>
+            </div> 
+        </div>
+        <div class="row">   
+            <div class="col-sm-2"> 
+                <div class="form-group">
+                     Cantidad
+                     {{ form_widget(form.cantidad, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Cantidad'} }) }}
+                     <span class="text-danger"> {{ form_errors(form.cantidad) }} </span>
+                </div>
+            </div>
+
+
+
+            <div class="col-sm-12">
+                {{ form_widget(form.save, {'label' : 'Agregar Producto', 'attr': {'class': 'btn alumnos-btn'} }) }}
+            </div>
+            
+            
+          </div>
+          </div>
+            {{ form_end(form) }}
+    </div>
+         
+        
+         
+ 
+ {% endblock %}

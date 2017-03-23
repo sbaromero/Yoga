@@ -1,0 +1,134 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ path("cya_usuario_inicio") }}"> 
+                <i class="icon ion-android-home"></i>
+                <span>Inicio</span>
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-left">
+                {% if is_granted('ROLE_SUPER') or is_granted('ROLE_ADMIN') %}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    
+                    <div class="change">Usuarios</div><div class="icon1"></div><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ path('cya_usuario_rapido') }}">Carga Rápida de Usuario</a></li>
+                         <li><a href="{{ path('cya_usuario_add') }}">Nuevo Usuario</a></li>
+                         <li><a href="{{ path('cya_tipocuota_add') }}">Nuevo tipo de cuota</a></li>
+                        <li><a href="{{ path('cya_usuario_index') }}">Listado de Usuarios</a></li>
+                        <li><a href="{{ path('cya_tipocuota_index') }}">Listado de Tipos de Cuota</a></li>
+
+                        
+                    </ul>
+                
+                </li>
+                
+                     <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <div class="change">Productos</div><div class="icon2"></div><span class="caret"></span>
+                    </a>
+                     <ul class="dropdown-menu">
+                        <li><a href="{{ path('cya_tipoproducto_add') }}">Nuevo Tipo de Producto</a></li>
+                        <li><a href="{{ path('cya_tipoproducto_index') }}">Listado de Tipos de Productos</a></li>
+                       
+                        <li><a href="{{ path('cya_producto_add') }}">Nuevo Producto</a></li>
+                         <li><a href="{{ path('cya_producto_index') }}"> Listado de Productos</a></li>
+                         <li><a href="{{ path('cya_detalleventa_add') }}">Venta de Productos</a></li>
+                         
+                          <li><a href="{{ path('cya_locker_add') }}">Nuevo Locker</a></li>
+                          <li><a href="{{ path('cya_locker_index') }}">Listado de Lockers</a></li>
+                         
+                          <li><a href="{{ path('cya_lockersocio_add') }}">Asignar Locker</a></li>
+                          <li><a href="{{ path('cya_lockersocio_index') }}">Listado de Asignaciones de Lockers</a></li>
+
+                    </ul>
+                    
+                    
+                    
+                  </li>
+                  
+                  <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                       
+                        <div class="change">Caja</div><div class="icon3"></div><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="{{ path('cya_rubro_index') }}"> Rubros de Caja</a></li>
+                          <li><a href="{{ path('cya_movimiento_add') }}"> Nuevo Movimiento de Caja </a></li>
+                          <li><a href="{{ path('cya_movimiento_index') }}"> Listado de movimientos de Caja </a></li>
+                        </ul>
+                   </li>
+                   
+                   <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    
+                    <div class="change">Cuenta corriente</div><div class="icon4"></div><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                       <li><a href="{{ path('cya_alumnocc_index') }}">Listado Cta. Cte. y Cuotas</a></li>
+                        <li><a href="{{ path('cya_alumnocc_pagodiario') }}">Pago diario clase de yoga</a></li>
+                        <li><a href="{{ path('cya_alumnocc_indexdeuda') }}">Listado de Deuda de Alumnos</a></li>
+                   </ul>
+                   </li>
+                   
+                    <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    
+                    <div class="change">Profesorado</div><div class="icon5"></div><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ path('cya_usuario_constru') }}">Materias</a></li>
+                        <li><a href="{{ path('cya_usuario_constru') }}">Consulta de Planes de Estudio</a></li>
+                  
+                   </ul>
+                   </li>
+                   
+                   
+                   {% endif %}
+                   {% if is_granted('ROLE_USER') %}
+                   
+                       <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                   
+                            Usuario<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ path('cya_usuario_editpublic') }}">Editar datos personales</a></li>
+                            </ul>
+                       
+                       </li>
+                       
+                       <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            
+                            Cuenta corriente<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ path('cya_alumnocc_indexpublic') }}">Cuotas</a></li>
+
+                           </ul>
+                          </li>
+                   {% endif %}
+                   
+            </ul>
+            
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="drop-fix">
+                        <span class="avatar">
+                            <img src="{{ asset('public/img/avatar.jpg') }}"/> 
+                        </span>
+                        <div class="change">{{ app.user.username }}</div>
+                        
+                    </a>
+                      
+                </li>
+                <li><a href="{{ path('cya_yoga_logout') }}" data-toggle="tooltip" data-placement="bottom" title="Cerrar sesión"><i class="icon ion-close-circled"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

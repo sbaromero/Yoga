@@ -1,0 +1,104 @@
+{% extends 'layout.html.twig' %}
+
+  
+{% block body %}
+{{ parent() }}
+{{ include('CYAYogaBundle:Alumnocc:messages/success.html.twig')}}
+{{ include('CYAYogaBundle:Alumnocc:messages/danger.html.twig')}}
+  <br>
+    <div class="container-fluid cuenta">
+        <div class="container alumnos-icon">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2>Listado de Cuotas</h2>
+                </div>
+                <div class="col-sm-7">
+                    <form method="get" action="" class="form-inline pull-right" role="search">
+                        
+                        <div class="form-group">
+                          <select class="form-control" id="pago" name="pago" value="{{ app.request.get('pago') }}">
+                            <option value="" selected disabled>Tipo</option>
+                            <option value="">Todas</option>
+                            <option value="S">Pagas</option>
+                            <option value="N">No pagas</option>
+                          </select>
+                        </div>
+                        
+          				<input type="submit" value="Buscar" class="btn btn-success">
+        			</form>
+                </div>
+            </div>
+        </div>
+    </div>
+           
+            
+	<div class="container">
+	    <div class="row">
+	    	
+	    <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+
+							<th>Alumno</th>
+							<th>Vencimiento</th>
+							<th>Debe</th>
+							<th>Pagado</th>
+							<th></th>
+							<th>Modificacion</th>
+							<th>Tipo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for alumnocc in pagination %}
+                            <tr data-id="{{ alumnocc.id }}">
+                                
+                                <td>{{ alumnocc.usuario.apellido }}, {{ alumnocc.usuario.nombre }}</td>
+                                <td>{{ alumnocc.fechavencimiento | date('d m Y - h:i:s') }}</td>
+                                <td>{{ alumnocc.deuda }}</td>
+                                <td>{{ alumnocc.pagado }}</td>
+                                <td>{{ alumnocc.bonificacion }}</td>
+                                <td>{{ alumnocc.fechamodificacion | date('d m Y - h:i:s') }}</td>
+                                <td>{{ alumnocc.tipo }}</td>
+                               
+                               
+                                <td class="actions">
+                                    <a href="{{ path('cya_alumnocc_detallepagopublic', {id: alumnocc.id }) }}" 
+                                    {% if alumnocc.pagado == 0 %}
+                                        class="btn btn-warning disabled"
+                                    {% elseif alumnocc.pagado > 0 %} 
+                                        class="btn btn-warning"
+                                    {% endif %} >
+                                        Detalles
+                                    </a>
+                                    
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                
+            <H4> Total Movimientos: {{ contador }}</H4>
+          <H4> Total Deudas: {{ deudas }}</H4>
+           <H4> Total Pagado: {{ pagados }}</H4>
+            <H4>   {{ bonificaciones }}</H4>
+        
+          </br>
+         {% if saldo < 0 %}  
+         <H4 >  <b> <span class="text-danger">SALDO NEGATIVO: $ {{ saldo }}</span> </b>  <H4 >
+         {% endif %}</td>  
+         
+          {% if saldo >= 0 %}  
+         <H4 >  <b> <span class="text-success">SALDO POSITIVO: $ {{ saldo }}</span> </b>  <H4 >
+         {% endif %}</td>  
+                
+                
+         
+                <div class="navigation">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

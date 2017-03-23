@@ -1,0 +1,45 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('public/css/signin.css') }}">
+{% endblock %}
+
+{% block body %}
+{#	{{ parent() }} #}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-4">
+                <form action="{{ path('cya_yoga_login_check') }}" method="post" class="form-signin">
+        			<h2 class="form-signin-heading">Bienvenido al Sistema del Centro de Yoga Aplicada</h2>
+        
+                    {% if error %}
+                    <div class="text-danger">
+                        <p>
+                            <strong>
+                                {{ error.messageKey|trans(error.messageData, 'security') }}
+                            </strong>
+                        </p>
+                    </div>
+                    {% endif %}
+                    
+                    <span class="sign-in-avatar">
+                        <img src="{{ asset('public/img/avatar.jpg') }}"/> 
+                    </span>
+        
+        		    <label for="username" class="sr-only">{{ 'Username'|trans }}:</label>
+        		    <input type="text" id="username" class="form-control" name="_nombreusuario" value="{{ last_username }}" placeholder="Nombre de Usuario" required autofocus />
+        
+        		    <label for="password" class="sr-only">{{ 'Password'|trans }}:</label>
+        		    <input type="password" id="password" class="form-control" name="_password" placeholder="Contraseña" required />
+        		    
+        		    <input type="hidden" name="_target_path" value="cya_yoga_home" />
+        
+        		    <button type="submit" class="btn btn-lg btn-sign-in">Ingresar</button>
+        		</form>
+            </div>
+        </div>
+		
+    </div> <!-- /container -->
+{% endblock %}

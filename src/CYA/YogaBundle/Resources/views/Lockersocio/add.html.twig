@@ -1,0 +1,96 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="container-fluid producto">
+        <div class="container producto-icon">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2>Asignar Locker</h2>
+                       <a href="{{ path('cya_locker_index') }}" class="head-link">
+        			        <h3>
+        			           <span><i class="icon ion-android-arrow-dropleft back"></i></span>
+        			            ir a listado lockers
+        			         </h3>
+        			    </a>
+        			    
+        			    <a href="{{ path('cya_lockersocio_index') }}" class="head-link">
+        			        <h3>
+        			           <span><i class="icon ion-android-arrow-dropleft back"></i></span>
+        			            ir a listado de asignaciones de lockers
+        			         </h3>
+        			    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    {{ form_start(form, {'attr' : {'role' : 'form'}, 'action':'', 'method':'POST' }) }}
+           
+     <div class="container grey-input">
+        <div class="row">
+            <div class="col-sm-4"> 
+                    
+                     
+                     
+                     
+                     <div class="form-group">
+                          Asignar locker a <br>
+                         <select class="selectpicker" data-live-search="true" id="usuario" name="usuario" value="{{ app.request.get('usuario') }}">
+                            <option value="" selected disabled>Usuario</option>
+                            {% for us in usuarios %}
+                           <option value="{{ us.id }}">{{ us.nombrecompleto }}</option>
+                        {% endfor %}
+                       </select>
+                      </div>
+                   
+   
+                   <div class="form-group">
+                     Locker
+                     {{ form_widget(form.locker, { 'attr' : { 'class' : 'form-control'} }) }}
+                     <span class="text-danger"> {{ form_errors(form.locker) }} </span>
+                   </div>
+             
+                   
+                    
+                    
+                    <div class="form-group">
+                         Fecha Inicio
+                         {{ form_widget(form.fechainicio, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Fecha de inicio del locker'} }) }}
+                         <span class="text-danger"> {{ form_errors(form.fechainicio) }} </span>
+                    </div>
+                    
+                    <div class="form-group">
+                         Monto Mensual
+                         {{ form_widget(form.monto, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Monto Mensual'} }) }}
+                         <span class="text-danger"> {{ form_errors(form.monto) }} </span>
+                    </div>
+                    
+                   
+                   
+
+                    
+                    <div class="form-group">
+                         Comentario
+                         {{ form_widget(form.comentario, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Comentario'} }) }}
+                         <span class="text-danger"> {{ form_errors(form.comentario) }} </span>
+                    </div>
+                    
+                    
+                    
+                    
+            </div>
+
+            
+            <div class="col-sm-12">
+                
+                {{ form_widget(form.save, {'label' : 'Asignar Locker', 'attr': {'class': 'btn alumnos-btn'} }) }}
+                 
+                
+            </div>
+            {{ form_end(form) }}
+         </div>
+     </div>
+{% endblock %}
+

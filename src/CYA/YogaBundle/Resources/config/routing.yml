@@ -1,0 +1,61 @@
+cya_yoga_usuario:
+    resource: "@CYAYogaBundle/Resources/config/rutas/usuario.yml"
+    prefix:   /usuario
+
+cya_yoga_rubro:
+    resource: "@CYAYogaBundle/Resources/config/rutas/rubro.yml"
+    prefix:   /rubro
+
+cya_yoga_movimiento:
+    resource: "@CYAYogaBundle/Resources/config/rutas/movimiento.yml"
+    prefix:   /movimiento
+
+cya_yoga_tipoproducto:
+    resource: "@CYAYogaBundle/Resources/config/rutas/tipoproducto.yml"
+    prefix:   /tipoproducto
+
+cya_yoga_locker:
+    resource: "@CYAYogaBundle/Resources/config/rutas/locker.yml"
+    prefix:   /locker
+
+cya_yoga_lockersocio:
+    resource: "@CYAYogaBundle/Resources/config/rutas/lockersocio.yml"
+    prefix:   /lockersocio    
+    
+    
+cya_yoga_producto:
+    resource: "@CYAYogaBundle/Resources/config/rutas/producto.yml"
+    prefix:   /producto
+
+cya_yoga_alumnocc:
+    resource: "@CYAYogaBundle/Resources/config/rutas/alumnocc.yml"
+    prefix:   /alumnocc
+    
+cya_yoga_tipocuota:
+    resource: "@CYAYogaBundle/Resources/config/rutas/tipocuota.yml"
+    prefix:   /tipocuota
+
+cya_yoga_maestroventa:
+    resource: "@CYAYogaBundle/Resources/config/rutas/maestroventa.yml"
+    prefix:   /maestroventa
+    
+cya_yoga_detalleventa:
+    resource: "@CYAYogaBundle/Resources/config/rutas/detalleventa.yml"
+    prefix:   /detalleventa
+    
+#Autentication
+
+cya_yoga_home:
+    path:     /home
+    defaults: { _controller: CYAYogaBundle:Usuario:home }
+
+cya_yoga_login:
+    path:     /login
+    defaults: { _controller: CYAYogaBundle:Security:login }
+
+cya_yoga_login_check:
+    path:     /login_check
+    defaults: { _controller: CYAYogaBundle:Security:loginCheck }
+
+cya_yoga_logout:
+    path:     /logout

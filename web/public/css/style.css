@@ -1,0 +1,775 @@
+/*-------tipografia-------*/
+body{
+    font-family: "lato", sans-serif;
+}
+
+.grey-input label{
+    font-weight: 400;
+}
+
+.alumnos h2,
+.caja h2,
+.producto h2,
+.cuenta h2,
+.profesorado h2,
+.form-signin-heading,
+.btn-sign-in,
+.navbar-default .navbar-nav > li > a,
+ul.dropdown-menu li a,
+h2.bienvenido{
+    font-weight: 300;
+}
+
+footer i,
+.home .icon{
+    font-size: 40px;
+}
+
+h2{
+    font-size: 36px;
+}
+
+h2.form-signin-heading,
+h2.bienvenido{
+    font-size: 26px;
+}
+
+.top h2{
+    font-size: 20px;
+}
+
+.cuenta-btn:before,
+.productos-btn:before,
+.alumnos-btn:before, 
+.caja-btn:before{
+    font-size: 18px;
+}
+
+.head-link h3,
+.navbar-default .navbar-nav > li > a,
+ul.dropdown-menu li a{
+    font-size: 16px;
+}
+
+h2.bienvenido,
+.box p{
+    text-align:left;
+}
+
+.form-signin-heading,
+.form-signin{
+    text-align: center;
+}
+
+.check .checkbox{
+    text-align: right;
+}
+
+.navbar-default .navbar-nav > li,
+.form-signin-heading,
+.btn-sign-in,
+.productos-btn,
+.alumnos-btn,
+.caja-btn{
+    text-transform: uppercase;
+}
+
+.table>tbody>tr>td{
+    text-transform: capitalize;
+}
+
+.dropdown-menu{
+    text-transform: none;
+}
+
+.table>tbody>tr>td:nth-of-type(1){
+    text-transform: capitalize;
+}
+
+/*-------color-------*/
+.navbar-default,
+.navbar-default .navbar-nav > li > a,
+.navbar-default .navbar-brand,
+.alumnos h2,
+.caja h2,
+.producto h2,
+.cuenta h2,
+.profesorado h2,
+.navbar-default .navbar-nav>li>a:focus, 
+.navbar-default .navbar-nav>li>a:hover,
+.form-signin-heading,
+.btn-sign-in,
+nav .dropdown-menu>li>a,
+.navbar-default .navbar-nav>li.open>a:focus,
+.navbar-default .navbar-nav>li.open>a:hover,
+.navbar-left > li.dropdown ul.dropdown-menu li a:hover,
+.navbar-left > li.dropdown ul.dropdown-menu li a:focus,
+.select-class2,
+.home .icon,
+.dropdown-menu.inner>.active>a{
+    color: white;
+}
+
+.select-class2 input{
+    color: black;
+}
+
+.head-link,
+.alumnos-btn,
+.productos-btn,
+.caja-btn,
+.cuenta-btn{
+    color: #00FFF6;
+}
+
+.head-link:hover,
+.alumnos-btn:hover,
+.productos-btn:hover,
+.caja-btn:hover,
+.cuenta-btn:hover{
+    color: #2BEEEE;
+}
+
+.avatar:after{
+    color: #015C77;
+}
+
+.cuenta h4{
+    color: burlywood;
+}
+
+.alumnos-icon:after,
+a.home-usuario .icon,
+a.home-usuario{
+    color: #d9534f;
+}
+
+a.home-usuario.productos > .icon,
+a.home-usuario.productos{
+    color: #33968B;
+}
+
+a.home-usuario.caja-home > .icon,
+a.home-usuario.caja-home{
+    color: #882CAA;
+}
+
+a.home-usuario.cuenta-home > .icon,
+a.home-usuario.cuenta-home {
+    color: #3F2F53;
+}
+
+a.home-usuario.profesorado-home > .icon,
+a.home-usuario.profesorado-home {
+    color: #4990E2;
+}
+
+.caja-icon:after{
+    color: #9C54B7;
+}
+
+.producto-icon:after{
+    color: #4BB3A7;
+}
+
+.cuenta-icon:after{
+    color: #524364;
+}
+.navbar-default .navbar-brand{
+    color: #6BD3F3;
+}
+
+.navbar-default .navbar-nav.navbar-right>li a:hover span.avatar:after{
+    color: #004458;
+}
+
+.select-class{
+    background: white;
+}
+
+.select-class2{
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.navbar-default,
+footer,
+.btn-sign-in{
+    background: #006C8D;
+}
+
+.navbar-left > li:nth-of-type(1).dropdown ul.dropdown-menu,
+.navbar-default .navbar-nav.navbar-left>li:nth-of-type(1).open>a:focus,
+.navbar-default .navbar-nav>li:nth-of-type(1)>a:hover{
+    background: #CF3F3B;
+    border: none;
+}
+
+.navbar-left > li:nth-of-type(2).dropdown ul.dropdown-menu,
+.navbar-default .navbar-nav>li:nth-of-type(2).open>a:focus,
+.navbar-default .navbar-nav>li:nth-of-type(2)>a:hover{
+    background: #33968B;
+    border: none;
+}
+
+.navbar-left > li:nth-of-type(3).dropdown ul.dropdown-menu,
+.navbar-default .navbar-nav>li:nth-of-type(3).open>a:focus,
+.navbar-default .navbar-nav>li:nth-of-type(3)>a:hover{
+    background: #882CAA;
+    border: none;
+}
+
+.navbar-left > li:nth-of-type(4).dropdown ul.dropdown-menu,
+.navbar-default .navbar-nav>li:nth-of-type(4).open>a:focus,
+.navbar-default .navbar-nav>li:nth-of-type(4)>a:hover{
+    background: #3F2F53;
+    border: none;
+}
+
+.navbar-left > li:nth-of-type(5).dropdown ul.dropdown-menu,
+.navbar-default .navbar-nav>li:nth-of-type(5).open>a:focus,
+.navbar-default .navbar-nav>li:nth-of-type(5)>a:hover{
+    background: #4990E2;
+    border: none;
+}
+
+.navbar-left > li:nth-of-type(1),
+.navbar-left > li:nth-of-type(1).dropdown ul.dropdown-menu li a:hover,
+.navbar-left > li:nth-of-type(1).dropdown ul.dropdown-menu li a:focus,
+.alumnos,
+.alumnos-btn{
+    background: #d9534f;
+}
+
+.navbar-left > li:nth-of-type(1).dropdown ul.dropdown-menu li a{
+    border-bottom: 1px solid #d9534f;
+}
+
+.navbar-left > li:nth-of-type(2),
+.navbar-left > li:nth-of-type(2).dropdown ul.dropdown-menu li a:hover,
+.navbar-left > li:nth-of-type(2).dropdown ul.dropdown-menu li a:focus,
+.producto,
+.productos-btn{
+    background: #4BB3A7;
+}
+
+.navbar-left > li:nth-of-type(2).dropdown ul.dropdown-menu li a{
+    border-bottom: 1px solid #4BB3A7;
+}
+
+.navbar-left > li:nth-of-type(3),
+.navbar-left > li:nth-of-type(3).dropdown ul.dropdown-menu li a:hover,
+.navbar-left > li:nth-of-type(3).dropdown ul.dropdown-menu li a:focus,
+.caja,
+.caja-btn{
+    background: #9C54B7;
+}
+
+.navbar-left > li:nth-of-type(3).dropdown ul.dropdown-menu li a{
+    border-bottom: 1px solid #9C54B7;
+}
+
+.navbar-left > li:nth-of-type(4),
+.navbar-left > li:nth-of-type(4).dropdown ul.dropdown-menu li a:hover,
+.navbar-left > li:nth-of-type(4).dropdown ul.dropdown-menu li a:focus,
+.cuenta,
+.cuenta-btn{
+    background: #524364;
+}
+
+.navbar-left > li:nth-of-type(4).dropdown ul.dropdown-menu li a{
+    border-bottom: 1px solid #524364;
+}
+
+.navbar-left > li:nth-of-type(5),
+.navbar-left > li:nth-of-type(5).dropdown ul.dropdown-menu li a:hover,
+.navbar-left > li:nth-of-type(5).dropdown ul.dropdown-menu li a:focus,
+.profesorado{
+    background: #4990E2;
+}
+
+.navbar-left > li:nth-of-type(5).dropdown ul.dropdown-menu li a{
+    border-bottom: 1px solid #4990E2;
+}
+
+.navbar-right > li:nth-of-type(1),
+.navbar-right > li:nth-of-type(1)>a:hover,
+.navbar-right > li:nth-of-type(1)>a:focus,
+.navbar-brand{
+    background: #015C77;
+}
+
+.navbar-default .navbar-nav.navbar-right>li a:hover{
+    background: #004458;
+}
+
+.grey-input input,
+.grey-input select,
+.bs-searchbox .form-control{
+    background: #F1F1F1 !important;
+}
+
+.form-signin-heading{
+    border-bottom: 1px solid white;
+}
+
+.modulo-form{
+    border-bottom: 1px solid #FE6869;
+}
+
+.home-avatar{
+    border-bottom: 1px solid #979797;
+}
+
+/*-------maqueta-------*/
+body{
+    padding-top: 50px;
+}
+
+.form-signin-heading{
+    padding-bottom: 40px;
+}
+
+.dropdown-menu{
+    padding: 0;
+}
+
+.btn-sign-in{
+    width: 300px;
+    height: 50px;
+    margin: 0 auto;
+}
+
+.form-signin input{
+    margin: 0 auto 20px auto;
+    width:300px;
+    height:50px;
+}
+
+img.brand{
+    float: left;
+    width: 40px;
+    margin-top: -10px;
+    margin-right: 10px;
+}
+
+.nav>li>a{
+    padding-left: 28px;
+    padding-right: 28px;
+}
+
+.nav span{
+    margin-left: 10px;
+}
+
+.navbar-right > li:nth-of-type(1) a{
+    padding: 0 10px 0 0;
+}
+
+.navbar-right > li:nth-of-type(1) a:hover img{
+    opacity: 0.8;
+     -webkit-transition: opacity 0.3s linear;
+    -o-transition: opacity 0.3s linear;
+    transition: opacity 0.3s linear;
+}
+.avatar{
+    padding-right: 10px;
+}
+
+span.avatar,
+.alumnos-icon,
+.caja-icon,
+.producto-icon,
+.cuenta-icon{
+    position: relative;
+}
+
+.avatar:after{
+    content: "\f361";
+    font-family: "ionicons";
+    position: absolute;
+    right: 0;
+    font-size: 30px;
+    top: 0px;
+}
+
+span.avatar{
+    margin: 0;
+    padding: 0;
+}
+
+.alumnos,
+.caja,
+.producto,
+.cuenta{
+    padding-top: 40px;
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+}
+
+.alumnos-icon:after,
+.caja-icon:after,
+.producto-icon:after,
+.cuenta-icon:after{
+    content: "\f35f";
+    font-family: "ionicons";
+    position: absolute;
+    left: 15px;
+    font-size: 40px;
+    bottom: -74px;
+}
+
+a.head-link span{
+    width: 30px;
+    height: 30px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 100px;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 5px;
+    position: relative;
+    text-align: center;
+}
+
+a.head-link span i.back{
+    font-size: 40px;
+    padding: 0;
+    top: -7px;
+    margin: 0;
+    text-align: center;
+    /* margin-top: -40px; */
+    position: absolute;
+    left: 8px;
+}
+.alumnos form,
+.caja form,
+.producto form,
+.cuenta form{
+    margin-top: 20px;
+}
+
+.modulo-form{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.grey-input .form-group{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.cuenta-btn,
+.productos-btn,
+.alumnos-btn,
+.caja-btn{
+    padding: 15px;
+}
+
+.cuenta-btn:before,
+.productos-btn:before,
+.alumnos-btn:before,
+.caja-btn:before{
+    content: "\f120";
+    font-family: "ionicons";
+    margin-right: 5px;
+}
+
+.avatar-tabla{
+    border-radius: 50px;
+    height: 50px;
+    width: 50px;
+    margin-right: 10px;
+}
+
+span.sign-in-avatar img{
+    width:100px;
+    height:100px;
+    border-radius: 100px;
+    margin: 40px auto;
+    display: block;
+}
+
+footer{
+    margin-top: 40px;
+}
+
+.navbar-left > li.dropdown ul.dropdown-menu li a:before{
+    content: "\f400";
+    font-family: "ionicons";
+    margin-right: 10px;
+    opacity: 0.5;
+}
+
+.select-class2{
+    margin-top: 10px;
+    padding: 0 10px;
+}
+
+.select-class2 input{
+    padding: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.home a{
+    display: inline;
+}
+
+.home-avatar{
+    padding-top: 40px;
+    padding-bottom: 40px;
+    margin-bottom: 20px;
+}
+
+.checkbox label{
+    padding-left: 0;
+}
+
+.check .checkbox label > div{
+    margin-left: 10px;
+}
+
+.home-avatar h2.bienvenido,
+.home-avatar span{
+    float: left;
+}
+
+.home-avatar span{
+    margin-right: 20px;
+}
+
+.top h2,
+.top .icon{
+    float: left;
+    margin-bottom: 0;
+}
+
+.top{
+    display: block;
+    clear: left;
+    padding: 22px 0 65px 19px;
+    margin-bottom: 0;
+}
+
+.top .icon{
+    margin-right: 10px;
+    line-height: 46px;
+}
+
+.top h2{
+    margin-top: 14px;
+}
+
+.box{
+    background: #F6F6F6;
+    min-height: 225px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.home-usuario .icon{
+    font-size: 40px;
+    margin: 0 10px 0 0;
+}
+
+.home-usuario span{
+    position: relative;
+    top: -9px;
+}
+/*-------resets-------*/
+a:hover{
+    text-decoration: none;
+}
+/*--color navbar--*/
+.navbar-default {
+    border: none;
+}
+
+.navbar {
+    border-radius: 0;
+    margin-bottom: 0;
+}
+
+.drop-fix{
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.form-control{
+    height: 32px;
+}
+
+.form-control,
+.form-group input{
+    border-radius: 0;
+    box-shadow: none;
+    border: 0;
+}
+
+.btn{
+    border: 0;
+    border-radius: 0;
+}
+
+.pagination,
+.pagination>li:first-child>a, 
+.pagination>li:first-child>span,
+.pagination>li:last-child>a, 
+.pagination>li:last-child>span{
+    border-radius: 0;
+}
+
+.table>tbody>tr>td, 
+.table>tbody>tr>th, 
+.table>tfoot>tr>td, 
+.table>tfoot>tr>th, 
+.table>thead>tr>td, 
+.table>thead>tr>th{
+    vertical-align: middle;
+}
+
+.dropdown ul.dropdown-menu,
+.dropdown-menu{
+    border-radius: 0;
+}
+
+ul.dropdown-menu li a{
+    padding: 20px 25px;
+}
+/*-------responsive-------*/
+@media (max-width: 768px){
+    .form-inline .form-group {
+        display: inline-block;
+        margin-bottom: 0;
+        vertical-align: middle;
+    }
+    
+    .alumnos form{
+        width: 100%;
+    }
+    
+    .navbar-default .navbar-toggle .icon-bar {
+        background-color: #6BD3F3;
+    }
+    
+    .navbar-default .navbar-toggle {
+        border: none;
+        border-radius: 0;
+        margin: 0;
+        padding: 18px;
+        background: #015C77;
+    }
+    
+    .navbar-default .navbar-toggle:focus, 
+    .navbar-default .navbar-toggle:hover{
+        background: #6BD3F3;
+    }
+    
+    .navbar-default .navbar-toggle:focus .icon-bar,
+    .navbar-default .navbar-toggle:hover .icon-bar{
+        background-color: #015C77;
+    }
+    
+    .navbar-collapse{
+        border-top: 0;
+    }
+    
+    .navbar-collapse .navbar-nav{
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    
+    .navbar-default .navbar-nav .open .dropdown-menu>li>a{
+        color: white;
+    }
+    
+    .navbar-right i:after{
+        content:" Cerrar sesion";
+        font-style: normal;
+        margin-left: 15px;
+    }
+    
+    .nav.navbar-right>li{
+        display: inline-block;
+    }
+    
+    .nav.navbar-right>li.dropdown{
+        top: -3px;
+    }
+    
+    .nav.navbar-right>li.dropdown span.avatar img{
+        width: 39px;
+    }
+    [data-placement=bottom] + .tooltip .tooltip-inner, 
+    [data-placement=bottom] + .tooltip .tooltip-arrow { 
+        display: none; 
+        
+    }
+}
+
+.change,
+.icon1,
+.icon2,
+.icon3,
+.icon4,
+.icon5{
+         display: inline;
+    }
+    
+@media (max-width: 1199px){
+    .change{
+        display:none;
+    }
+    
+    
+    .icon1:after{
+        content:"\f39e";
+        font-family:"Ionicons";
+        font-size: 27px;
+        position: relative;
+        line-height: 13px;
+        top: 5px;
+    }
+    
+    .icon2:after{
+        content:"\f110";
+        font-family:"Ionicons";
+        font-size: 27px;
+        position: relative;
+        line-height: 13px;
+        top: 5px;
+    }
+    
+    .icon3:after{
+        content:"\f3ec";
+        font-family:"Ionicons";
+        font-size: 27px;
+        position: relative;
+        line-height: 13px;
+        top: 5px;
+    }
+    
+    .icon4:after{
+        content:"\f119";
+        font-family:"Ionicons";
+        font-size: 27px;
+        position: relative;
+        line-height: 13px;
+        top: 5px;
+    }
+    
+    .icon5:after{
+        content:"\f357";
+        font-family:"Ionicons";
+        font-size: 27px;
+        position: relative;
+        line-height: 13px;
+        top: 5px;
+    }
+}
+
+@media (min-width: 1200{
+    .box{
+        height: 225px;
+    }
+}

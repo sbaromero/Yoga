@@ -1,0 +1,34 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    {{ include('CYAYogaBundle:Usuario:messages/success.html.twig') }}
+	<div class="main container">
+		<div class="row well">
+			<div class="col-md-6">
+				<div class="page-header">
+					<h2>Ingrese Nuevo Password para {{usuario.nombrecompleto}}  (DNI: {{usuario.dni}} )</h2>
+				</div>
+				{{ form_start(form, {'attr': { 'rol' : 'form'}}) }}
+				<h4 class="text-danger">{{ form_errors(form) }}</h4>
+                     
+					<fieldset>
+				    
+					       
+					    <div class="form-group">
+					       
+					        {{ form_widget(form.password, {'attr': {'class': 'form-control', 'placeholder' : 'Password Nuevo'}}) }}
+					        <span class="text-danger">{{ form_errors(form.password) }}</span>
+					    </div>
+				 	</fieldset>
+                     
+				    <p>
+				        {{ form_widget(form.save, {'label' : 'Modificar Password', 'attr': {'class': 'btn btn-success'}}) }}
+				    </p>
+                 
+                   
+				{{ form_end(form) }}
+			</div>
+		</div>
+	</div>
+{% endblock %}

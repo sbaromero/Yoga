@@ -1,0 +1,11 @@
+cya_tipocuota_index:
+    path:    /index
+    defaults: { _controller: CYAYogaBundle:Tipocuota:index }
+    
+cya_tipocuota_add:
+    path:    /add
+    defaults: { _controller: CYAYogaBundle:Tipocuota:add }
+
+cya_tipocuota_edit:
+    path:    /edit/{id}
+    defaults: { _controller: CYAYogaBundle:Tipocuota:edit }
