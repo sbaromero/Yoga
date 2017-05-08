@@ -1,0 +1,58 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="container-fluid cuenta">
+        <div class="container cuenta-icon">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2>Nuevo Proveedor</h2>
+                    <a href="{{ path('cya_proveedor_index') }}" class="head-link">
+        			        <h3>
+        			           <span><i class="icon ion-android-arrow-dropleft back"></i></span>
+        			            Regresar a listado Proveedores
+        			         </h3>
+        			    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    {{ form_start(form, {'attr' : {'role' : 'form'}, 'action':'', 'method':'POST' }) }}
+           
+     <div class="container grey-input">
+        <div class="row">
+            <div class="col-sm-4"> 
+                    <div class="form-group">
+                        Nombre
+                         {{ form_widget(form.nombre, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Nombre'} }) }}
+                         <span class="text-danger"> {{ form_errors(form.nombre) }} </span>
+                    </div>
+                    
+                    <div class="form-group">
+                         Mail
+                         {{ form_widget(form.mail, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Mail'} }) }}
+                         <span class="text-danger"> {{ form_errors(form.mail) }} </span>
+                    </div>
+                    
+                    <div class="form-group">
+                         Telefono
+                         {{ form_widget(form.telefono, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Teléfono'} }) }}
+                         <span class="text-danger"> {{ form_errors(form.telefono) }} </span>
+                    </div>
+                    
+            </div>
+
+            
+            <div class="col-sm-12">
+                
+                {{ form_widget(form.save, {'label' : 'Agregar Proveedor', 'attr': {'class': 'btn alumnos-btn'} }) }}
+                 
+                
+            </div>
+            {{ form_end(form) }}
+         </div>
+     </div>
+{% endblock %}
+

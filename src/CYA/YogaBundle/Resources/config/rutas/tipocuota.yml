@@ -9,3 +9,7 @@ cya_tipocuota_add:
 cya_tipocuota_edit:
     path:    /edit/{id}
     defaults: { _controller: CYAYogaBundle:Tipocuota:edit }
+
+cya_tipocuota_delete:
+    path:    /delete/{id}
+    defaults: { _controller: CYAYogaBundle:Tipocuota:delete }

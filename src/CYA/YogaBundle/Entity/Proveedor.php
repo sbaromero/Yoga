@@ -3,6 +3,7 @@
 namespace CYA\YogaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Proveedor
@@ -15,18 +16,7 @@ class Proveedor
     /**
      * @ORM\OneToMany(targetEntity="Proveedorcc", mappedBy="proveedor")
      */
-    protected $proveedorccs;
- 
-    /**
-     * @ORM\OneToMany(targetEntity="Producto", mappedBy="proveedor")
-     */
-    protected $productos;
-    
-    public function __construct()
-    {
-        $this->productos = new ArrayCollection();
-        $this->proveedorccs = new ArrayCollection();
-    }
+    protected $proveedorcc;
     
     /**
      * @var int

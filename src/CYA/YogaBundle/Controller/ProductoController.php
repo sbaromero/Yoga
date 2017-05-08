@@ -53,42 +53,42 @@ class ProductoController extends Controller
     }
     
     
-    
-    
     public function indexAction(Request $request)
     {
-        $searchQuery = $request->get('query');
+        $searchQuery = $request->get('productot');
         $tcQuery = $request->get('tipoproducto');
+        
+         $repository = $this->getDoctrine()->getRepository('CYAYogaBundle:Producto');
+        $query = $repository->createQueryBuilder('u')
+            ->where('1 = 1')
+            ->getQuery();
+        $productot = $query->getResult();
             
-        if(!empty($searchQuery)){
-            $finder = $this->container->get('fos_elastica.finder.app.producto');
-            $productos = $finder->createPaginatorAdapter($searchQuery);
-        }else{
+  //      if(!empty($searchQuery)){
+   //        $finder = $this->container->get('fos_elastica.finder.app.producto');
+  //          $productos = $finder->createPaginatorAdapter($searchQuery);
+  //      }else{ 
+        
+            
+            
             $em = $this->getDoctrine()->getManager();
-            /*$dql = "SELECT r FROM CYAYogaBundle:Producto r ORDER BY r.id DESC";*/
             
              $dql = "SELECT u FROM CYAYogaBundle:Producto u WHERE u.id > 0";
         
-       /*    if ($estadoQuery == '1'){
-                $dql = $dql . "AND u.isActive = 1";
-                
-            }
-            
-            if ($estadoQuery == '0'){
-                $dql = $dql . "AND u.isActive = 0";
-            }*/
             
             if(!empty($tcQuery)){
                 $dql = $dql . " AND u.tipoproducto = (SELECT t FROM CYAYogaBundle:Tipoproducto t WHERE t.id = " . $tcQuery .")";
             }
             
+              if(!empty($searchQuery)){
+                $dql = $dql . " AND u.id =  " . $searchQuery;
+            }
+            
             $dql = $dql . " ORDER BY u.id DESC";
             
             
-            
-            
             $productos = $em->createQuery($dql);  
-        }
+        
 
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
@@ -99,10 +99,9 @@ class ProductoController extends Controller
         $em = $this->getDoctrine()->getManager();
         $tipoproductos = $em->getRepository('CYAYogaBundle:Tipoproducto')->findAll();
         
-        return $this->render('CYAYogaBundle:Producto:index.html.twig', array('pagination' => $pagination, 'productos' => $productos,'tipoproductos' => $tipoproductos));
+        return $this->render('CYAYogaBundle:Producto:index.html.twig', array('pagination' => $pagination, 
+        'productos' => $productos,'tipoproductos' => $tipoproductos, 'productot' => $productot));
         
-        
-      
         
         
     }
@@ -146,6 +145,7 @@ class ProductoController extends Controller
             $this->addFlash('mensaje', 'El producto '.$producto->getDescripcion().' ha sido modificado');
             
             return $this->redirectToRoute('cya_producto_index');
+           
         }
        
         return $this->render('CYAYogaBundle:Producto:edit.html.twig', array('producto' => $producto, 'form' => $form->createView()));

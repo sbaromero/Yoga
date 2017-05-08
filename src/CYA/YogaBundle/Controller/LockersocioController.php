@@ -57,15 +57,27 @@ class LockersocioController extends Controller
             
                 $em = $this->getDoctrine()->getManager();
                 $usuario = $repository->findOneById($usuarioQuery);
+                
+                if  ($usuario->gethaveLocker() == 1){
+                    
+                     $this->addFlash('mensaje', 'Este usuario ya tiene un locker asignado: '.$usuario->getnombrecompleto() );
+                     return $this->redirectToRoute('cya_lockersocio_index');
+                
+                
+                    
+                }
+                
                   
-             if ($usuarioQuery == 0)
-             { 
+              if ($usuarioQuery == 0)
+              { 
              
                  return $this->redirectToRoute('cya_lockersocio_add');
-              
-            
+                
+                 
              
-              }
+               }
+                
+                $usuario->sethaveLocker(1);
                 
                 $lockersocio->setUsuario($usuario);
                 $em->persist($lockersocio);
@@ -86,7 +98,7 @@ class LockersocioController extends Controller
                 
                // $this->addFlash('mensaje',  $lock );
                 $this->addFlash('mensaje', 'Se generó la asignación de locker al usuario: '.$usuario->getnombrecompleto() );
-                $this->addFlash('mensaje', 'REVISAR TIPO DE CUOTA (ELEGIR UN  TIPO DE CUOTA + CASILLERO/LOCKER) PARA: '.$usuario->getnombrecompleto());
+               // $this->addFlash('mensaje', 'REVISAR TIPO DE CUOTA (ELEGIR UN  TIPO DE CUOTA + CASILLERO/LOCKER) PARA: '.$usuario->getnombrecompleto());
         
                
                 return $this->redirectToRoute('cya_lockersocio_index');
@@ -109,6 +121,21 @@ class LockersocioController extends Controller
         $em = $this->getDoctrine()->getManager();
         $locker = $em->getRepository('CYAYogaBundle:Lockersocio')->find($id);
         $lock =  $locker->getlocker()->getId(); 
+        $user =  $locker->getUsuario();
+        
+        
+        $repository = $this->getDoctrine()->getRepository('CYAYogaBundle:Usuario');
+        $query = $repository->createQueryBuilder('u')
+            ->where('1 = 1')
+            ->getQuery();
+        $usuarios = $query->getResult();
+        $usuarioQuery = 0;
+        $usuarioQuery = $request->get('usuario'); 
+        $usuario = $repository->findOneById($user);
+        $usuario->sethaveLocker(0);
+        
+        
+        
         $em->remove($locker);
         $em->flush();  
         $successMessage = 'Asignación de Locker eliminada';

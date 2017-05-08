@@ -7,7 +7,11 @@
         <div class="container alumnos-icon">
             <div class="row">
                 <div class="col-sm-12">
-                   <h2>{{ usuario.nombre }} {{ usuario.apellido }} (edad: {{ edad }}    años)</h2>
+                 
+                 {%if usuario.brochure != null%}
+                  <img src="{{ asset('web/uploads/brochures'~'/'~usuario.brochure) }}" class="img-circle" /> 
+                  {%endif%}
+                   <h2>{{ usuario.nombre }} {{ usuario.apellido }} (edad: {{ edad }}    años)</h2> 
                     <a href="{{ path('cya_usuario_index') }}" class="head-link">
         			        <h3>
         			           <i class="icon ion-android-arrow-dropleft-circle"></i>
@@ -80,17 +84,16 @@
 	            </dd>
 	            <br>
 
-                </div>
                 
                 
-                <div class="col-md-4">
 	            <dt>Mail</dt>
 	            <dd>
 	                {{ usuario.mail }}
 	                &nbsp;
 	            </dd>
 	             <br>
-	            
+	             </div>
+	            <div class="col-md-4">
 	            <dt>Fecha Nacimiento</dt>
 	            <dd>
 	                {{ usuario.fechanacimiento|date('d/m/Y') }}
@@ -135,18 +138,52 @@
 	            </dd>
 	            <br>
 
-	            <dt>Estado del Usuario</dt>
+	          
+           <dt>Locker</dt>
+	           <b>
+	            <dd>
+                	{% if usuario.haveLocker == 1 %}
+						<span class="text-success">SI</span>
+					{% elseif usuario.haveLocker == 0 %}
+						<span class="text-warning">NO</span>
+							{% elseif usuario.haveLocker == null %}
+						<span class="text-warning">NO</span>
+                	{% endif %}
+	                &nbsp;
+	            </dd>
+	             </b>
+	            <br>
+               
+              <dt>Asociación</dt>
+	           <b>
+	            <dd>
+                	{% if usuario.haveAsoc == 1 %}
+						<span class="text-success">SI</span>
+					{% elseif usuario.haveAsoc == 0 %}
+						<span class="text-warning">NO</span>
+							{% elseif usuario.haveAsoc == null %}
+						<span class="text-warning">NO</span>
+                	{% endif %}
+	                &nbsp;
+	            </dd>
+	             </b>
+	            <br>
+               
+                 <dt>Estado del Usuario</dt>
 	           <b>
 	            <dd>
                 	{% if usuario.isActive == 1 %}
 						<span class="text-success">Usuario Activo</span>
 					{% elseif usuario.isActive == 0 %}
 						<span class="text-warning">Usuario Inactivo</span>
+							{% elseif usuario.isActive == null %}
+						<span class="text-warning">Usuario Inactivo</span>
                 	{% endif %}
 	                &nbsp;
 	            </dd>
 	             </b>
 	            <br>
+               
                
                  </div>
                
@@ -176,6 +213,14 @@
 		    	<a href="{{ path('cya_usuario_edit', { id: usuario.id }) }}" class="btn btn-primary btn-lg btn-block">
 		    		<span class="glyphicon glyphicon-edit"></span>
 		        	 Editar Usuario
+				 </a>
+			</p>
+			
+			
+						<p>
+		    	<a href="{{ path('cya_alumnocc_index', { usuario: usuario.id }) }}" class="btn btn-primary btn-lg btn-block">
+		    		<span class="glyphicon glyphicon-edit"></span>
+		        	 Ver Cuentas Corrientes
 				 </a>
 			</p>
 	    </div>

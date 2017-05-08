@@ -77,4 +77,62 @@ class TipocuotaController extends Controller
        
         return $this->render('CYAYogaBundle:Tipocuota:edit.html.twig', array('tipocuota' => $tipocuota, 'form' => $form->createView()));
     }
+    
+    
+     public function deleteAction($id, Request $request)
+    {
+        
+        $em = $this->getDoctrine()->getManager();
+        $producto = $em->getRepository('CYAYogaBundle:Tipocuota')->find($id);
+       
+        if(!$producto)
+        {
+            throw $this->createNotFoundException('Cuota no encontrada, reintente');
+        }   
+        
+        
+        if ($producto->getNombre()=='Asociación'){
+            
+         
+        $successMessage = ' No se puede eliminar la Asociación';
+        $this->addFlash('mensaje', $successMessage); 
+         return $this->redirectToRoute('cya_tipocuota_index');
+        }
+        
+        if ($producto->getNombre()=='Locker'){
+            
+           $successMessage = ' No se puede eliminar la Locker';
+        $this->addFlash('mensaje', $successMessage); 
+         return $this->redirectToRoute('cya_tipocuota_index');
+        }
+
+        try
+        {
+        
+        $nombre = $producto->getNombre();
+        $em->remove($producto);
+        $em->flush();
+
+        
+        $successMessage = 'Tipo de cuota: '. $nombre.' eliminada';
+        $this->addFlash('mensaje', $successMessage);
+
+        return $this->redirectToRoute('cya_tipocuota_index');
+        
+        }
+        
+        
+       catch(\Exception $e)
+       {
+        $successMessage = 'Cuota '. $nombre.' no se puede eliminar, es probable que esté incluida en un usuario, 
+        revise que ningun usuario la tenga';
+        $this->addFlash('mensaje', $successMessage); 
+         return $this->redirectToRoute('cya_tipocuota_index');
+       }
+        
+        
+    }
+    
+    
+    
 }

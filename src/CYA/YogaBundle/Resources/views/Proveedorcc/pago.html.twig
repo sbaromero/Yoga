@@ -1,0 +1,52 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    {{ include('CYAYogaBundle:Locker:messages/success.html.twig') }}
+	<div class="container-fluid cuenta">
+        <div class="container cuenta-icon">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2> Pagar Cuenta Corriente de Proveedores</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<div class="container grey-input">
+		<div class="modulo-form">
+		<div class="row">
+			<div class="col-sm-6">
+			
+				{{ form_start(form, {'attr': { 'role' : 'form'}}) }}
+				<h4 class="text-danger">{{ form_errors(form) }}</h4>
+                     
+					<fieldset>
+					
+                    
+                    <div class="form-group">
+                         Pagado $
+                         {{ form_widget(form.pagado, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Pagado $'} }) }}
+                         <span class="text-danger"> {{ form_errors(form.pagado) }} </span>
+                    </div>
+                    
+                    
+                      <div class="form-group">
+                       Descripción
+                         {{ form_widget(form.tipo, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Descripción'} }) }}
+                         <span class="text-danger"> {{ form_errors(form.tipo) }} </span>
+                    </div>
+				 	</fieldset>
+                     
+				    
+			</div>
+		</div>
+		</div>
+		
+		<p>
+			{{ form_widget(form.save, {'label' : 'Pagar a Proveedor', 'attr': {'class': 'btn btn-success'}}) }}
+		</p>
+                 
+            {{ form_end(form) }}
+	</div>
+{% endblock %}

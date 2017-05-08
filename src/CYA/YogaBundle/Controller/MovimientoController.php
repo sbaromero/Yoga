@@ -32,7 +32,7 @@ class MovimientoController extends Controller
             $em->persist($movimiento);
             $em->flush();
             
-            $successMessage = 'Movimiento acentado';
+            $successMessage = 'Movimiento asentado';
             $this->addFlash('mensaje', $successMessage);
             
             return $this->redirectToRoute('cya_movimiento_add');
@@ -105,7 +105,20 @@ class MovimientoController extends Controller
         $query = $em->createQuery($select);
         $movimientos = $query->getResult();
 
+     
+      
+         $saldo2 = 0;  
 
+        foreach($movimientos as $mov){
+            if($mov->getRubro()->getTipo() == 'D'){
+                $saldo2 = $saldo2 - $mov->getMonto();
+            }else{
+                $saldo2 = $saldo2 + $mov->getMonto();
+            }
+        }
+     
+     
+     
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $movimientos, $request->query->getInt('page' , 1),
@@ -142,7 +155,8 @@ class MovimientoController extends Controller
         
         
         
-        return $this->render('CYAYogaBundle:Movimiento:index.html.twig', array('saldo' => $saldo,'pagination' => $pagination, 'rubros' => $rubros, 'usuarios' => $usuarios));
+        return $this->render('CYAYogaBundle:Movimiento:index.html.twig', 
+        array('saldo2' => $saldo2,'saldo' => $saldo,'pagination' => $pagination, 'rubros' => $rubros, 'usuarios' => $usuarios));
     }
     
     public function deleteAction($id, Request $request)

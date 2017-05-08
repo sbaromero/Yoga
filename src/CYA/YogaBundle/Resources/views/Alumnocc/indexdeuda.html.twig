@@ -11,19 +11,41 @@
                 <div class="col-sm-5">
                     <h2>Deuda de Alumnos </h2>
                    <h4>{{ nombrecuota }} </h4>
+                    <h4>Se listan cuotas con alguna deuda y el total neto de deuda por alumno</h4>
                 </div>
                 <div class="col-sm-9">
                     <form method="get" action="" class="form-inline pull-right" role="search">
                         
-
         				<div class="form-group">
                             <select class="selectpicker" data-live-search="true" id="cuota" name="cuota" value="{{ app.request.get('cuota') }}">
-                                <option value="" selected disabled>Tipo de cuota</option>
+                                <option value="" selected disabled>(Elija Tipo de cuota)</option>
                                 {% for us in cuotas %}
                                     <option value="{{ us.id }}">{{ us.nombre }}</option>
                                 {% endfor %}
                              </select>
                         </div>
+                        
+                           
+                          <div class="form-group select-class">
+                         
+                          <select class="form-control" id="dc"name="ac" value="{{ app.request.get('actives') }}">
+                            <option value="" selected "">Activos/Inactivos (Todos)</option>
+                            <option value="">Todos</option>
+                            <option value="Activos">Activos</option>
+                            <option value="Inactivos">Inactivos</option>
+                          </select>
+                        </div>
+
+                     
+                       <div class="form-group select-class">
+                           
+                          <select class="form-control" id="dc"name="dc" value="{{ app.request.get('debts') }}">
+                            <option value="" selected "">Con Deuda/Sin Deuda (Todos)</option>
+                            <option value="">Todos</option>
+                            <option value="Deudores">Sólo Deudores</option>
+                          </select>
+                        </div>
+                        
 
         				<input type="submit" value="Buscar" class="btn btn-success">
         			</form>
@@ -40,36 +62,89 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-
 						    <th>ALUMNO</th>
-							<th>REINGRESO</th>
-							<th>MES</th>
-
-							<th>DEUDA</th>
-							<th>PAGADO</th>
-							<th>BONIFICACION</th>
-							<th> COMENTARIO </th>
-                       
+                            <th>DEUDA</th>
+                            <th>ACTIVO/INACTIVO</th>
                         </tr>
                     </thead>
+                   
                     <tbody>
-                        {% for alumnocc in pagination %}
+                         
+                          {% set alumno = 0 %}
+                          {% set deuda = 0 %}
+                          {% set nombrevar = '-' %}
+                          {% set ape = '-' %}
+                          {% set inicio = 0 %}
+                          {% set count = 1 %}
+                          {% set deudatot = 0 %}
+                          {% set activo = 2 %}
+                          
+                          {% for alumnocc in pagination  %}
+                         
                             <tr data-id="{{ alumnocc.id }}">
-                                
-                                <td>{{ alumnocc.usuario.apellido }}, {{ alumnocc.usuario.nombre }} </td>
-                               <td>{{ alumnocc.usuario.fechareingreso |date('d/m/Y') }}</td>
-                                <td>{{ alumnocc.mes }}</td>
-
-                                <td>{{ alumnocc.deuda }}</td>
-                                <td>{{ alumnocc.pagado }}</td>
-                                <td>{{ alumnocc.bonificacion }}</td>
-                               <h6> <td>{{ alumnocc.comentario }}</td> </h6>
+                            
+                             {% if inicio != 0 %} 
+                                   
+                                    
+                                  
+                                   {% if alumnocc.usuario.id != alumno %}
+                               
+                                   {% set count = count + 1 %}
+                                   <tr> 
+                                  
+                                   <td>{{ape}}, {{nombrevar}}</td>  
+                                   <td> ${{deuda}}  </td> 
+                                   
+                                    <td>{% if activo == 1 %}
+					               <b>   <span class="text-success">Activo</span></b>
+				                      {% elseif activo == 0 %}
+						            <b> <span class="text-danger">Inactivo</span> </b>
+                                	{% endif %}</td>
+                                   
+                                   
+                                   
+                                   {% set deudatot = deudatot + deuda %}  
+                                   
+                                   </tr>
+                                   {% set deuda = 0 %}
+                                  {% endif %}
+                                  
+                             {% endif %}    
+                         
+                              
+                              {% set alumno = alumnocc.usuario.id %}
+                              {% set nombrevar = alumnocc.usuario.nombre  %}
+                              {% set ape = alumnocc.usuario.apellido  %}
+                              {% set activo = alumnocc.usuario.isActive %} 
+                              {% set deuda = deuda + (  alumnocc.deuda -  alumnocc.pagado -  alumnocc.bonificacion ) %}
+                              {% set inicio = 1 %}
+                              
+                              
+                              
                                
                             </tr>
+                            
+                        
                         {% endfor %}
+                         <tr> 
+                           <td>{{ape}}, {{nombrevar}}  </td>  
+                           <td> ${{deuda}}  </td> 
+                           
+                                  <td>{% if activo == 1 %}
+					               <b>   <span class="text-success">Activo</span></b>
+				                      {% elseif activo == 0 %}
+						            <b> <span class="text-danger">Inactivo</span> </b>
+                                	{% endif %}</td>
+                           
+                            {% set deudatot = deudatot + deuda %} 
+                        </tr>
+                        
                     </tbody>
                 </table>
-
+            <br>
+            <H5> <b>Total Alumnos: {{ count }} </b></H5>
+            <br>
+            <H4> <b>Total Deuda ({{ nombrecuota }}): $ {{ deudatot }} </b></H4>
             </div>
         </div>
     </div>

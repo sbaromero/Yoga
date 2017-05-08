@@ -13,6 +13,10 @@ cya_alumnocc_add:
 cya_alumnocc_pagodiario:
     path:    /pagodiarioAction
     defaults: { _controller: CYAYogaBundle:Alumnocc:pagodiario }
+    
+cya_alumnocc_generacc:
+    path:    /generaccAction
+    defaults: { _controller: CYAYogaBundle:Alumnocc:generacc }
 
 cya_alumnocc_create:
     path:    /create
@@ -42,3 +46,7 @@ cya_alumnocc_pago:
 cya_alumnocc_indexdeuda:
     path:    /indexdeuda
     defaults: { _controller: CYAYogaBundle:Alumnocc:indexdeuda }        
+
+cya_alumnocc_indexdeudatotalizada:
+    path:    /indexdeudatotalizada
+    defaults: { _controller: CYAYogaBundle:Alumnocc:indexdeudatotalizada }  

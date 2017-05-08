@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use CYA\YogaBundle\Entity\Tipocuota;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -35,6 +36,8 @@ class UsuariopublicType extends AbstractType
             ->add('mail', EmailType::class)
             ->add('fechanacimiento', DateType::class, array('widget' => 'single_text','attr' => ['class' => 'js-datepicker'],))
             ->add('password', PasswordType::class)
+             ->add('brochure', FileType::class, array('disabled'=>true, 'mapped'=>false, 'required' => false,'label' => 'Avatar (Archivo .jpg)' ))
+        
             ->add('save', SubmitType::class)   
         ; 
     }

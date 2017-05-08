@@ -35,7 +35,7 @@ class LockersocioType extends AbstractType
                     'choice_label' => 'descripcion',
                     'placeholder'  => 'Seleccione un locker',
                 ))
-            ->add('monto',MoneyType::class, array('currency' => '$'))
+           
             ->add('fechainicio', DateType::class, array('widget' => 'single_text','attr' => ['class' => 'js-datepicker'],'data' => new \DateTime("now")))
             ->add('comentario',TextType::class)
             ->add('save', SubmitType::class)

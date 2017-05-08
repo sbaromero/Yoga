@@ -155,13 +155,39 @@
                      <span class="text-danger"> {{ form_errors(form.password) }} </span>
         
                   </div> 
-                            <div class="col-sm-4"> 
-                   <div class="checkbox">
+                   <div class="col-sm-4"> 
+                    
+                         <div class="checkbox">
                      <label>
+                         Locker
+                         {{ form_widget(form.haveLocker) }}
+                         <span class="text-danger"> {{ form_errors(form.haveLocker) }} </span>
+                     </label>
+                           
+                            &nbsp;
+					        &nbsp;
+					        &nbsp;
+					    
+                     <label>
+                         Asociación
+                         {{ form_widget(form.haveAsoc) }}
+                         <span class="text-danger"> {{ form_errors(form.haveAsoc) }} </span>
+                     </label>
+                   </div>
+                 
+                 
+                 <br><br>
+                 
+                    
+                    <div class="checkbox" align="center">
+                     <label> Estado
                          {{ form_widget(form.isActive) }}
                          <span class="text-danger"> {{ form_errors(form.isActive) }} </span>
                      </label>
-                 </div>
+                   </div>
+                  
+                
+              
                  </div>    
         </div>      
                 

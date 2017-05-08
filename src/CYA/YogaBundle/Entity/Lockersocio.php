@@ -47,12 +47,6 @@ class Lockersocio
      */
     private $fechainicio;
 
-     /**
-     * @var float
-     *
-     * @ORM\Column(name="monto", type="float")
-     */
-    private $monto;
 
      /**
      * @var string
@@ -120,53 +114,6 @@ class Lockersocio
     }
 
 
-    /**
-     * Set monto
-     *
-     * @param float $monto
-     *
-     * @return Lockersocio
-     */
-    public function setMonto($monto)
-    {
-        $this->monto = $monto;
-
-        return $this;
-    }
-
-    /**
-     * Get monto
-     *
-     * @return float
-     */
-    public function getMonto()
-    {
-        return $this->monto;
-    }
-
-    /**
-     * Set pagado
-     *
-     * @param float $pagado
-     *
-     * @return Alumnocc
-     */
-    public function setPagado($pagado)
-    {
-        $this->pagado = $pagado;
-
-        return $this;
-    }
-
-    /**
-     * Get pagado
-     *
-     * @return float
-     */
-    public function getPagado()
-    {
-        return $this->pagado;
-    }
 
     
     /**

@@ -42,9 +42,27 @@ class UsuarioType extends AbstractType
             ->add('isActive', CheckboxType::class, array('required' => false,
                                                          'data'     => true,
                                                          'attr'     =>array ('class'=>'inputswitch','data-on-text'=>'ACTIVO','data-off-text'=>'INACTIVO'))) 
+            
+            ->add('haveLocker', CheckboxType::class, array('required' => false,
+                                                        
+                                                         'attr'     =>array ('class'=>'inputswitch','data-on-text'=>'SI','data-off-text'=>'NO'))) 
+            
+            ->add('haveAsoc', CheckboxType::class, array('required' => false,
+                                                        
+                                                         'attr'     =>array ('class'=>'inputswitch','data-on-text'=>'SI','data-off-text'=>'NO'))) 
+           
+           
             ->add('tipocuota', EntityType::class, array('class' => 'CYAYogaBundle:Tipocuota','query_builder' => function (EntityRepository $er) 
                     { return $er->createQueryBuilder('t')
-                        ->where('1 = 1');},
+                        ->where('1 = 1')
+                        ->andwhere ('t.nombre <> :locker')
+                        ->andwhere ('t.nombre <> :asoc')
+                        ->setParameter('locker','Locker')
+                        ->setParameter('asoc','Asociación')
+                        ;
+                        
+                        
+                    },
                     'choice_label' => 'nombre',
                     'placeholder'  => 'Seleccione un tipo de cuota',
                 ))

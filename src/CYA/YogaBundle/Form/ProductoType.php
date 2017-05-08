@@ -24,8 +24,8 @@ class ProductoType extends AbstractType
     {
         $builder
             ->add('descripcion',TextType::class)
-            ->add('costo', MoneyType::class, array('currency' => 'ARS'))
-            ->add('preciolista', MoneyType::class, array('currency' => 'ARS'))
+            ->add('costo', MoneyType::class, array('currency' => '$'))
+            ->add('preciolista', MoneyType::class, array('currency' => '$'))
             ->add('stock', NumberType::class)
             
             ->add('tipoproducto', EntityType::class, array(

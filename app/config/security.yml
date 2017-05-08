@@ -45,6 +45,7 @@ security:
         - { path: ^/$, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/usuario/home, roles: [ROLE_ADMIN, ROLE_SUPER, ROLE_USER] }
         - { path: ^/usuario/editpublic, roles: ROLE_USER }
+        - { path: ^/usuario/editavatar, roles: [ROLE_ADMIN, ROLE_SUPER, ROLE_USER] }
         - { path: ^/usuario/edit, roles: [ROLE_ADMIN, ROLE_SUPER] }
         - { path: ^/usuario/editpass, roles: [ROLE_ADMIN, ROLE_SUPER] }
         - { path: ^/usuario/add, roles: [ROLE_ADMIN, ROLE_SUPER] }

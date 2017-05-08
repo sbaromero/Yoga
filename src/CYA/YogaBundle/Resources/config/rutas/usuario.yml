@@ -18,6 +18,10 @@ cya_usuario_create:
 cya_usuario_edit:
     path:    /edit/{id}
     defaults: { _controller: CYAYogaBundle:Usuario:edit }
+
+cya_usuario_editavatar:
+    path:    /editavatar/{id}
+    defaults: { _controller: CYAYogaBundle:Usuario:editavatar }    
     
 cya_usuario_editpublic:
     path:    /editpublic/
@@ -43,3 +47,7 @@ cya_usuario_inicio:
 cya_usuario_constru:
     path:    /constru
     defaults: { _controller: CYAYogaBundle:Usuario:constru }
+    
+cya_usuario_generarcuota:
+    path:    /generarcuota
+    defaults: { _controller: CYAYogaBundle:Usuario:generarcuota }

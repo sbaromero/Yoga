@@ -1,0 +1,81 @@
+{% extends 'layout.html.twig' %}
+
+  
+{% block body %}
+{{ parent() }}
+{{ include('CYAYogaBundle:Curso:messages/success.html.twig')}}
+<div class="container-fluid profesorado">
+        <div class="container profesorado-icon">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2>Cursos</h2>
+                    <a href="{{ path('cya_curso_add') }}" class="head-link">
+        			        <h3>
+        			           <span><i class="icon ion-plus"></i></span>
+    			                Agregar Nuevo Curso
+        			         </h3>
+        			    </a>
+                </div>
+                <div class="col-sm-7">
+                    <form method="get" action="" class="form-inline pull-right" role="search">
+        			</form>
+        			
+        			
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="container">
+	    <div class="row">
+	    	
+	    <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+
+							<th>{{ knp_pagination_sortable(pagination, 'Código', 'r.id') }}</th>
+							<th>{{ knp_pagination_sortable(pagination, 'Nombre de Curso', 'r.titulo') }} </th>
+							<th>{{ knp_pagination_sortable(pagination, 'Descripción', 'r.descripcion') }} </th>
+							<th>{{ knp_pagination_sortable(pagination, 'Fecha inicio', 'r.fechaini') }} </th>
+							<th>{{ knp_pagination_sortable(pagination, 'Fecha Fin', 'r.fechafin') }} </th>
+						
+                            <th>Acciones</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for curso in pagination %}
+                            <tr data-id="{{ curso.id }}">
+                                
+                                <td>{{ curso.id }}</td>
+                                <td>{{ curso.titulo }}</td>
+                                <td>{{ curso.descripcion }}</td>
+                                <td>{{ curso.fechaini| date('d/m/Y') }}</td>
+                                <td>{{ curso.fechafin | date('d/m/Y')}}</td>
+                                <td class="actions">
+                                    <a href="{{ path('cya_curso_edit', {id: curso.id }) }}" class="btn btn-sm btn-primary">
+                                        {% trans %} <i class="icon ion-edit">Editar</i> {% endtrans %}
+                                    </a>
+                                    
+                                      <a href="{{ path('cya_curso_delete', {id: curso.id }) }}" onclick="return confirm('Está seguro??')"
+			                           class="btn btn btn-danger btn-delete" >
+              
+			                            eliminar
+			                        </a>
+                                    
+                                    
+                                    
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+           <H4> {% trans %}Total Cursos:{% endtrans %} {{ pagination.getTotalItemCount }}</H4>
+                {# display navigation #}
+                <div class="navigation">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

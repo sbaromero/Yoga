@@ -1,6 +1,5 @@
-/*-------tipografia-------*/
-body{
-    font-family: "lato", sans-serif;
+/*-------tipografia-----3C5560--*/
+body{    font-family: "lato", sans-serif;
 }
 
 .grey-input label{
@@ -141,7 +140,7 @@ nav .dropdown-menu>li>a,
 .alumnos-icon:after,
 a.home-usuario .icon,
 a.home-usuario{
-    color: #d9534f;
+    color: #7F534F;
 }
 
 a.home-usuario.productos > .icon,
@@ -151,7 +150,7 @@ a.home-usuario.productos{
 
 a.home-usuario.caja-home > .icon,
 a.home-usuario.caja-home{
-    color: #882CAA;
+    color: #3C5560;
 }
 
 a.home-usuario.cuenta-home > .icon,
@@ -161,15 +160,15 @@ a.home-usuario.cuenta-home {
 
 a.home-usuario.profesorado-home > .icon,
 a.home-usuario.profesorado-home {
-    color: #4990E2;
+    color: #5B79B8;
 }
 
 .caja-icon:after{
-    color: #9C54B7;
+    color: #3C5567;
 }
 
 .producto-icon:after{
-    color: #4BB3A7;
+    color: #33948B;
 }
 
 .cuenta-icon:after{
@@ -194,13 +193,13 @@ a.home-usuario.profesorado-home {
 .navbar-default,
 footer,
 .btn-sign-in{
-    background: #006C8D;
+    background: grey;
 }
 
 .navbar-left > li:nth-of-type(1).dropdown ul.dropdown-menu,
 .navbar-default .navbar-nav.navbar-left>li:nth-of-type(1).open>a:focus,
 .navbar-default .navbar-nav>li:nth-of-type(1)>a:hover{
-    background: #CF3F3B;
+    background: #7F534F;
     border: none;
 }
 
@@ -214,7 +213,7 @@ footer,
 .navbar-left > li:nth-of-type(3).dropdown ul.dropdown-menu,
 .navbar-default .navbar-nav>li:nth-of-type(3).open>a:focus,
 .navbar-default .navbar-nav>li:nth-of-type(3)>a:hover{
-    background: #882CAA;
+    background: #3C5567;
     border: none;
 }
 
@@ -228,7 +227,7 @@ footer,
 .navbar-left > li:nth-of-type(5).dropdown ul.dropdown-menu,
 .navbar-default .navbar-nav>li:nth-of-type(5).open>a:focus,
 .navbar-default .navbar-nav>li:nth-of-type(5)>a:hover{
-    background: #4990E2;
+    background: #5B79B8;
     border: none;
 }
 
@@ -237,11 +236,11 @@ footer,
 .navbar-left > li:nth-of-type(1).dropdown ul.dropdown-menu li a:focus,
 .alumnos,
 .alumnos-btn{
-    background: #d9534f;
+    background: #7F534F;
 }
 
 .navbar-left > li:nth-of-type(1).dropdown ul.dropdown-menu li a{
-    border-bottom: 1px solid #d9534f;
+    border-bottom: 1px solid grey;
 }
 
 .navbar-left > li:nth-of-type(2),
@@ -249,11 +248,11 @@ footer,
 .navbar-left > li:nth-of-type(2).dropdown ul.dropdown-menu li a:focus,
 .producto,
 .productos-btn{
-    background: #4BB3A7;
+    background: #33948B;
 }
 
 .navbar-left > li:nth-of-type(2).dropdown ul.dropdown-menu li a{
-    border-bottom: 1px solid #4BB3A7;
+    border-bottom: 1px solid white;
 }
 
 .navbar-left > li:nth-of-type(3),
@@ -261,11 +260,11 @@ footer,
 .navbar-left > li:nth-of-type(3).dropdown ul.dropdown-menu li a:focus,
 .caja,
 .caja-btn{
-    background: #9C54B7;
+    background: #3C5560;
 }
 
 .navbar-left > li:nth-of-type(3).dropdown ul.dropdown-menu li a{
-    border-bottom: 1px solid #9C54B7;
+    border-bottom: 1px solid grey;
 }
 
 .navbar-left > li:nth-of-type(4),
@@ -284,11 +283,11 @@ footer,
 .navbar-left > li:nth-of-type(5).dropdown ul.dropdown-menu li a:hover,
 .navbar-left > li:nth-of-type(5).dropdown ul.dropdown-menu li a:focus,
 .profesorado{
-    background: #4990E2;
+    background: #60729D;
 }
 
 .navbar-left > li:nth-of-type(5).dropdown ul.dropdown-menu li a{
-    border-bottom: 1px solid #4990E2;
+    border-bottom: 1px solid grey;
 }
 
 .navbar-right > li:nth-of-type(1),
@@ -480,6 +479,7 @@ a.head-link span i.back{
     width: 50px;
     margin-right: 10px;
 }
+
 
 span.sign-in-avatar img{
     width:100px;

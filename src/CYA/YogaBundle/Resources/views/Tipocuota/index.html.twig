@@ -17,10 +17,7 @@
                 </div>
                 <div class="col-sm-7">
                     <form method="get" action="" class="form-inline pull-right" role="search">
-        				<div class="form-group">
-        					<input type="text" size="40" name="query" value="" class="form-control" placeholder="Buscar tipo de cuota" required />
-        				</div>
-        				<input type="submit" value="buscar" class="btn btn-default">
+
         			</form>
                 </div>
             </div>
@@ -36,13 +33,7 @@
 
 							<th>{{ knp_pagination_sortable(pagination, 'Nombre', 't.nombre') }}</th>
 							<th>{{ knp_pagination_sortable(pagination, 'Valor', 't.valor') }} </th>
-							<th>{{ knp_pagination_sortable(pagination, 'Profesorado 1er. Nivel', 't.instructorado') }}</th>
-							<th>{{ knp_pagination_sortable(pagination, 'Clases de yoga', 't.clasesyoga') }}</th>
-							<th>{{ knp_pagination_sortable(pagination, 'Asociacion', 't.asociacion') }}</th>
-							<th>{{ knp_pagination_sortable(pagination, 'Profesorado 2do. Nivel', 't.profesorado') }}</th>
-							<th>{{ knp_pagination_sortable(pagination, 'Posgrado', 't.posgrado') }}</th>
-							<th>{{ knp_pagination_sortable(pagination, 'Casillero', 't.casillero') }}</th>
-							<th>{{ knp_pagination_sortable(pagination, 'Otro', 't.otro') }}</th>
+							
                             <th>Acciones</th>
                             
                         </tr>
@@ -53,67 +44,20 @@
                                 
                                 <td>{{ tipocuota.nombre }}</td>
                                 <td>$ {{ tipocuota.valor }}</td>
-                                <td>
-                                    {% if tipocuota.instructorado == 1  %}
-                                        <strong>SI</strong>
-                                    {% endif %}    
-                                    {% if tipocuota.instructorado == 0 %}
-                                        <strong>No</strong>
-                                    {% endif %}    
-                                </td>
-                                <td>
-                                    {% if tipocuota.clasesyoga == 1  %}
-                                        <strong>SI</strong>
-                                    {% endif %}    
-                                    {% if tipocuota.clasesyoga == 0 %}
-                                        <strong>No</strong>
-                                    {% endif %}    
-                                </td>
-                                <td>
-                                    {% if tipocuota.asociacion == 1  %}
-                                        <strong>SI</strong>
-                                    {% endif %}    
-                                    {% if tipocuota.asociacion == 0 %}
-                                        <strong>No</strong>
-                                    {% endif %}    
-                                </td>
-                                <td>
-                                    {% if tipocuota.profesorado == 1  %}
-                                        <strong>SI</strong>
-                                    {% endif %}    
-                                    {% if tipocuota.profesorado == 0 %}
-                                        <strong>No</strong>
-                                    {% endif %}    
-                                </td>
-                                <td>
-                                    {% if tipocuota.posgrado == 1  %}
-                                        <strong>SI</strong>
-                                    {% endif %}    
-                                    {% if tipocuota.posgrado == 0 %}
-                                        <strong>No</strong>
-                                    {% endif %}    
-                                </td>
-                                <td>
-                                    {% if tipocuota.casillero == 1  %}
-                                        <strong>SI</strong>
-                                    {% endif %}    
-                                    {% if tipocuota.casillero == 0 %}
-                                        <strong>No</strong>
-                                    {% endif %}    
-                                </td>
-                                <td>
-                                    {% if tipocuota.otro == 1  %}
-                                        <strong>SI</strong>
-                                    {% endif %}    
-                                    {% if tipocuota.otro == 0 %}
-                                        <strong>No</strong>
-                                    {% endif %}    
-                                </td>
+                               
 
                                 <td class="actions">
                                     <a href="{{ path('cya_tipocuota_edit', {id: tipocuota.id }) }}" class="btn btn-sm btn-primary">
                                     Editar
                                     </a>
+                                    
+                                  <a href="{{ path('cya_tipocuota_delete', {id: tipocuota.id }) }}" onclick="return confirm('Está seguro?')"
+                                  class="btn btn btn-danger btn-delete"
+                                         >
+			                            Eliminar
+			                     </a>
+                                    
+                                    
                                 </td>
                             </tr>
                         {% endfor %}

@@ -1,0 +1,64 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    {{ include('CYAYogaBundle:Curso:messages/success.html.twig') }}
+	<div class="container-fluid profesorado">
+        <div class="container profesorado-icon">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2>Editar Cursos</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<div class="container grey-input">
+		<div class="modulo-form">
+		<div class="row">
+			<div class="col-sm-6">
+			
+				{{ form_start(form, {'attr': { 'role' : 'form'}}) }}
+				<h4 class="text-danger">{{ form_errors(form) }}</h4>
+                     
+					<fieldset>
+						
+
+					    <div class="form-group">
+	                         {{ form_label(form.titulo) }}
+	                         {{ form_widget(form.titulo, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Nombre del Curso'} }) }}
+	                         <span class="text-danger"> {{ form_errors(form.titulo) }} </span>
+                    	</div>
+                         
+                        <div class="form-group">
+	                         {{ form_label(form.descripcion) }}
+	                         {{ form_widget(form.descripcion, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Descripción'} }) }}
+	                         <span class="text-danger"> {{ form_errors(form.descripcion) }} </span>
+                    	</div>
+                        
+                        <div class="form-group">
+	                         {{ form_label(form.fechaini) }}
+	                         {{ form_widget(form.fechaini, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Fecha Inicio'} }) }}
+	                         <span class="text-danger"> {{ form_errors(form.fechaini) }} </span>
+                    	</div>                            
+                       
+                        <div class="form-group">
+	                         {{ form_label(form.fechafin) }}
+	                         {{ form_widget(form.fechafin, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Fecha Fin'} }) }}
+	                         <span class="text-danger"> {{ form_errors(form.fechafin) }} </span>
+                    	</div>         
+		               
+				 	</fieldset>
+                     
+				    
+			</div>
+		</div>
+		</div>
+		
+		<p>
+			{{ form_widget(form.save, {'label' : 'Modificar Curso', 'attr': {'class': 'btn btn-success'}}) }}
+		</p>
+                 
+            {{ form_end(form) }}
+	</div>
+{% endblock %}

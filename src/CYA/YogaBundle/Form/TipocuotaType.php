@@ -21,13 +21,13 @@ class TipocuotaType extends AbstractType
         $builder
             ->add('nombre',TextType::class)
             ->add('valor',MoneyType::class, array('currency' => 'ARS'))
-            ->add('instructorado', CheckboxType::class, array('required' => false, 'attr' => array ('class'=>'inputswitch','data-on-text'=>'SI','data-off-text'=>'NO'))) 
-            ->add('clasesyoga', CheckboxType::class, array('required' => false, 'attr' => array ('class'=>'inputswitch','data-on-text'=>'SI','data-off-text'=>'NO'))) 
-            ->add('asociacion', CheckboxType::class, array('required' => false, 'attr' => array ('class'=>'inputswitch','data-on-text'=>'SI','data-off-text'=>'NO'))) 
-            ->add('profesorado', CheckboxType::class, array('required' => false, 'attr' => array ('class'=>'inputswitch','data-on-text'=>'SI','data-off-text'=>'NO'))) 
-            ->add('posgrado', CheckboxType::class, array('required' => false, 'attr' => array ('class'=>'inputswitch','data-on-text'=>'SI','data-off-text'=>'NO'))) 
-            ->add('casillero', CheckboxType::class, array('required' => false, 'attr' => array ('class'=>'inputswitch','data-on-text'=>'SI','data-off-text'=>'NO'))) 
-            ->add('otro', CheckboxType::class, array('required' => false, 'attr' => array ('class'=>'inputswitch','data-on-text'=>'SI','data-off-text'=>'NO'))) 
+            // ->add('instructorado', CheckboxType::class, array('required' => false, 'attr' => array ('class'=>'inputswitch','data-on-text'=>'SI','data-off-text'=>'NO'))) 
+            // ->add('clasesyoga', CheckboxType::class, array('required' => false, 'attr' => array ('class'=>'inputswitch','data-on-text'=>'SI','data-off-text'=>'NO'))) 
+            // ->add('asociacion', CheckboxType::class, array('required' => false, 'attr' => array ('class'=>'inputswitch','data-on-text'=>'SI','data-off-text'=>'NO'))) 
+            // ->add('profesorado', CheckboxType::class, array('required' => false, 'attr' => array ('class'=>'inputswitch','data-on-text'=>'SI','data-off-text'=>'NO'))) 
+            // ->add('posgrado', CheckboxType::class, array('required' => false, 'attr' => array ('class'=>'inputswitch','data-on-text'=>'SI','data-off-text'=>'NO'))) 
+            // ->add('casillero', CheckboxType::class, array('required' => false, 'attr' => array ('class'=>'inputswitch','data-on-text'=>'SI','data-off-text'=>'NO'))) 
+            // ->add('otro', CheckboxType::class, array('required' => false, 'attr' => array ('class'=>'inputswitch','data-on-text'=>'SI','data-off-text'=>'NO'))) 
             ->add('save', SubmitType::class)
             ;
     }

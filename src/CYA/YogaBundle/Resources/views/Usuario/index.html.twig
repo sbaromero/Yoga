@@ -19,9 +19,14 @@
                 </div>
                 <div class="col-sm-7">
                     <form method="get" action="" class="form-inline pull-right" role="search">
-                        <div class="form-group">
-        					<input type="text" size="40" name="query" value="{{ app.request.get('query') }}" class="form-control" placeholder="Buscar Usuario por Apellido, Nombre o DNI" />
-        				</div>
+                    	<div class="form-group">
+                            <select class="selectpicker" data-live-search="true" id="usuariot" name="usuariot" value="{{ app.request.get('usuariot') }}">
+                                <option value="" selected disabled>Usuario</option>
+                                {% for us in usuariot %}
+                                    <option value="{{ us.id }}">{{ us.nombrecompleto }}</option>
+                                {% endfor %}
+                             </select>
+                        </div>
         				
         				<div class="form-group select-class">
                           <select class="form-control" id="estado"name="estado" value="{{ app.request.get('estado') }}">
@@ -76,11 +81,21 @@
                             <tr data-id="{{ usuario.id }}">
                                 
                                 
-                                <td colspan="1"> <img src="{{ asset('public/img/avatar.jpg') }}" class="avatar-tabla" />  
-                                 <td>{% if usuario.isActive == 1 %}
-                                <b> <span class="text-success"> {{ usuario.nombrecompleto }} </span>
+                                <td colspan="1"> 
                                 
-                                  {% endif %}
+                                {% if usuario.brochure != null %}
+                                <img src="{{ asset('web/uploads/brochures'~'/'~usuario.brochure) }}" class="avatar-tabla" />  
+                                 {% endif %} 
+                                 
+                                 <td>{% if usuario.isActive == 1 %}
+                                <b> <span class="text-success"> {{ usuario.apellido }}, {{ usuario.nombre }} </span>
+                                  {% endif %} 
+                                 
+                                 {% if usuario.isActive == 0 %}
+                                <b> <span class="text-danger"> {{ usuario.apellido }}, {{ usuario.nombre }} </span>
+                                  {% endif %} 
+                                    
+                                  
                                 </td>
                                 
                                  <td>{{ usuario.dni }}</td>

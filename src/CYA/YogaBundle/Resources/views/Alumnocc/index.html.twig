@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-sm-5">
                     <h2>Cuentas Corrientes de Alumnos </h2>
-                   <h4>Leyenda: pc (pago de cuota)  - cc (cuota cancelada) - vp (venta de producto) - pd (pago diario)  </h4>
+                   <h4>Leyenda: pc (pago de cuota)  - cc (cuota cancelada) - vp (venta de producto) - pd (pago diario) - ge (generada por administración) </h4>
                 </div>
                 <div class="col-sm-7">
                     <form method="get" action="" class="form-inline pull-right" role="search">
@@ -35,12 +35,22 @@
 
         				<input type="submit" value="Buscar" class="btn btn-success">
         			</form>
+        		
                 </div>
+                	 
             </div>
+                       <div align ='right'>
+                        <a href="{{ path('cya_usuario_generarcuota') }}" class="btn btn-success"  > Generar Cuotas Pendientes </a>
+                       </div>
+                       <br>
+                        <div align ='right'>
+                        <a href="{{ path('cya_alumnocc_generacc') }}" class="btn btn-success"  > Generar CC  </a>
+                       </div>
         </div>
+          
     </div>
-           
-            
+          
+                
 	<div class="container">
 	    <div class="row">
 	    	
@@ -52,7 +62,6 @@
 							<th>{{ knp_pagination_sortable(pagination, 'Alumno', 'a.nombrecompleto') }}</th>
 							<th>{{ knp_pagination_sortable(pagination, 'Fecha de Reingreso', 'a.fechavencimiento') }}</th>
 							<th>{{ knp_pagination_sortable(pagination, 'Cuota Mes', 'a.deuda') }}</th>
-
 							<th>{{ knp_pagination_sortable(pagination, 'Debe', 'a.deuda') }}</th>
 							<th>{{ knp_pagination_sortable(pagination, 'Pagado', 'a.pagado') }}</th>
 							<th>{{ knp_pagination_sortable(pagination, 'Bonificación', 'a.bonificacion') }}</th>
@@ -102,6 +111,8 @@
                                         {% elseif alumnocc.tipo == 'PD' %} 
                                             class="btn btn btn-danger btn-delete"
                                         {% elseif alumnocc.tipo == 'VP' %} 
+                                            class="btn btn btn-danger btn-delete"
+                                             {% elseif alumnocc.tipo == 'GE' %} 
                                             class="btn btn btn-danger btn-delete"
                                         {% elseif alumnocc.tipo == 'PC' %}
                                          class="btn btn btn-danger btn-delete"   

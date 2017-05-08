@@ -1,0 +1,27 @@
+cya_proveedor_index:
+    path:    /index
+    defaults: { _controller: CYAYogaBundle:Proveedor:index }
+    
+cya_proveedor_add:
+    path:    /add
+    defaults: { _controller: CYAYogaBundle:Proveedor:add }
+
+
+cya_proveedor_edit:
+    path:    /edit/{id}
+    defaults: { _controller: CYAYogaBundle:Proveedor:edit }
+    
+cya_proveedor_update:
+    path:    /update/{id}
+    defaults: { _controller: CYAYogaBundle:Proveedor:update }
+    methods: [POST,PUT]
+    
+cya_proveedor_view:
+    path:    /view/{id}
+    defaults: { _controller: CYAYogaBundle:Proveedor:view }
+    
+cya_proveedor_delete:
+    path:    /delete/{id}
+    defaults: { _controller: CYAYogaBundle:Proveedor:delete }
+    
+    

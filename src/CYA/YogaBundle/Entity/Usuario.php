@@ -154,6 +154,22 @@ class Usuario implements AdvancedUserInterface, \Serializable
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
+    
+    
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="have_locker", type="boolean",nullable=true)
+     */
+    private $haveLocker;
+    
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="have_asoc", type="boolean",nullable=true)
+     */
+    private $haveAsoc;
+    
 
     /**
      * @var \DateTime
@@ -168,8 +184,34 @@ class Usuario implements AdvancedUserInterface, \Serializable
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
+    
+  
+     /**
+     * @ORM\Column(type="string",nullable=true)
+     *
+     * @Assert\Image(
+     *     minWidth = 100,
+     *     maxWidth = 1000,
+     *     minHeight = 100,
+     *     maxHeight = 1000
+     * )
+     */
+    private $brochure;
+
+    public function getBrochure()
+    {
+        return $this->brochure;
+    }
 
 
+    public function setBrochure($brochure)
+    {
+        $this->brochure = $brochure;
+
+        return $this;
+    }
+  
+  
 
     /**
      * Get id
@@ -516,6 +558,56 @@ class Usuario implements AdvancedUserInterface, \Serializable
     {
         return $this->isActive;
     }
+
+     /**
+     * Set haveLocker
+     *
+     * @param boolean $haveLocker
+     *
+     * @return Usuario
+     */
+    public function setHaveLocker($haveLocker)
+    {
+        $this->haveLocker = $haveLocker;
+
+        return $this;
+    }
+
+    /**
+     * Get haveLocker
+     *
+     * @return bool
+     */
+    public function getHaveLocker()
+    {
+        return $this->haveLocker;
+    }
+
+     /**
+     * Set haveAsoc
+     *
+     * @param boolean $haveAsoc
+     *
+     * @return Usuario
+     */
+    public function setHaveAsoc($haveAsoc)
+    {
+        $this->haveAsoc = $haveAsoc;
+
+        return $this;
+    }
+
+    /**
+     * Get haveAsoc
+     *
+     * @return bool
+     */
+    public function getHaveAsoc()
+    {
+        return $this->haveAsoc;
+    }
+
+
 
     /**
      * Set createdAt

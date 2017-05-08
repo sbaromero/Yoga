@@ -146,19 +146,27 @@
                              
                                     
                                     
-                                  
-                                    
-                                    
                                     <td>
+                                        
+                         
+                                        
                                         {% if movimiento.tipo == 'MB' %}
                                             Movimiento de caja básico
                                         {% endif %}    
-                                        {% if movimiento.tipo == 'CC' %}
+                                        {% if movimiento.tipo == 'PP' %}
+                                            Pago a Proveedores
+                                        {% endif %}  
+                                        
+                                        
+                                        {% if movimiento.tipo == 'CC' and  movimiento.alumnocc != null  %}
                                             Movimiento de CC - {{ movimiento.alumnocc.usuario.nombrecompleto }}
                                         {% endif %}   
+                                        
                                         {% if movimiento.tipo == 'VP' %}
                                            Venta de productos
                                         {% endif %}   
+                       
+                                        
                                     </td>
                                     
                                     <td>{{ movimiento.usuario.nombrecompleto }}</td>
@@ -183,7 +191,8 @@
                     </table>
                    
                <H4> {% trans %}Total Movimientos:{% endtrans %} {{ pagination.getTotalItemCount }}</H4>
-               <H4> {% trans %}Saldo: ${% endtrans %} {{ saldo }}</H4>
+               <H4> {% trans %}Saldo Caja total: ${% endtrans %} {{ saldo }}</H4>
+                <H4> {% trans %}Saldo de esta consulta: ${% endtrans %} {{ saldo2 }}</H4>
                     <div class="navigation">
                         {{ knp_pagination_render(pagination) }}
                     </div>

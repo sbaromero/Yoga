@@ -1,0 +1,84 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    {{ include('CYAYogaBundle:Locker:messages/success.html.twig') }}
+	<div class="container-fluid cuenta">
+        <div class="container cuenta-icon">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2>Editar Cuenta Corriente de Proveedores</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<div class="container grey-input">
+		<div class="modulo-form">
+		<div class="row">
+			<div class="col-sm-6">
+			
+				{{ form_start(form, {'attr': { 'role' : 'form'}}) }}
+				<h4 class="text-danger">{{ form_errors(form) }}</h4>
+                     
+					<fieldset>
+						<div class="form-group">
+                           <b> Seleccione Proveedor  </b><b r> 
+                            <select class="selectpicker" data-live-search="true" id="proveedor" name="proveedor" data-style="btn-primary" 
+                            value="{{ app.request.get('proveedor') }}">
+                               
+                             {% for pr in proveedores %}
+                                {% if  pr.id == idelegido %} 
+                                <option selected= true value="{{ pr.id }}">{{ pr.nombre }}</option>
+                                {% else %}
+                                <option  value="{{ pr.id }}">{{ pr.nombre }}</option>
+                                {% endif %}
+                            {% endfor %}
+                           </select>
+                        </div>
+
+					    <div class="form-group">
+	                   <div class="form-group">
+                         Fecha Vencimiento
+                         {{ form_widget(form.fechavencimiento, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Fecha de Vencimiento'} }) }}
+                         <span class="text-danger"> {{ form_errors(form.fechavencimiento) }} </span>
+                    </div>
+                    
+                    <div class="form-group">
+                         Deuda $
+                         {{ form_widget(form.deuda, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Deuda $'} }) }}
+                         <span class="text-danger"> {{ form_errors(form.deuda) }} </span>
+                    </div>
+                    
+                    
+                    <div class="form-group">
+                         Pagado $
+                         {{ form_widget(form.pagado, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Pagado $'} }) }}
+                         <span class="text-danger"> {{ form_errors(form.pagado) }} </span>
+                    </div>
+                    
+                     <div class="form-group">
+                         Nº Factura
+                         {{ form_widget(form.factura, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Nº Factura'} }) }}
+                         <span class="text-danger"> {{ form_errors(form.factura) }} </span>
+                    </div>
+                    
+                      <div class="form-group">
+                       Descripción
+                         {{ form_widget(form.tipo, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Descripción'} }) }}
+                         <span class="text-danger"> {{ form_errors(form.tipo) }} </span>
+                    </div>
+				 	</fieldset>
+                     
+				    
+			</div>
+		</div>
+		</div>
+		
+		<p>
+			{{ form_widget(form.save, {'label' : 'Modificar CC. Proveedor', 'attr': {'class': 'btn btn-success'}}) }}
+		</p>
+                 
+            {{ form_end(form) }}
+	</div>
+{% endblock %}

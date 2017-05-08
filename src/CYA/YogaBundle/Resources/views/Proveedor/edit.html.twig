@@ -1,0 +1,60 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    {{ include('CYAYogaBundle:Locker:messages/success.html.twig') }}
+	<div class="container-fluid cuenta">
+        <div class="container cuenta-icon">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2>Editar Proveedores</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<div class="container grey-input">
+		<div class="modulo-form">
+		<div class="row">
+			<div class="col-sm-6">
+			
+				{{ form_start(form, {'attr': { 'role' : 'form'}}) }}
+				<h4 class="text-danger">{{ form_errors(form) }}</h4>
+                     
+					<fieldset>
+						
+
+					    <div class="form-group">
+	                         {{ form_label(form.nombre) }}
+	                         {{ form_widget(form.nombre, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Nombre'} }) }}
+	                         <span class="text-danger"> {{ form_errors(form.nombre) }} </span>
+                    	</div>
+                         
+                         <div class="form-group">
+	                         {{ form_label(form.mail) }}
+	                         {{ form_widget(form.mail, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Mail'} }) }}
+	                         <span class="text-danger"> {{ form_errors(form.mail) }} </span>
+                    	</div>
+                          
+                          <div class="form-group">
+	                         {{ form_label(form.telefono) }}
+	                         {{ form_widget(form.telefono, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Teléfono'} }) }}
+	                         <span class="text-danger"> {{ form_errors(form.telefono) }} </span>
+                    	</div>
+                           
+
+		               
+				 	</fieldset>
+                     
+				    
+			</div>
+		</div>
+		</div>
+		
+		<p>
+			{{ form_widget(form.save, {'label' : 'Modificar Proveedor', 'attr': {'class': 'btn btn-success'}}) }}
+		</p>
+                 
+            {{ form_end(form) }}
+	</div>
+{% endblock %}

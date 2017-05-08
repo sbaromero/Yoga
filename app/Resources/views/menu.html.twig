@@ -34,7 +34,7 @@
                 
                      <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <div class="change">Productos</div><div class="icon2"></div><span class="caret"></span>
+                        <div class="change">Prod.</div><div class="icon2"></div><span class="caret"></span>
                     </a>
                      <ul class="dropdown-menu">
                         <li><a href="{{ path('cya_tipoproducto_add') }}">Nuevo Tipo de Producto</a></li>
@@ -70,24 +70,34 @@
                    <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                     
-                    <div class="change">Cuenta corriente</div><div class="icon4"></div><span class="caret"></span></a>
+                    <div class="change">Cta. Cte</div><div class="icon4"></div><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                        <li><a href="{{ path('cya_alumnocc_index') }}">Listado Cta. Cte. y Cuotas</a></li>
                         <li><a href="{{ path('cya_alumnocc_pagodiario') }}">Pago diario clase de yoga</a></li>
                         <li><a href="{{ path('cya_alumnocc_indexdeuda') }}">Listado de Deuda de Alumnos</a></li>
+                        <li><a href="{{ path('cya_proveedor_index') }}">Proveedores</a></li>
+                        <li><a href="{{ path('cya_proveedorcc_index') }}">CC. con Proveedores</a></li>
+                        </li>
+                   
+                        
+                        
                    </ul>
                    </li>
                    
                     <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                     
-                    <div class="change">Profesorado</div><div class="icon5"></div><span class="caret"></span></a>
+                    <div class="change">Cursos</div><div class="icon5"></div><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ path('cya_usuario_constru') }}">Materias</a></li>
-                        <li><a href="{{ path('cya_usuario_constru') }}">Consulta de Planes de Estudio</a></li>
+                        <li><a href="{{ path('cya_curso_index') }}">Listado de Cursos</a></li>
+                        <li><a href="{{ path('cya_usuario_constru') }}">Listado de Materias</a></li>
+                        <li><a href="{{ path('cya_usuario_constru') }}">Inscripción a Cursos/Materias</a></li>
                   
                    </ul>
-                   </li>
+                   
+                   
+                   
+                   
                    
                    
                    {% endif %}
@@ -102,13 +112,13 @@
                             </ul>
                        
                        </li>
-                       
+                       <li></li> <li></li>
                        <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             
                             Cuenta corriente<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="{{ path('cya_alumnocc_indexpublic') }}">Cuotas</a></li>
+                                <li><a href="{{ path('cya_alumnocc_indexpublic') }}">Ver Resumen</a></li>
 
                            </ul>
                           </li>
@@ -116,14 +126,15 @@
                    
             </ul>
             
+            
+            
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="drop-fix">
                         <span class="avatar">
-                            <img src="{{ asset('public/img/avatar.jpg') }}"/> 
+                            <img src="{{ asset('web/uploads/brochures'~'/'~ app.user.brochure) }}"class="avatar-tabla" /> 
                         </span>
                         <div class="change">{{ app.user.username }}</div>
-                        
                     </a>
                       
                 </li>

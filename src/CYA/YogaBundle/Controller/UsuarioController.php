@@ -13,9 +13,11 @@ use CYA\YogaBundle\Entity\Alumnocc;
 use CYA\YogaBundle\Entity\Auxiliarventa;
 use CYA\YogaBundle\Form\UsuarioType;
 use CYA\YogaBundle\Form\UsuarioeditType;
+use CYA\YogaBundle\Form\UsuarioeditavatarType;
 use CYA\YogaBundle\Form\UsuariopublicType;
 use CYA\YogaBundle\Form\UsuariorapidoType;
 use CYA\YogaBundle\Form\UsuariopassType;
+use Symfony\Component\HttpFoundation\File\File;
 class UsuarioController extends Controller
 {
     
@@ -197,8 +199,7 @@ class UsuarioController extends Controller
         if ($rol != 'ROLE_USER')
         {
                
-             $salida = exec('sudo /etc/init.d/elasticsearch start');
-             $this->addFlash('mensaje', $salida);
+             
             
             $this->procesarCuentas();
             
@@ -340,16 +341,25 @@ class UsuarioController extends Controller
     public function indexAction(Request $request)
     {
         
-       
-            
-        $searchQuery = $request->get('query');
+        $usuarioQuery = $request->get('usuariot'); 
+        $repository = $this->getDoctrine()->getRepository('CYAYogaBundle:Usuario');
+        $query = $repository->createQueryBuilder('u')
+            ->where('1=1')
+            ->getQuery();
+        $usuariot = $query->getResult();
+
+
+      
+       // $searchQuery = $request->get('query');
         $estadoQuery = $request->get('estado');
         $tcQuery = $request->get('tipocuota');
         
-        if(!empty($searchQuery)){
+    /*    if(!empty($searchQuery)){
             $finder = $this->container->get('fos_elastica.finder.app.usuario');
             $users = $finder->createPaginatorAdapter($searchQuery);
-        }else{
+        }else
+        
+        { */
             $em = $this->getDoctrine()->getManager();
             $dql = "SELECT u FROM CYAYogaBundle:Usuario u WHERE u.id > 0";
         
@@ -366,10 +376,15 @@ class UsuarioController extends Controller
                 $dql = $dql . " AND u.tipocuota = (SELECT t FROM CYAYogaBundle:Tipocuota t WHERE t.id = " . $tcQuery .")";
             }
             
+             if(!empty($usuarioQuery)){
+                $dql = $dql . "AND u.id = " . $usuarioQuery;
+            }
+            
+            
             $dql = $dql . " ORDER BY u.id DESC";
             
             $users = $em->createQuery($dql); 
-        }
+        
         
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate($users, $request->query->getInt('page' , 1),30);
@@ -380,7 +395,7 @@ class UsuarioController extends Controller
         
 
         
-        return $this->render('CYAYogaBundle:Usuario:index.html.twig',array('pagination' => $pagination, 'tipocuotas' => $tipocuotas));
+        return $this->render('CYAYogaBundle:Usuario:index.html.twig',array('pagination' => $pagination, 'tipocuotas' => $tipocuotas,'usuariot' => $usuariot));
         
     }
     
@@ -452,10 +467,8 @@ class UsuarioController extends Controller
         $usuario = $em->getRepository('CYAYogaBundle:Usuario')->find($id);
         $fechareingreso = $usuario->getFechareingreso();
         
-        
         $form = $this->createForm(UsuarioeditType::class, $usuario);
-    
-        
+      
         $form->handleRequest($request); 
         
         if(!$usuario){
@@ -464,6 +477,11 @@ class UsuarioController extends Controller
        
         if ($form->isSubmitted() && $form->isValid()) {
             
+             
+             // $file stores the uploaded PDF file
+            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+          
+             
              /*
             $nfechareingreso = $usuario->getFechareingreso();
             if($fechareingreso != $nfechareingreso)
@@ -532,10 +550,104 @@ class UsuarioController extends Controller
    }
    
    
+   public function editavatarAction($id, Request $request)
+   {    
+        $em = $this->getDoctrine()->getManager();
+        $usuario = $em->getRepository('CYAYogaBundle:Usuario')->find($id);
+     
+        
+        if ($usuario->getBrochure()!= null){
+        $usuario->setBrochure(new File('web/uploads/brochures'.'/'.$usuario->getBrochure()));
+        }
+        
+       
+        $form = $this->createForm(UsuarioeditavatarType::class, $usuario);
+        $form->handleRequest($request); 
+        
+        if(!$usuario){
+            throw $this->createNotFoundException('Usuario no encontrado');
+        }
+       
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+
+         if ($usuario->getBrochure()!= null){
+         
+            
+            $file = $usuario->getBrochure();
+
+            // Generate a unique name for the file before saving it
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+            // Move the file to the directory where brochures are stored
+            $file->move(
+                'web/uploads/brochures',
+                $fileName
+            );
+
+            // Update the 'brochure' property to store the PDF file name
+            // instead of its contents
+            $usuario->setBrochure($fileName);
+             
+         }
+             
+             
+         
+            
+            $em->flush();
+
+            $this->addFlash('mensaje', 'El AVATAR del usuario '.$usuario->getNombrecompleto().' ha sido modificado');
+            
+            return $this->render('CYAYogaBundle:Usuario:editavatar.html.twig', array('usuario' => $usuario, 'form' => $form->createView()));
+        }                                                                                                                   
+       
+        return $this->render('CYAYogaBundle:Usuario:editavatar.html.twig', array('usuario' => $usuario, 'form' => $form->createView()));
+   }
+   
+   
+  
+   
+   
     private function procesarCuentas(){
         
         $fechahoy = new \DateTime("now");
         $contador = 0;
+        $lock = "Locker";
+        $asoc = "Asociación";
+        
+        //obtiene valor locker
+        $repolocker = $this->getDoctrine()->getRepository('CYAYogaBundle:Tipocuota');
+        $querylocker = $repolocker->createQueryBuilder('l')
+            ->where('l.nombre = :valor')
+            ->setParameter('valor', $lock)
+            ->getQuery();
+            
+        $locker = $querylocker->getOneOrNullResult();
+        if ($locker){
+        $valorLocker =   $locker->getValor();
+        }
+        else
+        {$valorLocker = 0;}
+        
+        
+        //obtiene valor Asoc
+        $repoasoc = $this->getDoctrine()->getRepository('CYAYogaBundle:Tipocuota');
+        $queryasoc = $repoasoc->createQueryBuilder('l')
+            ->where('l.nombre = :valor')
+            ->setParameter('valor', $asoc)
+            ->getQuery();
+            
+        $asociacion = $queryasoc->getOneOrNullResult();
+        
+         if ($locker){
+         $valorAsoc =   $asociacion->getValor();
+        }
+        else
+        {$valorAsoc = 0;}
+        
+       
+        
+        
         $repository = $this->getDoctrine()->getRepository('CYAYogaBundle:Usuario');
         $query = $repository->createQueryBuilder('u')
             ->where('u.isActive = 1')
@@ -545,7 +657,7 @@ class UsuarioController extends Controller
         $usuarios = $query->getResult();
         $em = $this->getDoctrine()->getManager();
         foreach($usuarios as $us){
-            if($us->getTipocuota()->getValor() > 0)
+            if($us->getTipocuota()->getValor() > 0 || $us->gethaveLocker() == true || $us->gethaveAsoc() == true  ) 
             {
                 $generacc = 0;
                 $tienecuenta = 0 ;
@@ -591,7 +703,7 @@ class UsuarioController extends Controller
                 
                  switch ($mes) 
                  {
-                  case "Feb":
+                  case "Feb": 
                   $mes = 'ENERO/'.$anio;
                   break;
                   case "Mar":
@@ -629,12 +741,22 @@ class UsuarioController extends Controller
                   break;
                   }
                 
-                
-                
              
                  
                 if (($generacc == 0 && $tienecuenta == 0)  || ($nogenerar == 0   && $tienecuenta == 1)   )
                 {
+                    
+                    if ($us->gethaveLocker() == true){
+                        $xlocker = $valorLocker;
+                    }else{
+                        $xlocker = 0;
+                    }
+                    
+                     if ($us->gethaveAsoc() == true){
+                        $xasoc = $valorAsoc;
+                    }else{
+                        $xasoc = 0;
+                    }
                     
                     $alumnocc = new Alumnocc();
                     $alumnocc->setUsuario($us);
@@ -644,7 +766,7 @@ class UsuarioController extends Controller
                     $alumnocc->setPagado(0);
                     $alumnocc->setBonificacion(0);
                     $alumnocc->setTipo('PC');
-                    $alumnocc->setDeuda($us->getTipocuota()->getValor());
+                    $alumnocc->setDeuda($us->getTipocuota()->getValor() + $xlocker + $xasoc);
                     $alumnocc->setMes($mes); 
                     $em = $this->getDoctrine()->getManager();
                     $em->persist($alumnocc);
@@ -727,7 +849,52 @@ class UsuarioController extends Controller
                   break;
                   }
                 
+              //obtiene valor locker
+        $lock = "Locker";
+        $asoc = "Asociación";
+        
+        $repolocker = $this->getDoctrine()->getRepository('CYAYogaBundle:Tipocuota');
+        $querylocker = $repolocker->createQueryBuilder('l')
+            ->where('l.nombre = :valor')
+            ->setParameter('valor', $lock)
+            ->getQuery();
             
+        $locker = $querylocker->getOneOrNullResult();
+       
+       if ($locker){
+        $valorLocker =   $locker->getValor();
+       }else{$valorLocker=0;}
+        
+        
+        //obtiene valor Asoc
+        $repoasoc = $this->getDoctrine()->getRepository('CYAYogaBundle:Tipocuota');
+        $queryasoc = $repoasoc->createQueryBuilder('l')
+            ->where('l.nombre = :valor')
+            ->setParameter('valor', $asoc)
+            ->getQuery();
+            
+        $asociacion = $queryasoc->getOneOrNullResult();
+        if ($asociacion){
+        $valorAsoc =   $asociacion->getValor();
+        }
+        else{$valorAsoc=0;}
+        
+        
+        
+        
+          
+             if ($usuario->gethaveLocker() == true){
+                        $xlocker = $valorLocker;
+                    }else{
+                        $xlocker = 0;
+                    }
+                    
+                     if ($usuario->gethaveAsoc() == true){
+                        $xasoc = $valorAsoc;
+                    }else{
+                        $xasoc = 0;
+                    }
+          
             
             $alumnocc = new Alumnocc();
             $alumnocc->setUsuario($usuario);
@@ -737,7 +904,7 @@ class UsuarioController extends Controller
             $alumnocc->setPagado(0);
             $alumnocc->setBonificacion(0);
             $alumnocc->setTipo('PC');
-            $alumnocc->setDeuda($usuario->getTipocuota()->getValor());
+            $alumnocc->setDeuda($usuario->getTipocuota()->getValor()+ $xasoc + $xlocker);
             $alumnocc->setMes($mes); 
             $em = $this->getDoctrine()->getManager();
             $em->persist($alumnocc);
@@ -846,5 +1013,12 @@ class UsuarioController extends Controller
         return $this->render('CYAYogaBundle:Usuario:editpass.html.twig', array('usuario' => $usuario, 'form' => $form->createView()));
     
    }
-    
+  
+     public function generarcuotaAction()
+   {
+       $this->procesarCuentas();
+       $this->addFlash('mensaje', 'Generación de cuotas finalizada');  
+       return $this->redirectToRoute('cya_alumnocc_index');
+   }    
+  
 }

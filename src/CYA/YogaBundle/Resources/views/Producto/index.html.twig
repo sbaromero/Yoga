@@ -24,7 +24,14 @@
                     
                     <form method="get" action="" class="form-inline pull-right" role="search">
         				<div class="form-group">
-        					<input type="text" size="40" name="query" value="" class="form-control" placeholder="Buscar Producto" />
+        					          <div class="form-group">
+                            <select class="selectpicker" data-live-search="true" id="productot" name="productot" value="{{ app.request.get('productot') }}">
+                                <option value="" selected disabled>Producto</option>
+                                {% for us in productot %}
+                                    <option value="{{ us.id }}">{{ us.descripcion }}</option>
+                                {% endfor %}
+                             </select>
+                        </div>
         				</div>
         				
         			<div class="form-group select-class">

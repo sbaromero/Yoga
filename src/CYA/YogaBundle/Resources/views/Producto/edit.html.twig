@@ -20,19 +20,19 @@
                     	</div> 
 
 					    <div class="form-group">
-	                         {{ form_label(form.descripcion) }}
+	                             <b>Descripción</b> 
 	                         {{ form_widget(form.descripcion, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Descripcion'} }) }}
 	                         <span class="text-danger"> {{ form_errors(form.descripcion) }} </span>
                     	</div>
                        
                        	<div class="form-group">
-	                         {{ form_label(form.costo) }}
+	                      <b>Costo $</b> 
 	                         {{ form_widget(form.costo, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Precio de Costo'} }) }}
 	                         <span class="text-danger"> {{ form_errors(form.costo) }} </span>
                     	</div>   
 
 		                   <div class="form-group">
-	                         {{ form_label(form.preciolista) }}
+	                       <b>Precio Lista $</b>  
 	                         {{ form_widget(form.preciolista, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Precio de Lista'} }) }}
 	                         <span class="text-danger"> {{ form_errors(form.preciolista) }} </span>
                     	</div>   

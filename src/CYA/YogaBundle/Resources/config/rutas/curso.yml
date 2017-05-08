@@ -1,0 +1,31 @@
+cya_curso_index:
+    path:    /index
+    defaults: { _controller: CYAYogaBundle:Curso:index }
+    
+cya_curso_add:
+    path:    /add
+    defaults: { _controller: CYAYogaBundle:Curso:add }
+
+cya_curso_create:
+    path:    /create
+    defaults: { _controller: CYAYogaBundle:Curso:create }
+    methods: POST
+
+cya_curso_edit:
+    path:    /edit/{id}
+    defaults: { _controller: CYAYogaBundle:Curso:edit }
+    
+cya_curso_update:
+    path:    /update/{id}
+    defaults: { _controller: CYAYogaBundle:Curso:update }
+    methods: [POST,PUT]
+    
+cya_curso_view:
+    path:    /view/{id}
+    defaults: { _controller: CYAYogaBundle:Curso:view }
+    
+cya_curso_delete:
+    path:    /delete/{id}
+    defaults: { _controller: CYAYogaBundle:Curso:delete }
+    
+    

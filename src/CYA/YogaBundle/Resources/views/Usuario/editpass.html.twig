@@ -26,6 +26,13 @@
 				        {{ form_widget(form.save, {'label' : 'Modificar Password', 'attr': {'class': 'btn btn-success'}}) }}
 				    </p>
                  
+                 
+                 
+                   <div class="hidden">
+					        Avatar
+					        {{ form_widget(form.brochure, {'attr': {'class': 'form-control', 'placeholder' : 'archivo'}}) }}
+					        <span class="text-danger">{{ form_errors(form.brochure) }}</span>
+					    </div>
                    
 				{{ form_end(form) }}
 			</div>

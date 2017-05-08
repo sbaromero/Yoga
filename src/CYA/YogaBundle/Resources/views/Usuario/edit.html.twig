@@ -8,17 +8,27 @@
 			<div class="col-md-20">
 				<div class="page-header">
 					<h2>Editar Usuario </h2>
-					
-					
+					   {%if usuario.brochure != null%}
+					 <img src="{{ asset('web/uploads/brochures'~'/'~usuario.brochure) }}" class="avatar-tabla" /> 
+					 {%endif%}
+                   <h2>{{ usuario.nombre }} {{ usuario.apellido }} </h2> 
+	
+				<a href="{{ path('cya_usuario_editavatar', {id: usuario.id }) }}"class="btn btn-sm btn-primary">
+                 <i class="icon ion-eye"></i> Cambiar Avatar
+                 </a>
 				</div>
+			
 				{{ form_start(form, {'attr': { 'rol' : 'form'}}) }}
 				<h4 class="text-danger">{{ form_errors(form) }}</h4>
                      
+	
+					     
+				
 					<fieldset>
                      
             
 	            
-                <div class="col-md-20">
+                 <div class="col-md-20">
                    
                    
                  <div class="col-md-6">
@@ -95,23 +105,56 @@
 					        <span class="text-danger">{{ form_errors(form.tipocuota) }}</span>
 					    </div>
 					    <br>
-					   	<div class="checkbox" align = center>
-					   		Estado <br>
+					   
+                     
+					
+				  	 
+				  	  <br>
+					    
+					    
+					   		Locker  
+						    <label>
+								{{ form_widget(form.haveLocker) }} 
+								<span class="text-danger">{{ form_errors(form.haveLocker) }}</span>
+					  	    </label>
+					        &nbsp;
+					        &nbsp;
+					        &nbsp;
+					    
+					 
+					   		Asociación   
+						    <label>
+								{{ form_widget(form.haveAsoc) }} 
+								<span class="text-danger">{{ form_errors(form.haveAsoc) }}</span>
+						    </label>
+						    
+						     <br><br><br><br> 
+					   		Estado 
 						    <label>
 								{{ form_widget(form.isActive) }} 
-								<span class="text-danger">{{ form_errors(form.rol) }}</span>
+								<span class="text-danger">{{ form_errors(form.isActive) }}</span>
 						    </label>
-						</div>
+						
+				
 					    <br> 
-					    
 					<br>
                     <br>
 				    <p align=center>
 				        {{ form_widget(form.save, {'label' : 'Grabar Modificación', 'attr': {'class': 'btn btn-success'}}) }}
 				    </p>
 		</div>		
-			
 		</div>
+				
+				
+				  <div class="hidden">
+					        Avatar
+					        {{ form_widget(form.brochure, {'attr': {'class': 'form-control', 'placeholder' : 'archivo'}}) }}
+					        <span class="text-danger">{{ form_errors(form.brochure) }}</span>
+					    </div>
+				
+				
+				
+				
 				
 				 	</fieldset>
                      

@@ -1,0 +1,99 @@
+{% extends 'layout.html.twig' %}
+
+  
+{% block body %}
+{{ parent() }}
+{{ include('CYAYogaBundle:Proveedorcc:messages/success.html.twig')}}
+<div class="container-fluid cuenta">
+        <div class="container cuenta-icon">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2>Cuentas Corrientes con Proveedores</h2>
+                    <a href="{{ path('cya_proveedorcc_add') }}" class="head-link">
+        			        <h3>
+        			           <span><i class="icon ion-plus"></i></span>
+    			                Agregar nuevo movimiento de cc.
+        			         </h3>
+        			    </a>
+                </div>
+                <div class="col-sm-7">
+                    <form method="get" action="" class="form-inline pull-right" role="search">
+                     <div class="form-group">
+                            <select class="selectpicker" data-live-search="true" id="proveedorq" name="proveedorq"  data-style="btn-success" 
+                            value="{{ app.request.get('proveedorq') }}">
+                               <option value="">Seleccione Proveedor</option>
+                             {% for proveedores in pagination %}
+                                <option value="{{ proveedores.proveedor.id }}">{{ proveedores.proveedor.nombre }}</option>
+                            {% endfor %}
+                           </select>
+                        </div>
+                 	<input type="submit" value="Buscar" class="btn btn-success">
+        			</form>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="container">
+	    <div class="row">
+	    	
+	    <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+
+							<th>{{ knp_pagination_sortable(pagination, 'Proveedor', 'p.proveedor.nombre') }}</th>
+							<th>{{ knp_pagination_sortable(pagination, 'Fecha Vencimiento', 'p.fechavencimiento')}} </th>
+						    <th>{{ knp_pagination_sortable(pagination, 'Deuda $', 'p.deuda') }} </th>
+						    <th>{{ knp_pagination_sortable(pagination, 'Pagado $', 'p.pagado') }} </th>
+						    <th>{{ knp_pagination_sortable(pagination, 'Nº Factura', 'p.factura') }} </th>
+						    <th>{{ knp_pagination_sortable(pagination, 'Descripción', 'p.tipo') }} </th>
+                            <th>Acciones</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for proveedorcc in pagination %}
+                            <tr data-id="{{ proveedorcc.id }}">
+                                
+                                <td>{{ proveedorcc.proveedor.nombre}}</td>
+                                <td>{{ proveedorcc.fechavencimiento|date('d/m/Y')  }}</td>
+                                <td>{{ proveedorcc.deuda }}</td>
+                                <td>{{ proveedorcc.pagado }}</td>
+                                <td>{{ proveedorcc.factura }}</td>
+                                <td>{{ proveedorcc.tipo }}</td>
+
+                                <td class="actions">
+                                
+                                    <a href="{{ path('cya_proveedorcc_edit', {id: proveedorcc.id }) }}" class="btn btn-sm btn-primary">
+                                        {% trans %} <i class="icon ion-wand">Editar</i> {% endtrans %}
+                                    </a>
+                                    
+                                     <a href="{{ path('cya_proveedorcc_pago', {id: proveedorcc.id }) }}" class="btn btn-sm btn-primary">
+                                        {% trans %} <i class="icon ion-wand"> Realizar Pago</i> {% endtrans %}
+                                    </a>
+                                    
+                                      <a href="{{ path('cya_proveedorcc_delete', {id: proveedorcc.id }) }}" 
+                                       class="btn btn-sm btn-primary"
+                                      onclick="return confirm('Está seguro??')"
+			                           class="icon ion-wand" >
+			                            Eliminar
+			                        </a>
+			                        
+			                        
+                                    
+                                    
+                                    
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+           <H4> {% trans %}Total Cuentas Proveedores:{% endtrans %} {{ pagination.getTotalItemCount }}</H4>
+                {# display navigation #}
+                <div class="navigation">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

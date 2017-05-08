@@ -1,0 +1,70 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="container-fluid profesorado">
+        <div class="container profesorado-icon">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2>Nuevo Curso</h2>
+                    <a href="{{ path('cya_curso_index') }}" class="head-link">
+        			        <h3>
+        			           <span><i class="icon ion-android-arrow-dropleft back"></i></span>
+        			            regresar a listado de cursos
+        			         </h3>
+        			    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    {{ form_start(form, {'attr' : {'role' : 'form'}, 'action':'', 'method':'POST' }) }}
+           
+     <div class="container grey-input">
+    	<fieldset>
+        <div class="row">
+            <div class="col-sm-4"> 
+                    <div class="form-group">
+                         Título del Curso
+                         {{ form_widget(form.titulo, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Título'} }) }}
+                         <span class="text-danger"> {{ form_errors(form.titulo) }} </span>
+                    </div>
+            </div>
+            
+            <div class="col-sm-8"> 
+                    <div class="form-group">
+                         Descripción del Curso
+                         {{ form_widget(form.descripcion, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Descripcion'} }) }}
+                         <span class="text-danger"> {{ form_errors(form.descripcion) }} </span>
+                    </div>
+            </div>
+    
+     <div class="col-sm-2"> 
+                    <div class="form-group">
+                         Fecha de Inicio
+                         {{ form_widget(form.fechaini, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Fecha de Inicio'} }) }}
+                         <span class="text-danger"> {{ form_errors(form.fechaini) }} </span>
+                    </div>
+            </div>
+      
+     
+          <div class="col-sm-2"> 
+                    <div class="form-group">
+                         Fecha de Finalización
+                         {{ form_widget(form.fechafin, { 'attr' : { 'class' : 'form-control', 'placeholder' : 'Fecha de Finalización'} }) }}
+                         <span class="text-danger"> {{ form_errors(form.fechafin) }} </span>
+                    </div>
+            </div>
+  	</fieldset>
+            <div class="col-sm-12">
+                
+                {{ form_widget(form.save, {'label' : 'Agregar Curso', 'attr': {'class': 'btn btn-success'} }) }}
+                 
+                
+            </div>
+            {{ form_end(form) }}
+         </div>
+     </div>
+{% endblock %}
+

@@ -1,0 +1,79 @@
+{% extends 'layout.html.twig' %}
+
+  
+{% block body %}
+{{ parent() }}
+{{ include('CYAYogaBundle:Maestroventa:messages/success.html.twig')}}
+<div class="container-fluid cuenta">
+        <div class="container cuenta-icon">
+            <div class="row">
+                <div class="col-sm-5">
+                    <h2>Generar Débito/Crédito</h2>
+                </div>
+            </div>
+        </div>
+</div>
+
+
+	<div class="container">
+
+	    {{ form_start(form, {'attr' : {'role' : 'form'}, 'action':'', 'method':'POST' }) }}
+	    <div class="container grey-input">
+        <div class="row">
+           
+           
+           <div class="col-sm-6">
+            <div class="form-group">
+               <b> Seleccione Usuario </b>
+                <select class="selectpicker" data-live-search="true" id="usuario" name="usuario" value="{{ app.request.get('usuario') }}">
+                   <option value="">Usuario</option>
+                 {% for us in usuarios %}
+                    <option value="{{ us.id }}">{{ us.nombrecompleto }}</option>
+                {% endfor %}
+               </select>
+            </div>
+          </div> 
+        </div>    
+        
+        
+     <div class="row">  
+       <div class="col-sm-4">
+           <div class="form-group">
+	        <b>  Monto $ </b>
+	     	{{ form_widget(form.deuda, {'attr': {'class': 'form-control', 'placeholder' : 'Monto'}}) }}
+	    	<span class="text-danger">{{ form_errors(form.deuda) }}</span>
+		  </div> 
+      </div> 
+     </div>     
+        <div class="row">  
+         <div class="col-sm-4">
+           <div class="form-group">
+	        <b>  Comentario </b>
+	     	{{ form_widget(form.comentario, {'attr': {'class': 'form-control', 'placeholder' : 'Monto'}}) }}
+	    	<span class="text-danger">{{ form_errors(form.comentario) }}</span>
+		  </div> 
+         </div>      
+    </div>   
+           
+            <br><br>
+             <div class="col-sm-2"></div>
+            <div class="col-sm-2" align = "left">
+                {{ form_widget(form.save, {'label' : 'Generar CC.', 'attr': {'class': 'btn btn-success'} }) }}
+            </div>
+            
+          </div>
+          </div>
+          {{ form_end(form) }}
+          
+ </div>
+
+ 
+ 
+ <br>
+ <br>
+ 
+       
+ 
+ 
+ 
+ {% endblock %}

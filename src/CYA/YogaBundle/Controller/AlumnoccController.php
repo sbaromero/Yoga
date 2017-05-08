@@ -15,17 +15,70 @@ use CYA\YogaBundle\Entity\Producto;
 use CYA\YogaBundle\Entity\Maestroventa;
 use CYA\YogaBundle\Form\AlumnoccType;
 use CYA\YogaBundle\Form\PagodiarioType;
+use CYA\YogaBundle\Form\GeneraccType;
 
 class AlumnoccController extends Controller
 {
+    public function generaccAction(Request $request)
+    {   
+        $repository = $this->getDoctrine()->getRepository('CYAYogaBundle:Usuario');
+        $query = $repository->createQueryBuilder('u')
+            ->where('u.rol = :rol')
+            ->setParameter('rol', 'ROLE_USER')
+            ->getQuery();
+        $usuarios = $query->getResult();
+        
+        $alumnocc = new Alumnocc();
+        $form = $this->createForm(GeneraccType::class, $alumnocc);
+        $form->handleRequest($request); 
+        $userid = $request->get('usuario'); 
+        
+        if ($form->isSubmitted() && $form->isValid()) 
+        {
+           
+            if ($userid != null){
+            $userid = $request->get('usuario'); 
+            $userelegido = $repository->findOneById($userid);
+
+            $alumnocc->setUsuario($userelegido);
+            $alumnocc->setPagado(0);
+            $alumnocc->setBonificacion(0);
+            $alumnocc->setMes('Ver Comentario');
+            $alumnocc->setFechavencimiento(new \DateTime("now"));
+            $alumnocc->setFechamodificacion(new \DateTime("now"));
+            $alumnocc->setFechacreacion(new \DateTime("now"));
+            $alumnocc->setTipo('GE');
+           
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($alumnocc);
+            $em->flush();
+            
+            $this->addFlash('mensaje', 'El movimiento ha sido generado al usuario:'.$userid);
+            
+            return $this->redirectToRoute('cya_alumnocc_index');
+            }
+            
+      
+          }
+         
+          return $this->render('CYAYogaBundle:Alumnocc:generacc.html.twig', array( 'usuarios'=>$usuarios,'form' => $form->createView()));
+            
+        }
+        
+     
     
     public function indexdeudaAction(Request $request)
     {
-
-     
+        
+        $dcQuery = $request->get('dc');
+        $acQuery = $request->get('ac');
+       
+        
+        
         $repository = $this->getDoctrine()->getRepository('CYAYogaBundle:Tipocuota');
         $query = $repository->createQueryBuilder('u')
             ->where('1 = 1')
+            ->orderBy('u.nombre','ASC')
             ->getQuery();
         $cuotas = $query->getResult();
      
@@ -41,16 +94,45 @@ class AlumnoccController extends Controller
        if (empty($cuotaQuery)) 
         {
          $dql = "SELECT a from CYAYogaBundle:Alumnocc a WHERE 1=2 ";
+          $this->addFlash('mensaje', 'Elija un tipo de cuota');
        }
           else
         {
-         $dql = "SELECT a from CYAYogaBundle:Alumnocc a WHERE a.usuario in (SELECT u FROM CYAYogaBundle:Usuario u WHERE u.tipocuota =" .  $cuotaQuery .")";
+         $dql = "SELECT a from CYAYogaBundle:Alumnocc a join CYAYogaBundle:Usuario b ";
          $nombrecuota = $cuotaelegida->getnombre();
+       //    $dql = $dql . "AND  (a.deuda - (a.pagado + a.bonificacion) > 0) ";
+        $dql = $dql . " WHERE  a.usuario = b.id";
+        $dql = $dql . " AND  b.tipocuota =" .  $cuotaQuery ;
+        
+         if(!empty($dcQuery) && ($dcQuery == 'Deudores'))
+         {
+            
+           $dql = $dql . "AND  (a.deuda - (a.pagado + a.bonificacion) > 0) ";
         }
-           
-        $dql = $dql . "AND  (a.deuda - (a.pagado + a.bonificacion) > 0) ";
-        $dql = $dql . "ORDER  BY a.usuario ";
-     
+        
+         if(!empty($acQuery))
+         {
+         
+             if ($acQuery == 'Activos')
+             
+             {
+              
+                 $dql = $dql . "AND  b.isActive = 1 ";
+             
+             }
+             else
+             {  
+            
+                $dql = $dql . "AND  b.isActive = 0 ";
+                 
+             }
+         }
+        
+        $dql = $dql . " ORDER  BY b.apellido ";
+        }
+        
+        $nombrecuota= $nombrecuota . "-" . $dcQuery . "-".  $acQuery;
+        
         $usuarios = $em->createQuery($dql); 
 
         $contador = 0;
@@ -62,7 +144,7 @@ class AlumnoccController extends Controller
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
         $usuarios, $request->query->getInt('page' , 1),
-        40
+        40000
         );
         
         return $this->render('CYAYogaBundle:Alumnocc:indexdeuda.html.twig',
@@ -112,6 +194,8 @@ class AlumnoccController extends Controller
                 $dql = $dql . "AND a.deuda > a.pagado + a.bonificacion ";
             }
         }
+        
+         $dql = $dql . "AND a.deuda > 0  ";
         
         $dql = $dql . "ORDER BY a.id DESC";
         $alumnoccs = $em->createQuery($dql); 
@@ -215,6 +299,7 @@ class AlumnoccController extends Controller
         $vencimiento = (string)$fechavencimiento->format('d/m/Y');
         $saldo = $alumnocc->getDeuda() - $alumnocc->getPagado() - $alumnocc->getBonificacion();
         $pagado = $alumnocc->getPagado();
+        $bonif = $alumnocc->getBonificacion();
         $alumnocc->setPagado(0);
         
         $form = $this->createForm(AlumnoccType::class, $alumnocc);
@@ -270,7 +355,8 @@ class AlumnoccController extends Controller
          
          
      
-        return $this->render('CYAYogaBundle:Alumnocc:pago.html.twig', array('saldo' => $saldo,'nombrecompleto' => $nombrecompleto, 'vencimiento' => $vencimiento,'alumnocc' => $alumnocc, 'form' => $form->createView()));
+        return $this->render('CYAYogaBundle:Alumnocc:pago.html.twig', array('bonif' => $bonif,'saldo' => $saldo,'nombrecompleto' => $nombrecompleto, 
+        'vencimiento' => $vencimiento,'alumnocc' => $alumnocc, 'form' => $form->createView()));
    }
     public function pagodiarioAction(Request $request)
     {   
@@ -408,6 +494,13 @@ class AlumnoccController extends Controller
            $em->flush();  
         }
         
+        if($alumnocc->getTipo() == 'GE')
+        {
+           $em->remove($alumnocc);
+           $em->flush();  
+        }
+        
+        
          if($alumnocc->getTipo() == 'CC' || $alumnocc->getTipo() == 'PD' )
         {
            
@@ -480,5 +573,10 @@ class AlumnoccController extends Controller
             return $this->redirectToRoute('cya_alumnocc_index');
         }
     }
+      
+      
+   
+  
+    
     
 }

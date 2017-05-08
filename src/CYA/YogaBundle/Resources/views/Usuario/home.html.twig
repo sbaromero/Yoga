@@ -8,7 +8,8 @@
 		<div class="row">
 		    <div class="home-avatar">
 			    <span>
-		            <img src="{{ asset('public/img/avatar.jpg') }}" class="img-circle"/> 
+		            <img src="{{ asset('web/uploads/brochures'~'/'~ app.user.brochure) }}" class="avatar-tabla"/> 
+		          
 		        </span>
 		        <h2 class="bienvenido">
 		            Bienvenido  al Sistema de Alumnos del Centro de Yoga Aplicada: {{ app.user.nombrecompleto}}
@@ -77,7 +78,7 @@
 	       	 	</div>
 	       	 	
     	        <div class="col-sm-4">
-    	        	<div class="top producto"><i class="icon ion-bag"></i> <h2>Productos y lockers</h2></div>
+    	        	<div class="top producto"><i class="icon ion-bag"></i> <h2>Productos</h2></div>
     	            <div class="box">
     	        		<ul class="list-group">
 							<li class="list-group-item">
@@ -94,7 +95,7 @@
 					    <a href="{{ path('cya_producto_index') }}" class="btn home-usuario productos"><i class="icon ion-ios-unlocked"></i><span>Listado de Productos</span></a>
     	        	</div>
     	        </div>
-	      
+	      </div>
     	        <div class="col-sm-4">
     	            <div class="top caja"><i class="icon ion-ios-box"></i> <h2>Caja</h2></div>
     	            <div class="box">
@@ -105,21 +106,28 @@
 							   Saldo
 							</li>
 						</ul>
-						<a href="{{ path('cya_movimiento_add') }}" class="btn home-usuario caja-home"><i class="icon ion-ios-filing"></i><span>Nuevo movimiento de caja</span></a>
-						<a href="{{ path('cya_movimiento_index') }}" class="btn home-usuario caja-home"><i class="icon ion-ios-compose"></i><span>Listado de movimientos</span></a>
+						<a href="{{ path('cya_movimiento_add') }}" class="btn home-usuario caja-home"><i class="icon ion-ios-filing"></i><span>Nuevo mov. de caja</span></a>
+						<a href="{{ path('cya_movimiento_index') }}" class="btn home-usuario caja-home"><i class="icon ion-ios-compose"></i><span>Listado de movs.</span></a>
     	        	</div>
     	        </div>
 	        	
 	        	<div class="col-sm-4">
-    	            <div class="top profesorado"><i class="icon ion-ios-box"></i> <h2>Profesorado</h2></div>
+    	            <div class="top profesorado"><i class="icon ion-ios-box"></i> <h2>Cursos</h2></div>
     	            <div class="box">
-						<a href="{{ path('cya_usuario_constru') }}" class="btn home-usuario profesorado-home"><i class="icon ion-ios-bookmarks"></i><span>Materias</span></a>
-						<a href="{{ path('cya_usuario_constru') }}" class="btn home-usuario profesorado-home"><i class="icon ion-university"></i><span>Consulta de planes de estudios</span></a>
+    	            
+    	            		<ul class="list-group">
+							
+								<li class="list-group-item">
+							    <span class="badge">0</span>
+							Cursos
+							</li>
+					    	</ul>
+						<a href="{{ path('cya_curso_index') }}" class="btn home-usuario profesorado-home"><i class="icon ion-ios-bookmarks"></i><span>Listado de Cursos</span></a>
+						<a href="{{ path('cya_usuario_constru') }}" class="btn home-usuario profesorado-home"><i class="icon ion-university"></i><span>Listado de Materias</span></a>
+						<a href="{{ path('cya_usuario_constru') }}" class="btn home-usuario profesorado-home"><i class="icon ion-university"></i><span>Inscripción a Materias</span></a>
     	        	</div>
-    	        </div>
-	         
-	        	
-	        
+    	          </div>
+    	         </div>
 	    </div>
 	</div>
 	{% endif %}
@@ -137,7 +145,7 @@
 	          <a href="{{ path('cya_alumnocc_indexpublic') }}">
 	        <div class="col-sm-6 cuenta">
 	            <i class="icon ion-card"></i>
-	            <h2>CUENTA CORRIENTE</h2>
+	            <h2>CTA. CORRIENTE</h2>
 	        </div>
 	        </a>
 	    </div>

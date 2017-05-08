@@ -42,6 +42,18 @@ cya_yoga_maestroventa:
 cya_yoga_detalleventa:
     resource: "@CYAYogaBundle/Resources/config/rutas/detalleventa.yml"
     prefix:   /detalleventa
+
+cya_yoga_curso:
+    resource: "@CYAYogaBundle/Resources/config/rutas/curso.yml"
+    prefix:   /curso
+    
+cya_yoga_proveedor:
+    resource: "@CYAYogaBundle/Resources/config/rutas/proveedor.yml"
+    prefix:   /proveedor  
+
+cya_yoga_proveedorcc:
+    resource: "@CYAYogaBundle/Resources/config/rutas/proveedorcc.yml"
+    prefix:   /proveedorcc      
     
 #Autentication
 

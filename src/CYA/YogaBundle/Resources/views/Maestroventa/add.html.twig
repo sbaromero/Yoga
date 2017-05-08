@@ -20,8 +20,9 @@
         </div>
 </div>
 
-    
+
 	<div class="container">
+	      <div class="home-avatar"> 
 	    {{ form_start(form, {'attr' : {'role' : 'form'}, 'action':'', 'method':'POST' }) }}
 	    <div class="container grey-input">
         <div class="row">
@@ -49,8 +50,11 @@
                          <span class="text-danger"> {{ form_errors(form.total) }} </span>
                     </div>
             </div>
+           
+       
            <div class="col-sm-2">
             <div class="form-group">
+                Seleccione Usuario
             <select class="selectpicker" data-live-search="true" id="usuario" name="usuario" value="{{ app.request.get('usuario') }}">
                 <option value="" selected disabled>Usuario</option>
                 {% for us in usuarios %}
@@ -59,9 +63,11 @@
              </select>
             </div>
             </div> 
-
-            <div class="col-sm-12">
-                {{ form_widget(form.save, {'label' : 'Pagar Venta', 'attr': {'class': 'btn alumnos-btn'} }) }}
+           
+            <br><br>
+             <div class="col-sm-2"></div>
+            <div class="col-sm-2">
+                {{ form_widget(form.save, {'label' : 'Pagar Venta', 'attr': {'class': 'btn btn-success'} }) }}
             </div>
             
           </div>
@@ -69,16 +75,16 @@
           {{ form_end(form) }}
           
  </div>
- 
+  </div>
  
  
  <br>
  <br>
  
         
-        <div class="container">
+        <div class="container grey-input">
 	    <div class="row">
-	    <h4>Productos de esta venta: ( {{ pagination.getTotalItemCount }} )</h4>
+	    
 	    <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
@@ -105,13 +111,10 @@
 
                 </table>
 
-<br>
+          <br>
 
 
-                {# display navigation #}
-                <div class="navigation">
-                    {{ knp_pagination_render(pagination) }}
-                </div>
+       
            
             </div>
  

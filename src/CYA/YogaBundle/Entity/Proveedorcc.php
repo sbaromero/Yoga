@@ -12,18 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Proveedorcc
 {
-    /**
-     * @ORM\OneToMany(targetEntity="Movimiento", mappedBy="proveedorcc")
-     */
-    protected $movimientos;
- 
-    public function __construct()
-    {
-        $this->movimientos = new ArrayCollection();
-    }
+
     
     /**
-     * @ORM\ManyToOne(targetEntity="Proveedor", inversedBy="proveedorccs")
+     * @ORM\ManyToOne(targetEntity="Proveedor")
      * @ORM\JoinColumn(name="proveedor_id", referencedColumnName="id")
      */
     protected $proveedor;
@@ -69,7 +61,7 @@ class Proveedorcc
     /**
      * @var string
      *
-     * @ORM\Column(name="tipo", type="string", length=2)
+     * @ORM\Column(name="tipo", type="string", length=256)
      */
     private $tipo;
 
