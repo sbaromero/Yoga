@@ -172,7 +172,7 @@
                                     <td>{{ movimiento.usuario.nombrecompleto }}</td>
                                     <td class="actions">
                                         <a href="{{ path('cya_movimiento_details', {id: movimiento.id }) }}" 
-                                        {% if movimiento.tipo == 'MB' or movimiento.tipo == 'CC' %}
+                                        {% if movimiento.tipo == 'MB' or movimiento.tipo == 'CC' or movimiento.tipo == 'PP'  %}
                                             class="btn btn-sm btn-primary disabled"
                                         {% elseif movimiento.tipo == 'VP' %} 
                                             class="btn btn-sm btn-primary"
@@ -180,9 +180,9 @@
                                         >
                                             detalles
                                         </a>
-                                         <a href="{{ path('cya_movimiento_delete', {id: movimiento.id }) }}" class="btn btn-sm btn-danger btn-delete" onclick="return confirm('Está seguro?')">
-    			                            eliminar
-    			                        </a>
+                               {#          <a href="{{ path('cya_movimiento_delete', {id: movimiento.id }) }}" class="btn btn-sm btn-danger btn-delete" onclick="return confirm('Está seguro?')">#}
+    			                        {#    eliminar#}
+    			                        {#</a>#}
                                     </td>
     
                                 </tr>

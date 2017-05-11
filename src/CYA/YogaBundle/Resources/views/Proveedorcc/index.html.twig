@@ -20,10 +20,10 @@
                     <form method="get" action="" class="form-inline pull-right" role="search">
                      <div class="form-group">
                             <select class="selectpicker" data-live-search="true" id="proveedorq" name="proveedorq"  data-style="btn-success" 
-                            value="{{ app.request.get('proveedorq') }}">
+                            value="{{ app.request.get('proveedores') }}">
                                <option value="">Seleccione Proveedor</option>
-                             {% for proveedores in pagination %}
-                                <option value="{{ proveedores.proveedor.id }}">{{ proveedores.proveedor.nombre }}</option>
+                             {% for pro in proveedores %}
+                                <option value="{{ pro.id }}">{{ pro.nombre }}</option>
                             {% endfor %}
                            </select>
                         </div>

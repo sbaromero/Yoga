@@ -113,19 +113,26 @@
                                     <a href="{{ path('cya_usuario_view', {id: usuario.id }) }}"class="btn btn-sm btn-primary">
                                         <i class="icon ion-eye"></i> Ver
                                     </a>
-                                  
-                                   </td>
-                                    <td class="actions">
+                                  </td>
+                                <td class="actions">    
                                     <a href="{{ path('cya_usuario_edit', {id: usuario.id }) }}" class="btn btn-sm btn-primary">
                                         <i class="icon ion-wand"></i> Editar
                                     </a>
                                    </td>
-                                    <td class="actions">
+                                <td class="actions">    
                                       <a href="{{ path('cya_usuario_editpass', {id: usuario.id }) }}" class="btn btn-sm btn-primary">
                                         <i class="icon ion-wand"></i> Password
                                     </a>
-                                    
-                                </td>
+                                 </td>
+                                <td class="actions">    
+                                
+                                <a href="{{ path('cya_usuario_imprimircuota', { id: usuario.id }) }}" class="btn btn-sm btn-primary">
+		    		<span class="icon ion-print"></span>
+		        	 Imprimir Cuota
+				 </a>
+                             </td>
+                             
+                             
                             </tr>
                         {% endfor %}
                     </tbody>

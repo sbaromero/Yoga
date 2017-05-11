@@ -23,6 +23,7 @@ class ProveedorccController extends Controller
         $repository = $this->getDoctrine()->getRepository('CYAYogaBundle:Proveedor');
         $query = $repository->createQueryBuilder('u')
             ->where('1=1')
+            ->orderBy('u.nombre')
             ->getQuery();
         $proveedores = $query->getResult();
         
@@ -40,12 +41,10 @@ class ProveedorccController extends Controller
         
         $proveedorcc = $em->createQuery($dql);  
        
-        
-       
 
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
-            $proveedorcc, $request->query->getInt('page' , 1),
+        $proveedorcc, $request->query->getInt('page' , 1),
             20
         );
         
@@ -75,7 +74,8 @@ class ProveedorccController extends Controller
                
                 $proveedorelegido = $repository->findOneById($proveedorid);
                 $proveedorcc->setProveedor($proveedorelegido);
-               
+                $proveedorcc->setPagado(0);
+                
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($proveedorcc);
                 $em->flush();
@@ -150,6 +150,9 @@ class ProveedorccController extends Controller
          $em = $this->getDoctrine()->getManager();
          $proveedorcc = $em->getRepository('CYAYogaBundle:Proveedorcc')->find($id);
          $idelegido = $proveedorcc->getProveedor()->getId();
+         $deuda = $proveedorcc->getDeuda();
+         $monto = $proveedorcc->getPagado();
+         $apagar = $proveedorcc->getDeuda() - $proveedorcc->getPagado() ;
          $form = $this->createForm(ProveedorpagoType::class, $proveedorcc);
          $form->handleRequest($request); 
         
@@ -159,6 +162,8 @@ class ProveedorccController extends Controller
        
         if ($form->isSubmitted() && $form->isValid()) {
             
+            
+            $proveedorcc->setPagado($monto + $proveedorcc->getPagado());
             $em->flush();
             
             
@@ -203,7 +208,10 @@ class ProveedorccController extends Controller
         array(
             // 'idelegido'=>$idelegido,
             // 'proveedores'=>$proveedores,
-            // 'proveedorcc' => $proveedorcc, 
+            // 'proveedorcc' => $proveedorcc,
+            'monto'=>$monto,
+            'deuda'=> $deuda,
+            'apagar'=> $apagar,
             'form' => $form->createView()));
    
 }

@@ -51,3 +51,7 @@ cya_usuario_constru:
 cya_usuario_generarcuota:
     path:    /generarcuota
     defaults: { _controller: CYAYogaBundle:Usuario:generarcuota }
+
+cya_usuario_imprimircuota:
+    path:    /imprimircuota/{id}
+    defaults: { _controller: CYAYogaBundle:Usuario:imprimircuota }    

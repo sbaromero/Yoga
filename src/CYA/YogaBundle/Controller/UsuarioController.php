@@ -22,6 +22,35 @@ class UsuarioController extends Controller
 {
     
     
+    public function imprimircuotaAction($id, Request $request)
+   {    
+       
+        $em = $this->getDoctrine()->getManager();
+        $usuario = $em->getRepository('CYAYogaBundle:Usuario')->find($id);
+        
+        $tipocuota = $usuario->gettipocuota()->getnombre();
+        $valorcuota =  $usuario->gettipocuota()->getvalor();
+        $fecha = new \DateTime("now");
+        $alumno =   $usuario->getnombrecompleto();
+        
+        $horario = $em->getRepository('CYAYogaBundle:Usuario')->findOneByDni('horario');
+        
+         
+        
+        
+        return $this->render('CYAYogaBundle:Usuario:imprimircuota.html.twig',
+        array (
+              'valorcuota' => $valorcuota,'tipocuota' => $tipocuota,
+              'fecha'      => $fecha, 'alumno'=>$alumno, 'horario'=>$horario
+             ));
+             
+             
+             
+             
+    }
+    
+    
+    
     public function usuariorapidoAction(Request $request)
     {
         

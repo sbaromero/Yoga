@@ -28,7 +28,7 @@
                             <select class="selectpicker" data-live-search="true" id="usuario" name="usuario" value="{{ app.request.get('usuario') }}">
                                 <option value="" selected disabled>Usuario</option>
                                 {% for us in usuarios %}
-                                    <option value="{{ us.id }}">{{ us.nombrecompleto }}</option>
+                                    <option value="{{ us.id }}">{{ us.nombrecompleto }} </option>
                                 {% endfor %}
                              </select>
                         </div>
@@ -46,6 +46,9 @@
                         <div align ='right'>
                         <a href="{{ path('cya_alumnocc_generacc') }}" class="btn btn-success"  > Generar CC  </a>
                        </div>
+                       
+                       
+                       
         </div>
           
     </div>
@@ -69,6 +72,7 @@
 							<th>{{ knp_pagination_sortable(pagination, 'Tipo', 'a.tipo') }}</th>
 							<th align=center>{{ knp_pagination_sortable(pagination, 'Comentario', 'a.comentario') }}</th>
                             <th>Acciones</th>
+                   
                         </tr>
                     </thead>
                     <tbody>
@@ -121,15 +125,17 @@
                                         
 			                            elimina
 			                        </a>
-                                    
-                                </td>
+                                     </td>
+                                 
                                 
                                 
                             </tr>
                         {% endfor %}
+                        
+                        
                     </tbody>
                 </table>
-           <H4> Total Movimientos: {{ contador }}</H4>
+          <H4> Total Movimientos: {{ contador }}</H4>
           <H4> Total Deudas: {{ deudas }}</H4>
            <H4> Total Pagado: {{ pagados }}</H4>
             <H4> Total Bonificaciones: {{ bonificaciones }}</H4>

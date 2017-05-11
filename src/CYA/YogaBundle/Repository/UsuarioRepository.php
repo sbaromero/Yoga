@@ -10,4 +10,11 @@ namespace CYA\YogaBundle\Repository;
  */
 class UsuarioRepository extends \Doctrine\ORM\EntityRepository
 {
-}
+    
+     public function findOneByDni($dni)
+    {
+        return  $this->createQueryBuilder('Usuario')
+            ->where('Usuario.dni = :dni')->setParameter('dni', $dni)
+            ->getQuery()->getOneOrNullResult();
+    
+}}

@@ -23,7 +23,7 @@ class ProveedorccType extends AbstractType
         $builder
             ->add('fechavencimiento', DateType::class, array('widget' => 'single_text','attr' => ['class' => 'js-datepicker'],))
             ->add('deuda',MoneyType::class, array('currency' => '$'))
-            ->add('pagado',MoneyType::class, array('currency' => '$'))
+         //   ->add('pagado',MoneyType::class, array('currency' => '$'))
             ->add('factura',TextType::class)
             ->add('tipo',TextType::class)
             ->add('save', SubmitType::class)  

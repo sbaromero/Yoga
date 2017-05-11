@@ -61,7 +61,7 @@ class AlumnoccController extends Controller
       
           }
          
-          return $this->render('CYAYogaBundle:Alumnocc:generacc.html.twig', array( 'usuarios'=>$usuarios,'form' => $form->createView()));
+          return $this->render('CYAYogaBundle:Alumnocc:generacc.html.twig', array('usuarios'=>$usuarios,'form' => $form->createView()));
             
         }
         
