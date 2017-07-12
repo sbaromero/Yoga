@@ -8,7 +8,7 @@
         <div class="container cuenta-icon">
             <div class="row">
                 <div class="col-sm-5">
-                    <h2>Generar Deuda</h2>
+                    <h2>Generar Deuda o Cuota</h2>
                 </div>
             </div>
         </div>
@@ -20,10 +20,10 @@
 	    {{ form_start(form, {'attr' : {'role' : 'form'}, 'action':'', 'method':'POST' }) }}
 	    <div class="container grey-input">
         <div class="row">
-           
-           
-           <div class="col-sm-6">
-            <div class="form-group">
+         
+         	<div class="col-sm-4">
+         	    
+         	    <div class="form-group">
                <b> Seleccione Usuario </b>
                 <select class="selectpicker" data-live-search="true" id="usuario" name="usuario" value="{{ app.request.get('usuario') }}">
                    <option value="">Usuario</option>
@@ -32,6 +32,49 @@
                 {% endfor %}
                </select>
             </div>
+         	    
+         	             <b> Tipo de Cuenta Corriente </b>
+                          <select class="form-control" id="tipocc"name="tipocc" value="{{ app.request.get('tipocc') }}">
+                            <option value="GE">Cuenta Corriente Normal</option>
+                            <option value="PC">Cuota Mes</option>
+                          </select>
+         <br>
+                         <b> Mes </b>
+                          <select class="form-control" id="mes"name="mes" value="{{ app.request.get('mes') }}">
+                            <option value="2">Enero</option>
+                            <option value="3">Febrero</option>
+                            <option value="4">Marzo</option>
+                            <option value="5">Abril</option>
+                            <option value="6">Mayo</option>
+                            <option value="7">Junio</option>
+                            <option value="8">Julio</option>
+                            <option value="9">Agosto</option>
+                            <option value="10">Septiembre</option>
+                            <option value="11">Octubre</option>
+                            <option value="12">Noviembre</option>
+                            <option value="1">Diciembre</option>
+
+                           
+                          </select>
+             <br>             
+                          <b> Año </b>
+                          <select class="form-control" id="año"name="año" value="{{ app.request.get('año') }}">
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                             <option value="2019">2019</option>
+                              <option value="2020">2020</option>
+                               <option value="2021">2021</option>
+                               <option value="2022">2022</option>
+                               <option value="2023">2023</option>
+                               <option value="2024">2024</option>
+                               <option value="2025">2025</option>
+                               <option value="2026">2026</option>
+                               <option value="2027">2026</option>
+                               
+                          </select>
+           
+       <br>
+            
           </div> 
         </div>    
         

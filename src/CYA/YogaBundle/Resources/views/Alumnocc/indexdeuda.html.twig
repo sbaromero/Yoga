@@ -101,6 +101,13 @@
 						            <b> <span class="text-danger">Inactivo</span> </b>
                                 	{% endif %}</td>
                                    
+               <td>   
+               
+		    	<a href="{{ path('cya_alumnocc_index', { usuario: alumno}) }}" class="btn btn-primary">
+		    		<span class="glyphicon glyphicon-edit"></span>
+		        	 Ver Cuentas Corrientes
+				 </a>
+				 </td>
                                    
                                    
                                    {% set deudatot = deudatot + deuda %}  
@@ -135,6 +142,8 @@
 				                      {% elseif activo == 0 %}
 						            <b> <span class="text-danger">Inactivo</span> </b>
                                 	{% endif %}</td>
+                           
+    
                            
                             {% set deudatot = deudatot + deuda %} 
                         </tr>

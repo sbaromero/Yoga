@@ -19,8 +19,12 @@ use CYA\YogaBundle\Form\GeneraccType;
 
 class AlumnoccController extends Controller
 {
+    
+  
     public function generaccAction(Request $request)
     {   
+        
+       
         $repository = $this->getDoctrine()->getRepository('CYAYogaBundle:Usuario');
         $query = $repository->createQueryBuilder('u')
             ->where('u.rol = :rol')
@@ -33,9 +37,70 @@ class AlumnoccController extends Controller
         $form->handleRequest($request); 
         $userid = $request->get('usuario'); 
         
+        $fechaCreac= new \DateTime("now");
+        $mes = 'Ver Comentario';
+        
         if ($form->isSubmitted() && $form->isValid()) 
         {
            
+        $tipocc = $userid = $request->get('tipocc'); 
+        $mes = $userid = $request->get('mes'); 
+        $anio = $userid = $request->get('año'); 
+       
+        switch ($mes){
+        case "1":
+            $mesreal="Diciembre";
+            break;
+            case "2":
+            $mesreal="Enero";
+            break;
+             case "3":
+            $mesreal="Febrero";
+            break;
+             case "4":
+            $mesreal="Marzo";
+            break;
+             case "5":
+            $mesreal="Abril";
+            break; 
+            case "6":
+            $mesreal="Mayo";
+            break;
+             case "7":
+            $mesreal="Junio";
+            break;
+             case "8":
+            $mesreal="Julio";
+            break;
+             case "9":
+            $mesreal="Agosto";
+            break;
+             case "10":
+            $mesreal="Septiembre";
+            break; 
+            case "11":
+            $mesreal="Octubre";
+            break;
+            case "12":
+            $mesreal="Noviembre";
+            break;
+        }
+        
+        
+    if  ($mes == 1) {
+        
+        $anio = $anio + 1;
+    }   
+        
+            $mesreal=strtoupper($mesreal); 
+           
+           $fechavenc = new \DateTime($anio.'-'.$mes.'-01'.' 00:00:00');
+            
+ if ($tipocc == 'PC' ){        
+    $mesSet =   $mesreal.'/'. $anio;  
+ }     else{
+      $mesSet =   'CC NORMAL'; 
+ }
             if ($userid != null){
             $userid = $request->get('usuario'); 
             $userelegido = $repository->findOneById($userid);
@@ -43,19 +108,19 @@ class AlumnoccController extends Controller
             $alumnocc->setUsuario($userelegido);
             $alumnocc->setPagado(0);
             $alumnocc->setBonificacion(0);
-            $alumnocc->setMes('Ver Comentario');
-            $alumnocc->setFechavencimiento(new \DateTime("now"));
+            $alumnocc->setMes($mesSet);
+            $alumnocc->setFechavencimiento($fechavenc);
             $alumnocc->setFechamodificacion(new \DateTime("now"));
-            $alumnocc->setFechacreacion(new \DateTime("now"));
-            $alumnocc->setTipo('GE');
+            $alumnocc->setFechacreacion($fechaCreac);
+            $alumnocc->setTipo($tipocc);
            
             $em = $this->getDoctrine()->getManager();
             $em->persist($alumnocc);
             $em->flush();
             
-            $this->addFlash('mensaje', 'El movimiento ha sido generado al usuario:'.$userid);
-            
-            return $this->redirectToRoute('cya_alumnocc_index');
+            $this->addFlash('mensaje', 'El movimiento ha sido generado al usuario:'. $userelegido->getnombrecompleto());
+                
+            return $this->redirectToRoute('cya_alumnocc_index', array('usuario'=> $userid));
             }
             
       
@@ -301,6 +366,7 @@ class AlumnoccController extends Controller
         $pagado = $alumnocc->getPagado();
         $bonif = $alumnocc->getBonificacion();
         $alumnocc->setPagado(0);
+        $usuario=$alumnocc->getUsuario();
         
         $form = $this->createForm(AlumnoccType::class, $alumnocc);
         $form->handleRequest($request); 
@@ -355,7 +421,7 @@ class AlumnoccController extends Controller
          
          
      
-        return $this->render('CYAYogaBundle:Alumnocc:pago.html.twig', array('bonif' => $bonif,'saldo' => $saldo,'nombrecompleto' => $nombrecompleto, 
+        return $this->render('CYAYogaBundle:Alumnocc:pago.html.twig', array('pagado'=>$pagado, 'usuario'=>$usuario,  'bonif' => $bonif,'saldo' => $saldo,'nombrecompleto' => $nombrecompleto, 
         'vencimiento' => $vencimiento,'alumnocc' => $alumnocc, 'form' => $form->createView()));
    }
     public function pagodiarioAction(Request $request)

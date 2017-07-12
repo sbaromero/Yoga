@@ -21,7 +21,32 @@ use Symfony\Component\HttpFoundation\File\File;
 class UsuarioController extends Controller
 {
     
-    
+          public function imprimircuota2Action($id, $valorcuota,Request $request)
+   {    
+       
+        $em = $this->getDoctrine()->getManager();
+        $usuario = $em->getRepository('CYAYogaBundle:Usuario')->find($id);
+        
+        $tipocuota = $usuario->gettipocuota()->getnombre();
+        //$valorcuota =  $usuario->gettipocuota()->getvalor();
+        $fecha = new \DateTime("now");
+        $alumno =   $usuario->getnombrecompleto();
+        
+        $horario = $em->getRepository('CYAYogaBundle:Usuario')->findOneByDni('horario');
+        
+         
+        
+        
+        return $this->render('CYAYogaBundle:Usuario:imprimircuota.html.twig',
+        array (
+              'valorcuota' => $valorcuota,'tipocuota' => $tipocuota,
+              'fecha'      => $fecha, 'alumno'=>$alumno, 'horario'=>$horario
+             ));
+             
+             
+             
+             
+    }
     public function imprimircuotaAction($id, Request $request)
    {    
        
@@ -471,7 +496,7 @@ class UsuarioController extends Controller
     public function viewAction($id)
     {
         $repository = $this->getDoctrine()->getRepository('CYAYogaBundle:Usuario');
-        
+    
         $usuario = $repository->find($id);
         
        if(!$usuario){
@@ -621,8 +646,6 @@ class UsuarioController extends Controller
          }
              
              
-         
-            
             $em->flush();
 
             $this->addFlash('mensaje', 'El AVATAR del usuario '.$usuario->getNombrecompleto().' ha sido modificado');
@@ -640,6 +663,10 @@ class UsuarioController extends Controller
     private function procesarCuentas(){
         
         $fechahoy = new \DateTime("now");
+        
+       // $fechahoy = new \DateTime("2018".'-'."02".'-02'.' 00:00:00');
+        
+        
         $contador = 0;
         $lock = "Locker";
         $asoc = "Asociación";
@@ -766,7 +793,8 @@ class UsuarioController extends Controller
                   $mes = "NOVIEMBRE/".$anio;
                   break;
                   case "Jan":
-                  $mes = "DICIEMBRE/";
+                  $anio = $anio - 1;       
+                  $mes = "DICIEMBRE/".$anio;
                   break;
                   }
                 
@@ -786,6 +814,8 @@ class UsuarioController extends Controller
                     }else{
                         $xasoc = 0;
                     }
+                    
+                    
                     
                     $alumnocc = new Alumnocc();
                     $alumnocc->setUsuario($us);
@@ -908,10 +938,6 @@ class UsuarioController extends Controller
         }
         else{$valorAsoc=0;}
         
-        
-        
-        
-          
              if ($usuario->gethaveLocker() == true){
                         $xlocker = $valorLocker;
                     }else{
@@ -965,7 +991,7 @@ class UsuarioController extends Controller
                    $venci  = new \DateTime("$year-$month-01");   
                    
                  //$venci2->modify('first day of this month');
-                 //$venci  = new \DateTime('first day of this month');   
+                 //$venci  = new \DateTime('first day of thnewsviis month');   
                  //$venci=$venci2;     
                    
                    

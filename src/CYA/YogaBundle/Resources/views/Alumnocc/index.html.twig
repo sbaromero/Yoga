@@ -91,6 +91,7 @@
                                <h6> <td>{{ alumnocc.comentario }}</td> </h6>
                                
                                 <td class="actions">
+                                   
                                     <a href="{{ path('cya_alumnocc_detallepago', {id: alumnocc.id }) }}" 
                                     {% if alumnocc.pagado == 0 or alumnocc.tipo != 'VP' %}
                                         class="btn btn-warning disabled"
@@ -106,7 +107,7 @@
                                         {% elseif alumnocc.deuda > (alumnocc.pagado + alumnocc.bonificacion) %} 
                                             class="btn btn-success"
                                         {% endif %} >
-                                        A Pagar
+                                        Pagar
                                     </a>
                                     
                                     <a href="{{ path('cya_alumnocc_delete', {id: alumnocc.id }) }}" onclick="return confirm('Está seguro??')"
@@ -125,9 +126,19 @@
                                         
 			                            elimina
 			                        </a>
+			                        
+			                      
+			                         <th>
+			                           {% if alumnocc.pagado > 0 %}
+			                         <a href="{{ path('cya_usuario_imprimircuota2', { id: alumnocc.usuario.id ,valorcuota:alumnocc.pagado}) }}" class="btn btn-sm btn-primary">
+			    	                 <span class="icon ion-print"></span>
+			        	             Imprimir Cuota (Pagado: $ {{alumnocc.pagado}})
+					                  </a>
+					                     {% endif %} 
+			                        <th>
                                      </td>
                                  
-                                
+                                 
                                 
                             </tr>
                         {% endfor %}

@@ -108,6 +108,7 @@ class MaestroventaController extends Controller
                         $alumnocc->setFechamodificacion(new \DateTime("now"));
                         $alumnocc->setFechacreacion(new \DateTime("now"));
                         $alumnocc->setPagado(0);
+                        $alumnocc->setMes('VTA. PRODUCTO');
                         $alumnocc->setBonificacion(0);
                         $alumnocc->setTipo('VP');
                         $alumnocc->setDeuda($total);

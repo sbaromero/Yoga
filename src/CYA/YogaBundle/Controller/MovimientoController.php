@@ -85,7 +85,7 @@ class MovimientoController extends Controller
         }
         
         if(!empty($rubroQuery)){
-            $select = $select . " AND m.rubro = (SELECT r FROM CYAYogaBundle:Rubro r WHERE r.id = " . $rubroQuery .")";
+            $select = $select . " AND m.rubro = (SELECT ru FROM CYAYogaBundle:Rubro ru WHERE ru.id = " . $rubroQuery .")";
         }
         
         if(!empty($fhQuery)){

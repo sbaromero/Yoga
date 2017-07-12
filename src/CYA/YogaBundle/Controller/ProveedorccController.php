@@ -132,12 +132,44 @@ class ProveedorccController extends Controller
 
  public function deleteAction($id, Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+        
+         $em = $this->getDoctrine()->getManager();
+         $proveedorcc = $em->getRepository('CYAYogaBundle:Proveedorcc')->find($id);
+         
+         $movimiento = new Movimiento();
+          
+            $rubro = $em->getRepository('CYAYogaBundle:Rubro')->find(7);
+            if(!$rubro){
+                $rubro = new Rubro();
+                $rubro->setNombre('CORRECCION DE CAJA (CREDITO)');
+                $rubro->setTipo('C');
+                $rubro->setIsActive(1);
+                $em->persist($rubro);
+                $em->flush(); 
+                $movimiento->setRubro($rubro);
+            }else{
+                $movimiento->setRubro($rubro);
+            }
+            $movimiento->setTipo('CC');
+            $movimiento->SetDescripcion('CREDITO DE CAJA POR CORRECCION EN CC PROVEEDORES');
+            $movimiento->setUsuario($this->get('security.token_storage')->getToken()->getUser());
+            $movimiento->setFecha(new \DateTime("now"));
+            $movimiento->setMonto($proveedorcc->getPagado());
+            //$movimiento->setAlumnocc($this->get();
+            $em->persist($movimiento);
+            $em->flush(); 
+            $this->addFlash('mensaje', 'Ha sido actualizada la caja');
+        
+        
+        
+      
         $proveedorcc = $em->getRepository('CYAYogaBundle:Proveedorcc')->find($id);
         $em->remove($proveedorcc);
         $em->flush();  
-        $successMessage = 'Cuenta Corriente de Proveedor eliminada, realice el movimiento correctivo correspondiente en caja.';
+        $successMessage = 'Cuenta Corriente de Proveedor eliminada';
         $this->addFlash('mensaje', $successMessage);
+       
+       
        
 
         return $this->redirectToRoute('cya_proveedorcc_index');
@@ -173,8 +205,8 @@ class ProveedorccController extends Controller
             $movimiento->SetDescripcion('Pago a Proveedor: '.$proveedorcc->getProveedor()->getNombre());
             $movimiento->setUsuario($this->get('security.token_storage')->getToken()->getUser());
             $movimiento->setFecha(new \DateTime("now"));
-            $monto = $proveedorcc->getPagado();
-            $movimiento->setMonto($monto);
+            $monto2 = $proveedorcc->getPagado();
+            $movimiento->setMonto($monto2-$monto);
             
             $repository = $this->getDoctrine()->getRepository('CYAYogaBundle:Rubro');
             $rubro = $repository->findOneByNombre('PAGO A PROVEEDORES');

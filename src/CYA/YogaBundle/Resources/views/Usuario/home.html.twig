@@ -7,10 +7,17 @@
 	<div class="container">
 		<div class="row">
 		    <div class="home-avatar">
+			    
+			    {% if app.user.brochure %}
 			    <span>
 		            <img src="{{ asset('web/uploads/brochures'~'/'~ app.user.brochure) }}" class="avatar-tabla"/> 
-		          
 		        </span>
+		         {% endif %}
+		        {# <span>#}
+		        {#<img src="{{ asset('public/img/avatar.jpg') }}"/> #}
+		        {# </span>#}
+		        {# {% endif %}#}
+		         
 		        <h2 class="bienvenido">
 		            Bienvenido  al Sistema de Alumnos del Centro de Yoga Aplicada: {{ app.user.nombrecompleto}}
 		            <!-- <small>
