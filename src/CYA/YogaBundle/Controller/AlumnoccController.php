@@ -23,8 +23,7 @@ class AlumnoccController extends Controller
   
     public function generaccAction(Request $request)
     {   
-        
-       
+
         $repository = $this->getDoctrine()->getRepository('CYAYogaBundle:Usuario');
         $query = $repository->createQueryBuilder('u')
             ->where('u.rol = :rol')
@@ -159,7 +158,7 @@ class AlumnoccController extends Controller
        if (empty($cuotaQuery)) 
         {
          $dql = "SELECT a from CYAYogaBundle:Alumnocc a WHERE 1=2 ";
-          $this->addFlash('mensaje', 'Elija un tipo de cuota');
+          $this->addFlash('mensaje', 'Elija 1 tipo de cuota');
        }
           else
         {
